@@ -1,6 +1,6 @@
 ---
 title: "Project title"
-author: "by The Git Gods: Kieran Lewis, Khushi Wadhwa, Caio Celano, Grace Tait & User5"
+author: "by The Git Gods: Kieran Lewis, Khushi Wadhwa, Caio Celano, Grace Tait & Nor Danish Raziq"
 date: "`r Sys.Date()`"
 output: html_document
 ---
