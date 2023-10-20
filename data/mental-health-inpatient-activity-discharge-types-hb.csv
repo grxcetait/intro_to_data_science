@@ -1,0 +1,481 @@
+FinancialYear,HBT,DischargeTypeGroup,DischargeTypeGroupTotal
+2012/13,SB0801,Death,0
+2012/13,SB0801,Irregular Discharge,0
+2012/13,SB0801,Regular Discharge,0
+2012/13,S08000015,Death,30
+2012/13,S08000015,Irregular Discharge,90
+2012/13,S08000015,Regular Discharge,2120
+2012/13,S08000016,Death,10
+2012/13,S08000016,Irregular Discharge,10
+2012/13,S08000016,Regular Discharge,770
+2012/13,S08000017,Death,20
+2012/13,S08000017,Irregular Discharge,50
+2012/13,S08000017,Regular Discharge,1060
+2012/13,S08000029,Death,30
+2012/13,S08000029,Irregular Discharge,40
+2012/13,S08000029,Regular Discharge,2300
+2012/13,S08000019,Death,40
+2012/13,S08000019,Irregular Discharge,70
+2012/13,S08000019,Regular Discharge,1390
+2012/13,S08000020,Death,50
+2012/13,S08000020,Irregular Discharge,100
+2012/13,S08000020,Regular Discharge,3190
+2012/13,S08000031,Death,150
+2012/13,S08000031,Irregular Discharge,620
+2012/13,S08000031,Regular Discharge,8870
+2012/13,S08000022,Death,30
+2012/13,S08000022,Irregular Discharge,80
+2012/13,S08000022,Regular Discharge,1990
+2012/13,S08000032,Death,60
+2012/13,S08000032,Irregular Discharge,200
+2012/13,S08000032,Regular Discharge,3880
+2012/13,S08000024,Death,130
+2012/13,S08000024,Irregular Discharge,170
+2012/13,S08000024,Regular Discharge,5580
+2012/13,S08000025,Death,0
+2012/13,S08000025,Irregular Discharge,0
+2012/13,S08000025,Regular Discharge,50
+2012/13,S08000026,Death,0
+2012/13,S08000026,Irregular Discharge,10
+2012/13,S08000026,Regular Discharge,80
+2012/13,S08000030,Death,30
+2012/13,S08000030,Irregular Discharge,100
+2012/13,S08000030,Regular Discharge,2490
+2012/13,S08000028,Death,0
+2012/13,S08000028,Irregular Discharge,0
+2012/13,S08000028,Regular Discharge,140
+2012/13,State Hospital,Death,0
+2012/13,State Hospital,Irregular Discharge,0
+2012/13,State Hospital,Regular Discharge,100
+2013/14,SB0801,Death,0
+2013/14,SB0801,Irregular Discharge,0
+2013/14,SB0801,Regular Discharge,0
+2013/14,S08000015,Death,20
+2013/14,S08000015,Irregular Discharge,100
+2013/14,S08000015,Regular Discharge,2140
+2013/14,S08000016,Death,10
+2013/14,S08000016,Irregular Discharge,20
+2013/14,S08000016,Regular Discharge,750
+2013/14,S08000017,Death,20
+2013/14,S08000017,Irregular Discharge,50
+2013/14,S08000017,Regular Discharge,1240
+2013/14,S08000029,Death,40
+2013/14,S08000029,Irregular Discharge,70
+2013/14,S08000029,Regular Discharge,2640
+2013/14,S08000019,Death,30
+2013/14,S08000019,Irregular Discharge,70
+2013/14,S08000019,Regular Discharge,1460
+2013/14,S08000020,Death,60
+2013/14,S08000020,Irregular Discharge,90
+2013/14,S08000020,Regular Discharge,3140
+2013/14,S08000031,Death,130
+2013/14,S08000031,Irregular Discharge,750
+2013/14,S08000031,Regular Discharge,9340
+2013/14,S08000022,Death,30
+2013/14,S08000022,Irregular Discharge,70
+2013/14,S08000022,Regular Discharge,2040
+2013/14,S08000032,Death,50
+2013/14,S08000032,Irregular Discharge,190
+2013/14,S08000032,Regular Discharge,4060
+2013/14,S08000024,Death,110
+2013/14,S08000024,Irregular Discharge,170
+2013/14,S08000024,Regular Discharge,5520
+2013/14,S08000025,Death,0
+2013/14,S08000025,Irregular Discharge,0
+2013/14,S08000025,Regular Discharge,60
+2013/14,S08000026,Death,0
+2013/14,S08000026,Irregular Discharge,10
+2013/14,S08000026,Regular Discharge,80
+2013/14,S08000030,Death,30
+2013/14,S08000030,Irregular Discharge,150
+2013/14,S08000030,Regular Discharge,2630
+2013/14,S08000028,Death,0
+2013/14,S08000028,Irregular Discharge,0
+2013/14,S08000028,Regular Discharge,130
+2013/14,State Hospital,Death,0
+2013/14,State Hospital,Irregular Discharge,0
+2013/14,State Hospital,Regular Discharge,80
+2014/15,SB0801,Death,0
+2014/15,SB0801,Irregular Discharge,0
+2014/15,SB0801,Regular Discharge,0
+2014/15,S08000015,Death,40
+2014/15,S08000015,Irregular Discharge,130
+2014/15,S08000015,Regular Discharge,2190
+2014/15,S08000016,Death,20
+2014/15,S08000016,Irregular Discharge,10
+2014/15,S08000016,Regular Discharge,730
+2014/15,S08000017,Death,10
+2014/15,S08000017,Irregular Discharge,30
+2014/15,S08000017,Regular Discharge,1250
+2014/15,S08000029,Death,60
+2014/15,S08000029,Irregular Discharge,40
+2014/15,S08000029,Regular Discharge,2470
+2014/15,S08000019,Death,30
+2014/15,S08000019,Irregular Discharge,60
+2014/15,S08000019,Regular Discharge,1670
+2014/15,S08000020,Death,60
+2014/15,S08000020,Irregular Discharge,100
+2014/15,S08000020,Regular Discharge,2730
+2014/15,S08000031,Death,150
+2014/15,S08000031,Irregular Discharge,720
+2014/15,S08000031,Regular Discharge,10220
+2014/15,S08000022,Death,40
+2014/15,S08000022,Irregular Discharge,70
+2014/15,S08000022,Regular Discharge,2190
+2014/15,S08000032,Death,90
+2014/15,S08000032,Irregular Discharge,140
+2014/15,S08000032,Regular Discharge,4310
+2014/15,S08000024,Death,110
+2014/15,S08000024,Irregular Discharge,130
+2014/15,S08000024,Regular Discharge,6000
+2014/15,S08000025,Death,0
+2014/15,S08000025,Irregular Discharge,0
+2014/15,S08000025,Regular Discharge,80
+2014/15,S08000026,Death,0
+2014/15,S08000026,Irregular Discharge,10
+2014/15,S08000026,Regular Discharge,70
+2014/15,S08000030,Death,40
+2014/15,S08000030,Irregular Discharge,150
+2014/15,S08000030,Regular Discharge,3010
+2014/15,S08000028,Death,0
+2014/15,S08000028,Irregular Discharge,0
+2014/15,S08000028,Regular Discharge,100
+2014/15,State Hospital,Death,0
+2014/15,State Hospital,Irregular Discharge,0
+2014/15,State Hospital,Regular Discharge,120
+2015/16,SB0801,Death,0
+2015/16,SB0801,Irregular Discharge,0
+2015/16,SB0801,Regular Discharge,0
+2015/16,S08000015,Death,30
+2015/16,S08000015,Irregular Discharge,100
+2015/16,S08000015,Regular Discharge,2320
+2015/16,S08000016,Death,10
+2015/16,S08000016,Irregular Discharge,20
+2015/16,S08000016,Regular Discharge,760
+2015/16,S08000017,Death,20
+2015/16,S08000017,Irregular Discharge,30
+2015/16,S08000017,Regular Discharge,1340
+2015/16,S08000029,Death,60
+2015/16,S08000029,Irregular Discharge,40
+2015/16,S08000029,Regular Discharge,2490
+2015/16,S08000019,Death,40
+2015/16,S08000019,Irregular Discharge,60
+2015/16,S08000019,Regular Discharge,1840
+2015/16,S08000020,Death,40
+2015/16,S08000020,Irregular Discharge,110
+2015/16,S08000020,Regular Discharge,2940
+2015/16,S08000031,Death,120
+2015/16,S08000031,Irregular Discharge,720
+2015/16,S08000031,Regular Discharge,11660
+2015/16,S08000022,Death,30
+2015/16,S08000022,Irregular Discharge,60
+2015/16,S08000022,Regular Discharge,2260
+2015/16,S08000032,Death,70
+2015/16,S08000032,Irregular Discharge,190
+2015/16,S08000032,Regular Discharge,4570
+2015/16,S08000024,Death,140
+2015/16,S08000024,Irregular Discharge,120
+2015/16,S08000024,Regular Discharge,6220
+2015/16,S08000025,Death,0
+2015/16,S08000025,Irregular Discharge,0
+2015/16,S08000025,Regular Discharge,60
+2015/16,S08000026,Death,0
+2015/16,S08000026,Irregular Discharge,0
+2015/16,S08000026,Regular Discharge,60
+2015/16,S08000030,Death,30
+2015/16,S08000030,Irregular Discharge,120
+2015/16,S08000030,Regular Discharge,3460
+2015/16,S08000028,Death,0
+2015/16,S08000028,Irregular Discharge,0
+2015/16,S08000028,Regular Discharge,150
+2015/16,State Hospital,Death,0
+2015/16,State Hospital,Irregular Discharge,0
+2015/16,State Hospital,Regular Discharge,90
+2016/17,SB0801,Death,0
+2016/17,SB0801,Irregular Discharge,0
+2016/17,SB0801,Regular Discharge,0
+2016/17,S08000015,Death,30
+2016/17,S08000015,Irregular Discharge,160
+2016/17,S08000015,Regular Discharge,2490
+2016/17,S08000016,Death,10
+2016/17,S08000016,Irregular Discharge,10
+2016/17,S08000016,Regular Discharge,670
+2016/17,S08000017,Death,20
+2016/17,S08000017,Irregular Discharge,30
+2016/17,S08000017,Regular Discharge,1500
+2016/17,S08000029,Death,50
+2016/17,S08000029,Irregular Discharge,40
+2016/17,S08000029,Regular Discharge,2740
+2016/17,S08000019,Death,30
+2016/17,S08000019,Irregular Discharge,50
+2016/17,S08000019,Regular Discharge,2030
+2016/17,S08000020,Death,40
+2016/17,S08000020,Irregular Discharge,120
+2016/17,S08000020,Regular Discharge,2830
+2016/17,S08000031,Death,140
+2016/17,S08000031,Irregular Discharge,790
+2016/17,S08000031,Regular Discharge,12730
+2016/17,S08000022,Death,30
+2016/17,S08000022,Irregular Discharge,60
+2016/17,S08000022,Regular Discharge,2070
+2016/17,S08000032,Death,60
+2016/17,S08000032,Irregular Discharge,190
+2016/17,S08000032,Regular Discharge,4810
+2016/17,S08000024,Death,110
+2016/17,S08000024,Irregular Discharge,140
+2016/17,S08000024,Regular Discharge,6200
+2016/17,S08000025,Death,0
+2016/17,S08000025,Irregular Discharge,0
+2016/17,S08000025,Regular Discharge,20
+2016/17,S08000026,Death,0
+2016/17,S08000026,Irregular Discharge,10
+2016/17,S08000026,Regular Discharge,60
+2016/17,S08000030,Death,50
+2016/17,S08000030,Irregular Discharge,160
+2016/17,S08000030,Regular Discharge,3550
+2016/17,S08000028,Death,0
+2016/17,S08000028,Irregular Discharge,10
+2016/17,S08000028,Regular Discharge,140
+2016/17,State Hospital,Death,0
+2016/17,State Hospital,Irregular Discharge,0
+2016/17,State Hospital,Regular Discharge,130
+2017/18,SB0801,Death,0
+2017/18,SB0801,Irregular Discharge,0
+2017/18,SB0801,Regular Discharge,0
+2017/18,S08000015,Death,40
+2017/18,S08000015,Irregular Discharge,120
+2017/18,S08000015,Regular Discharge,2400
+2017/18,S08000016,Death,10
+2017/18,S08000016,Irregular Discharge,20
+2017/18,S08000016,Regular Discharge,780
+2017/18,S08000017,Death,20
+2017/18,S08000017,Irregular Discharge,30
+2017/18,S08000017,Regular Discharge,1480
+2017/18,S08000029,Death,50
+2017/18,S08000029,Irregular Discharge,70
+2017/18,S08000029,Regular Discharge,3410
+2017/18,S08000019,Death,30
+2017/18,S08000019,Irregular Discharge,80
+2017/18,S08000019,Regular Discharge,2030
+2017/18,S08000020,Death,50
+2017/18,S08000020,Irregular Discharge,140
+2017/18,S08000020,Regular Discharge,2820
+2017/18,S08000031,Death,130
+2017/18,S08000031,Irregular Discharge,840
+2017/18,S08000031,Regular Discharge,13820
+2017/18,S08000022,Death,40
+2017/18,S08000022,Irregular Discharge,60
+2017/18,S08000022,Regular Discharge,2050
+2017/18,S08000032,Death,90
+2017/18,S08000032,Irregular Discharge,120
+2017/18,S08000032,Regular Discharge,5160
+2017/18,S08000024,Death,150
+2017/18,S08000024,Irregular Discharge,120
+2017/18,S08000024,Regular Discharge,6600
+2017/18,S08000025,Death,0
+2017/18,S08000025,Irregular Discharge,0
+2017/18,S08000025,Regular Discharge,50
+2017/18,S08000026,Death,0
+2017/18,S08000026,Irregular Discharge,0
+2017/18,S08000026,Regular Discharge,80
+2017/18,S08000030,Death,40
+2017/18,S08000030,Irregular Discharge,160
+2017/18,S08000030,Regular Discharge,3300
+2017/18,S08000028,Death,0
+2017/18,S08000028,Irregular Discharge,10
+2017/18,S08000028,Regular Discharge,180
+2017/18,State Hospital,Death,0
+2017/18,State Hospital,Irregular Discharge,0
+2017/18,State Hospital,Regular Discharge,130
+2018/19,SB0801,Death,0
+2018/19,SB0801,Irregular Discharge,0
+2018/19,SB0801,Regular Discharge,0
+2018/19,S08000015,Death,30
+2018/19,S08000015,Irregular Discharge,130
+2018/19,S08000015,Regular Discharge,2520
+2018/19,S08000016,Death,20
+2018/19,S08000016,Irregular Discharge,10
+2018/19,S08000016,Regular Discharge,830
+2018/19,S08000017,Death,20
+2018/19,S08000017,Irregular Discharge,30
+2018/19,S08000017,Regular Discharge,1670
+2018/19,S08000029,Death,50
+2018/19,S08000029,Irregular Discharge,60
+2018/19,S08000029,Regular Discharge,3510
+2018/19,S08000019,Death,30
+2018/19,S08000019,Irregular Discharge,50
+2018/19,S08000019,Regular Discharge,2060
+2018/19,S08000020,Death,40
+2018/19,S08000020,Irregular Discharge,120
+2018/19,S08000020,Regular Discharge,3040
+2018/19,S08000031,Death,90
+2018/19,S08000031,Irregular Discharge,810
+2018/19,S08000031,Regular Discharge,14390
+2018/19,S08000022,Death,30
+2018/19,S08000022,Irregular Discharge,80
+2018/19,S08000022,Regular Discharge,2000
+2018/19,S08000032,Death,70
+2018/19,S08000032,Irregular Discharge,180
+2018/19,S08000032,Regular Discharge,5500
+2018/19,S08000024,Death,130
+2018/19,S08000024,Irregular Discharge,140
+2018/19,S08000024,Regular Discharge,6810
+2018/19,S08000025,Death,0
+2018/19,S08000025,Irregular Discharge,0
+2018/19,S08000025,Regular Discharge,60
+2018/19,S08000026,Death,0
+2018/19,S08000026,Irregular Discharge,0
+2018/19,S08000026,Regular Discharge,80
+2018/19,S08000030,Death,50
+2018/19,S08000030,Irregular Discharge,200
+2018/19,S08000030,Regular Discharge,3630
+2018/19,S08000028,Death,0
+2018/19,S08000028,Irregular Discharge,0
+2018/19,S08000028,Regular Discharge,190
+2018/19,State Hospital,Death,0
+2018/19,State Hospital,Irregular Discharge,0
+2018/19,State Hospital,Regular Discharge,80
+2019/20,SB0801,Death,0
+2019/20,SB0801,Irregular Discharge,0
+2019/20,SB0801,Regular Discharge,0
+2019/20,S08000015,Death,20
+2019/20,S08000015,Irregular Discharge,90
+2019/20,S08000015,Regular Discharge,2410
+2019/20,S08000016,Death,10
+2019/20,S08000016,Irregular Discharge,20
+2019/20,S08000016,Regular Discharge,960
+2019/20,S08000017,Death,20
+2019/20,S08000017,Irregular Discharge,30
+2019/20,S08000017,Regular Discharge,1600
+2019/20,S08000029,Death,40
+2019/20,S08000029,Irregular Discharge,70
+2019/20,S08000029,Regular Discharge,3420
+2019/20,S08000019,Death,40
+2019/20,S08000019,Irregular Discharge,60
+2019/20,S08000019,Regular Discharge,3240
+2019/20,S08000020,Death,60
+2019/20,S08000020,Irregular Discharge,130
+2019/20,S08000020,Regular Discharge,3190
+2019/20,S08000031,Death,90
+2019/20,S08000031,Irregular Discharge,820
+2019/20,S08000031,Regular Discharge,15540
+2019/20,S08000022,Death,30
+2019/20,S08000022,Irregular Discharge,80
+2019/20,S08000022,Regular Discharge,2070
+2019/20,S08000032,Death,80
+2019/20,S08000032,Irregular Discharge,200
+2019/20,S08000032,Regular Discharge,5900
+2019/20,S08000024,Death,120
+2019/20,S08000024,Irregular Discharge,130
+2019/20,S08000024,Regular Discharge,7420
+2019/20,S08000025,Death,0
+2019/20,S08000025,Irregular Discharge,0
+2019/20,S08000025,Regular Discharge,60
+2019/20,S08000026,Death,0
+2019/20,S08000026,Irregular Discharge,0
+2019/20,S08000026,Regular Discharge,90
+2019/20,S08000030,Death,40
+2019/20,S08000030,Irregular Discharge,190
+2019/20,S08000030,Regular Discharge,3870
+2019/20,S08000028,Death,0
+2019/20,S08000028,Irregular Discharge,10
+2019/20,S08000028,Regular Discharge,180
+2019/20,State Hospital,Death,0
+2019/20,State Hospital,Irregular Discharge,0
+2019/20,State Hospital,Regular Discharge,100
+2020/21,SB0801,Death,0
+2020/21,SB0801,Irregular Discharge,0
+2020/21,SB0801,Regular Discharge,0
+2020/21,S08000015,Death,20
+2020/21,S08000015,Irregular Discharge,110
+2020/21,S08000015,Regular Discharge,2160
+2020/21,S08000016,Death,10
+2020/21,S08000016,Irregular Discharge,20
+2020/21,S08000016,Regular Discharge,920
+2020/21,S08000017,Death,10
+2020/21,S08000017,Irregular Discharge,60
+2020/21,S08000017,Regular Discharge,1260
+2020/21,S08000029,Death,70
+2020/21,S08000029,Irregular Discharge,70
+2020/21,S08000029,Regular Discharge,2760
+2020/21,S08000019,Death,30
+2020/21,S08000019,Irregular Discharge,60
+2020/21,S08000019,Regular Discharge,3530
+2020/21,S08000020,Death,30
+2020/21,S08000020,Irregular Discharge,140
+2020/21,S08000020,Regular Discharge,3160
+2020/21,S08000031,Death,110
+2020/21,S08000031,Irregular Discharge,980
+2020/21,S08000031,Regular Discharge,15370
+2020/21,S08000022,Death,20
+2020/21,S08000022,Irregular Discharge,60
+2020/21,S08000022,Regular Discharge,1870
+2020/21,S08000032,Death,70
+2020/21,S08000032,Irregular Discharge,260
+2020/21,S08000032,Regular Discharge,4790
+2020/21,S08000024,Death,100
+2020/21,S08000024,Irregular Discharge,180
+2020/21,S08000024,Regular Discharge,7620
+2020/21,S08000025,Death,0
+2020/21,S08000025,Irregular Discharge,0
+2020/21,S08000025,Regular Discharge,60
+2020/21,S08000026,Death,0
+2020/21,S08000026,Irregular Discharge,10
+2020/21,S08000026,Regular Discharge,60
+2020/21,S08000030,Death,40
+2020/21,S08000030,Irregular Discharge,170
+2020/21,S08000030,Regular Discharge,3320
+2020/21,S08000028,Death,0
+2020/21,S08000028,Irregular Discharge,0
+2020/21,S08000028,Regular Discharge,150
+2020/21,State Hospital,Death,0
+2020/21,State Hospital,Irregular Discharge,0
+2020/21,State Hospital,Regular Discharge,80
+2021/22,SB0801,Death,0
+2021/22,SB0801,Irregular Discharge,0
+2021/22,SB0801,Regular Discharge,0
+2021/22,S08000015,Death,30
+2021/22,S08000015,Irregular Discharge,80
+2021/22,S08000015,Regular Discharge,2040
+2021/22,S08000016,Death,10
+2021/22,S08000016,Irregular Discharge,10
+2021/22,S08000016,Regular Discharge,790
+2021/22,S08000017,Death,20
+2021/22,S08000017,Irregular Discharge,50
+2021/22,S08000017,Regular Discharge,1220
+2021/22,S08000029,Death,70
+2021/22,S08000029,Irregular Discharge,80
+2021/22,S08000029,Regular Discharge,3190
+2021/22,S08000019,Death,40
+2021/22,S08000019,Irregular Discharge,60
+2021/22,S08000019,Regular Discharge,3190
+2021/22,S08000020,Death,50
+2021/22,S08000020,Irregular Discharge,110
+2021/22,S08000020,Regular Discharge,3080
+2021/22,S08000031,Death,90
+2021/22,S08000031,Irregular Discharge,930
+2021/22,S08000031,Regular Discharge,14950
+2021/22,S08000022,Death,30
+2021/22,S08000022,Irregular Discharge,70
+2021/22,S08000022,Regular Discharge,1760
+2021/22,S08000032,Death,90
+2021/22,S08000032,Irregular Discharge,230
+2021/22,S08000032,Regular Discharge,5120
+2021/22,S08000024,Death,120
+2021/22,S08000024,Irregular Discharge,170
+2021/22,S08000024,Regular Discharge,7890
+2021/22,S08000025,Death,0
+2021/22,S08000025,Irregular Discharge,0
+2021/22,S08000025,Regular Discharge,50
+2021/22,S08000026,Death,0
+2021/22,S08000026,Irregular Discharge,0
+2021/22,S08000026,Regular Discharge,60
+2021/22,S08000030,Death,30
+2021/22,S08000030,Irregular Discharge,160
+2021/22,S08000030,Regular Discharge,3540
+2021/22,S08000028,Death,0
+2021/22,S08000028,Irregular Discharge,10
+2021/22,S08000028,Regular Discharge,150
+2021/22,State Hospital,Death,0
+2021/22,State Hospital,Irregular Discharge,0
+2021/22,State Hospital,Regular Discharge,30
