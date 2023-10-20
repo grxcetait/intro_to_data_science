@@ -1,6 +1,6 @@
 ---
 title: "IDS investigation worksheet"
-author: "by Team-Name: User1, Khushi Wadhwa, Caio Celano, User4 & User5"
+author: "by Team-Name: Kieran Lewis, Khushi Wadhwa, Caio Celano, User4 & User5"
 date: "`r Sys.Date()`"
 output: html_document
 ---
