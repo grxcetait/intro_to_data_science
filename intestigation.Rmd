@@ -5,14 +5,11 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-**Note:** You can use this file as you 'working document' where you can try out various investigation ideas and keep notes about your findings. How you use and structure this file is up to you. It is recommended that you keep notes about what you are investigating and what you find as this will make the process of creating your presentation and report easier. Please note that you _do not_ need to submit this file as part of your group project.
-
-
+**Note:** You can use this file as you 'working document' where you can try out various investigation ideas and keep notes about your findings. How you use and structure this file is up to you. It is recommended that you keep notes about what you are investigating and what you find as this will make the process of creating your presentation and report easier. Please note that you *do not* need to submit this file as part of your group project.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
 
 ```{r load-lib, message = FALSE}
 library(tidyverse)
@@ -26,6 +23,30 @@ We chose the mental health inpatient activity data. Our ideas are revolving arou
 
 During our first workshop we had the idea of joining the data by diagnosis, since it will exclude any patients with missing diagnosis, and also provide the patients' characteristics.
 
+Initial ideas:
+
+-   Number of patients in each age range
+
+    -   Percentage of male and female in each age range
+
+-   Length of stay and diagnosis for each age range / sex
+
+    -   Would health beliefs impact length of stay/diagnosis?
+
+    -   Would area of admission impact length of stay/diagnosis?
+
+-   How has awareness of mental health evolved over time?
+
+    -   Frequency of stays
+
+-   Number of admissions during each year/time period
+
+    -   What external factors would effect this?
+
+    -   Percentage of male/females. Did numbers change over time? Did men become more accepting to health care?
+
+    -   Percentage of age ranges. Did numbers change over time?
+
 ```{r load-data}
 # Load your data
 
@@ -33,5 +54,3 @@ During our first workshop we had the idea of joining the data by diagnosis, sinc
 
 
 ```
-
-
