@@ -22,9 +22,12 @@ library(tidyverse)
 
 ```
 
+We chose the mental health inpatient activity data. Our ideas are revolving around joining two or more datasets in order to find a relationship between several variables, e.g. how do different variables (age, diagnosis, hospital) affect the length of stay?
+
+During our first workshop we had the idea of joining the data by diagnosis, since it will exclude any patients with missing diagnosis, and also provide the patients' characteristics.
 
 ```{r load-data}
-# load your data 
+# Load your data
 
 
 
