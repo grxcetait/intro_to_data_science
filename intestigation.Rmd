@@ -25,7 +25,7 @@ During our first workshop we had the idea of joining the data by diagnosis, sinc
 
 Initial ideas:
 
--   Number of patients in each age range
+-   Number of patients in each age range  
 
     -   Percentage of male and female in each age range
 
