@@ -46,6 +46,13 @@ Initial ideas:
     -   Percentage of male/females. Did numbers change over time? Did men become more accepting to health care?
 
     -   Percentage of age ranges. Did numbers change over time?
+    
+-  How has the treatment for mental health changed between 1997/98 and 2021/22
+    - merge the relevant data sets to get a more complete view 
+    
+    count of patients - y axis and then barchart, each bar is one year
+    
+    Final question
 
 ```{r load-data}
 # Load your data
