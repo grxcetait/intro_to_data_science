@@ -51,8 +51,12 @@ Initial ideas:
     - merge the relevant data sets to get a more complete view 
     
     count of patients - y axis and then barchart, each bar is one year
+    whole of scotland, either look at financial year or age group 
     
-    Final question
+    1) take only 2 financial years, look at the count of patients of each sex in each age range. then make box plot for lenght of stay. then look at diagnosis of each. 
+    one graph, x axis age group, y axis would be patient count and then make bar chart of two different colours in each bar represeting male and female. 
+    
+    Final question: 
 
 ```{r load-data}
 # Load your data
