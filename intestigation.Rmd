@@ -61,7 +61,7 @@ Initial ideas:
 ```{r load-data}
 # Load your data
 
-
+ggplot(new_df1,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")
 
 
 ```
