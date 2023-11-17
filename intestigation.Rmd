@@ -61,7 +61,16 @@ Initial ideas:
 ```{r load-data}
 # Load your data
 
-ggplot(new_df1,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")
+#ggplot(new_df1,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")
+
+age.sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
 
 
+#Bar chart for age.sex
+age.sex %>% filter(HBR == "S92000003") %>%
+            group_by(FinancialYear, Sex) %>%
+            summarise(amount = sum(PatientsCount)) %>%
+            ggplot(aes(x = FinancialYear, y = amount, fill = Sex)) +
+            geom_col() +
+            theme(axis.text.x = element_text(angle = 45))
 ```
