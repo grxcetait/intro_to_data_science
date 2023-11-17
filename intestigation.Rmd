@@ -64,7 +64,7 @@ Initial ideas:
 #ggplot(new_df1,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")
 
 age.sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
-
+length.of.stay <- read_csv("data/mental-health-inpatient-activity-length-of-stay.csv")
 
 #Bar chart for age.sex
 age.sex %>% filter(HBR == "S92000003") %>%
@@ -73,4 +73,13 @@ age.sex %>% filter(HBR == "S92000003") %>%
             ggplot(aes(x = FinancialYear, y = amount, fill = Sex)) +
             geom_col() +
             theme(axis.text.x = element_text(angle = 45))
+
+length.of.stay %>% filter(HBT == "S92000003") %>%
+            group_by(FinancialYear, LengthOfStay) %>%
+            summarise(amount = sum(NumberOfStays)) %>%
+            ggplot(aes(x = FinancialYear, y = amount, fill = LengthOfStay)) +
+            geom_col() +
+            theme(axis.text.x = element_text(angle = 45))
+
+
 ```
