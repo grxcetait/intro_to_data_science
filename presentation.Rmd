@@ -1,7 +1,7 @@
 ---
-title: "Presentation title"
-subtitle: "Presentation subtitle (if any)"
-author: "Team name <br> Names of team members"
+title: "IDS Project"
+subtitle:
+author: "The Git Gods <br> Grace Tait, Khushi Wadhwa, Kieran Lewis, Caio Celano, & Nor Danish Raziq"
 institute: "University of Edinburgh"
 date: "`r Sys.Date()`"
 output:
@@ -53,21 +53,94 @@ style_xaringan(
 
 class: center, middle
 
-## A statement of the overall goal / research question
+## How has the length of stay in Scotland changed over the past 2 decades?
+
+---
+
+#CRITERA
+
+- What is the quality of the research questions and/or policy question, and the relevancy of data to that question(s)?
+- Are statistical procedures carried out and explained correctly?
+- What is the quality of the statistical presentation, writing, and explanations?
+- Is the project carefully thought out? Are the limitations carefully considered? Does  it appear that time and effort went into the planning and implementation of the project?
+
+---
+
+#POINTS TO COVER IN PRESENTATION
+
+- What choices we made, why
+What we found from each decision
+- Critique own methods
+- Provide suggestions for improving our analysis
+- Talk about issues relating to the reliability and validity of our data
+- Talk about the appropriateness of the statistical analysis 
+
 
 ---
 
 class: inverse, center, middle
 
-# Section title
+# About our dataset
 
 ---
 
-# Hello World
+# Mental health inpatient activity
 
-- Click the `Knit` button to compile your presentation
+- Data from "Public Health Scotland"
 
-- Make sure to commit and push all resulting files to your GitHub repo
+--
+
+- Consists of 14 files containing information on patients with mental health problems
+
+--
+
+- All patients had been cared for as inpatient or day cases in Scottish general and psychiatric hospitals for all NHS Boards or residence and treatment
+
+--
+
+- Period covered is financial years 1997/98 - 2021/22
+
+--
+
+- We chose this dataset because there were many variables that could be linked together and we knew there would be many different questions and relationships to analyse
+
+--
+
+- During the first workshop, we saw we could link datasets by diagnosis, since it will exclude any patients with missing diagnosis, and also provide the patients' characteristics.
+
+- From this, we began brainstorming research questions
+
+---
+
+#Brainstorming research questions
+
+- During the first workshop, we saw we could link datasets by diagnosis, since it will exclude any patients with missing diagnosis, and also provide the patients' characteristics.
+
+- Different factors/relationships to look at:
+
+ - age, sex, diagnosis, frequency of stay, number of admissions
+ 
+ - compare between two finacial years, or between two regions
+  
+--
+
+- Initial questions
+
+ - How has treatment for mental health changed between 1997/98 and 2021/22?
+ 
+ - Has the ratio of male and females changed over the years?
+ 
+ - Has awareness of mental health changed over time?
+ 
+ - How has the length of stay changed over time?
+
+---
+
+#Methodology
+
+---
+
+#Our findings
 
 ---
 
