@@ -65,20 +65,56 @@ Initial ideas:
 age.sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
 length.of.stay <- read_csv("data/mental-health-inpatient-activity-length-of-stay.csv")
 
-#Bar chart for age.sex
-age.sex %>% filter(HBR == "S92000003") %>%
-            group_by(FinancialYear, Sex) %>%
-            summarise(amount = sum(PatientsCount)) %>%
-            ggplot(aes(x = FinancialYear, y = amount, fill = Sex)) +
-            geom_col() +
-            theme(axis.text.x = element_text(angle = 45))
+#Bar chart for number of patients vs. financial year
+age.sex %>% 
+  filter(HBR == "S92000003") %>%
+  group_by(FinancialYear, Sex) %>%
+  summarise(amount = sum(PatientsCount)) %>%
+  ggplot(aes(y = FinancialYear, 
+             x = amount, 
+             fill = Sex)) +
+  geom_col() +
+  labs(x = "Financial Year",
+       y = "Number of Patients",
+       title = "Number of Patients Versus Financial Year")
 
-length.of.stay %>% filter(HBT == "S92000003") %>%
-            group_by(FinancialYear, LengthOfStay) %>%
-            summarise(amount = sum(NumberOfStays)) %>%
-            ggplot(aes(x = FinancialYear, y = amount, fill = LengthOfStay)) +
-            geom_col() +
-            theme(axis.text.x = element_text(angle = 45))
+#Bar chart for number of patients vs. length of stay
+length.of.stay %>% 
+  filter(HBT == "S92000003") %>%
+  group_by(FinancialYear, LengthOfStay) %>%
+  summarise(amount = sum(NumberOfStays)) %>%
+  ggplot(aes(y = FinancialYear,
+             x = amount, 
+             fill = LengthOfStay)) +
+  geom_col(position = "fill") +
+  labs(x = "Length of Stay",
+       y = "Financial Year",
+       title = "Number of Patients Versus Length of Stay") +
+  scale_fill_discrete(breaks = c('< 1 day', 
+                                 '1 - 7 days',
+                                 '8 - 28 days',
+                                 '29 days - 6 months',
+                                 '> 6 months'))
 
-
+#Comparing length of stay for patients in 1997/98 and 2021/22
+length.of.stay %>%
+  filter(HBT == "S92000003",
+         FinancialYear == "1997/98" | 
+           FinancialYear == "2021/22") %>%
+  group_by(FinancialYear, LengthOfStay) %>%
+  summarise(amount = sum(NumberOfStays)) %>%
+  ggplot(aes(y = FinancialYear,
+             x = amount, 
+             fill = LengthOfStay)) +
+  geom_col(position = "fill") +
+  labs(x = "Number of Patients",
+       y = "Financial Year",
+       title = "Number of Patients Versus Length of Stay",
+       subtitle = "Comparing 1997/98 and 2021/22") +
+  scale_fill_discrete(breaks = c('< 1 day', 
+                                 '1 - 7 days',
+                                 '8 - 28 days',
+                                 '29 days - 6 months',
+                                 '> 6 months'))
+#If someone knows how to reorder the lengthofstay ^^
 ```
