@@ -138,8 +138,16 @@ diagnosis %>% filter(HBT == "S92000003",
            FinancialYear == "2021/22") %>%
               group_by(FinancialYear, DiagnosisName) %>%
               summarise(amount = sum(PatientsCount)) %>%
-              ggplot(aes(y = FinancialYear, x = amount, fill = DiagnosisName)) +
-              geom_col(position = "fill")
+              ggplot(aes(x = amount, y = DiagnosisName, fill = FinancialYear)) +
+              theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+              geom_bar(position = "dodge", stat = "identity") +
+              labs(y = "Diagnoses in Patients", 
+                        x = "Amount of Patients", 
+                        title = "Changes in Diagnoses", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022",
+                        legend = "Financial Year"
+                        )
 
 #bar chart for 1997/87 and 2021/22 based on length of stay and amount of patients
 length.of.stay %>% filter(HBT == "S92000003",
