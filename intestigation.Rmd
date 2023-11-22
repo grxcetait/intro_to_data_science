@@ -70,9 +70,29 @@ plot1<-ggplot(y97_98,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position
 plot2<-ggplot(y21_22,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+labs(title = "Patient distribution by sex in 2021/22 in different age groups",
        x = "Age Groups", 
        y = "Number of Patients")
-
 plot1
 plot2
+
+#ggplot(new_df1,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")
+
+age.sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
+length.of.stay <- read_csv("data/mental-health-inpatient-activity-length-of-stay.csv")
+
+#Bar chart for age.sex
+age.sex %>% filter(HBR == "S92000003") %>%
+            group_by(FinancialYear, Sex) %>%
+            summarise(amount = sum(PatientsCount)) %>%
+            ggplot(aes(x = FinancialYear, y = amount, fill = Sex)) +
+            geom_col() +
+            theme(axis.text.x = element_text(angle = 45))
+
+length.of.stay %>% filter(HBT == "S92000003") %>%
+            group_by(FinancialYear, LengthOfStay) %>%
+            summarise(amount = sum(NumberOfStays)) %>%
+            ggplot(aes(x = FinancialYear, y = amount, fill = LengthOfStay)) +
+            geom_col() +
+            theme(axis.text.x = element_text(angle = 45))
+
 
 
 ```
