@@ -26,7 +26,7 @@ During our first workshop we had the idea of joining the data by diagnosis, sinc
 
 Initial ideas:
 
--   Number of patients in each age range  
+-   Number of patients in each age range
 
     -   Percentage of male and female in each age range
 
@@ -47,17 +47,16 @@ Initial ideas:
     -   Percentage of male/females. Did numbers change over time? Did men become more accepting to health care?
 
     -   Percentage of age ranges. Did numbers change over time?
-    
--  How has the treatment for mental health changed between 1997/98 and 2021/22
-    - merge the relevant data sets to get a more complete view 
-    
-    count of patients - y axis and then barchart, each bar is one year
-    whole of scotland, either look at financial year or age group 
-    
-    1) take only 2 financial years, look at the count of patients of each sex in each age range. then make box plot for lenght of stay. then look at diagnosis of each. 
-    one graph, x axis age group, y axis would be patient count and then make bar chart of two different colours in each bar represeting male and female. 
-    
-    Final question: 
+
+-   How has the treatment for mental health changed between 1997/98 and 2021/22
+
+    -   merge the relevant data sets to get a more complete view
+
+    count of patients - y axis and then barchart, each bar is one year whole of scotland, either look at financial year or age group
+
+    1)  take only 2 financial years, look at the count of patients of each sex in each age range. then make box plot for lenght of stay. then look at diagnosis of each. one graph, x axis age group, y axis would be patient count and then make bar chart of two different colours in each bar represeting male and female.
+
+    Final question:
 
 ```{r load-data}
 # Load your data
@@ -77,22 +76,140 @@ plot2
 
 age.sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
 length.of.stay <- read_csv("data/mental-health-inpatient-activity-length-of-stay.csv")
+diagnosis <- read_csv("data/mental-health-inpatient-activity-diagnosis-trend.csv")
 
-#Bar chart for age.sex
-age.sex %>% filter(HBR == "S92000003") %>%
-            group_by(FinancialYear, Sex) %>%
-            summarise(amount = sum(PatientsCount)) %>%
-            ggplot(aes(x = FinancialYear, y = amount, fill = Sex)) +
-            geom_col() +
-            theme(axis.text.x = element_text(angle = 45))
+#Bar chart for number of patients vs. financial year
+age.sex %>% 
+  filter(HBR == "S92000003") %>%
+  group_by(FinancialYear, Sex) %>%
+  summarise(amount = sum(PatientsCount)) %>%
+  ggplot(aes(y = FinancialYear, 
+             x = amount, 
+             fill = Sex)) +
+  geom_col() +
+  labs(x = "Financial Year",
+       y = "Number of Patients",
+       title = "Number of Patients Versus Financial Year")
 
-length.of.stay %>% filter(HBT == "S92000003") %>%
-            group_by(FinancialYear, LengthOfStay) %>%
-            summarise(amount = sum(NumberOfStays)) %>%
-            ggplot(aes(x = FinancialYear, y = amount, fill = LengthOfStay)) +
-            geom_col() +
-            theme(axis.text.x = element_text(angle = 45))
+#Bar chart for number of patients vs. length of stay
+length.of.stay %>% 
+  filter(HBT == "S92000003") %>%
+  group_by(FinancialYear, LengthOfStay) %>%
+  summarise(amount = sum(NumberOfStays)) %>%
+  ggplot(aes(y = FinancialYear,
+             x = amount, 
+             fill = LengthOfStay)) +
+  geom_col(position = "fill") +
+  labs(x = "Length of Stay",
+       y = "Financial Year",
+       title = "Number of Patients Versus Length of Stay") +
+  scale_fill_discrete(breaks = c('< 1 day', 
+                                 '1 - 7 days',
+                                 '8 - 28 days',
+                                 '29 days - 6 months',
+                                 '> 6 months'))
 
+#Comparing length of stay for patients in 1997/98 and 2021/22
+length.of.stay %>%
+  filter(HBT == "S92000003",
+         FinancialYear == "1997/98" | 
+           FinancialYear == "2021/22") %>%
+  group_by(FinancialYear, LengthOfStay) %>%
+  summarise(amount = sum(NumberOfStays)) %>%
+  ggplot(aes(y = FinancialYear,
+             x = amount, 
+             fill = LengthOfStay)) +
+  geom_col(position = "fill") +
+  labs(x = "Number of Patients",
+       y = "Financial Year",
+       title = "Number of Patients Versus Length of Stay",
+       subtitle = "Comparing 1997/98 and 2021/22") +
+  scale_fill_discrete(breaks = c('< 1 day', 
+                                 '1 - 7 days',
+                                 '8 - 28 days',
+                                 '29 days - 6 months',
+                                 '> 6 months'))
+#If someone knows how to reorder the lengthofstay ^^
+
+#mutating diagnosis to contain a column with the types of diagnosis based on the code
+diagnosis <- diagnosis %>% mutate(
+              DiagnosisName = case_when(
+                ICD10Codes == "F00 - F09 or Chapter G and second position F00" ~ "Organic, including symptomatic, mental disorders",
+                ICD10Codes == "F10 - F19" ~ "Mental & behavioural disorders due to psychoactive substance use",
+                ICD10Codes == "F20 - F29" ~ "Schizophrenia, schizotypal, & delusional disorders",
+                ICD10Codes == "F30 - F39" ~ "Mood (affective) disorders",
+                ICD10Codes == "F40 - F49" ~ "Neurotic, stress-related, & somatoform disorders",
+                ICD10Codes == "F60 - F69" ~ "Disorders of adult personality & behaviour",
+                ICD10Codes == "F50 - F59, F70 - F99" ~ "Other selected diagnoses principally affecting children & young people"
+               )
+              )
+
+#quick graph of diagnosis against financial year
+diagnosis %>% filter(HBT == "S92000003",
+                     FinancialYear == "1997/98" | 
+           FinancialYear == "2021/22") %>%
+              group_by(FinancialYear, DiagnosisName) %>%
+              summarise(amount = sum(PatientsCount)) %>%
+              ggplot(aes(x = amount, y = DiagnosisName, fill = FinancialYear)) +
+              theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+              geom_bar(position = "dodge", stat = "identity") +
+              labs(y = "Diagnoses in Patients", 
+                        x = "Amount of Patients", 
+                        title = "Changes in Diagnoses", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022",
+                        legend = "Financial Year"
+                        )
+
+#bar chart for 1997/87 and 2021/22 based on length of stay and amount of patients
+length.of.stay %>% filter(HBT == "S92000003",
+                       FinancialYear == "1997/98" | 
+                       FinancialYear == "2021/22") %>%
+                   group_by(FinancialYear, LengthOfStay) %>%
+                   summarise(Amount = sum(NumberOfStays)) %>%
+                   mutate(
+                     Order = case_when(
+                       LengthOfStay == "< 1 day" ~ 1,
+                       LengthOfStay == "1 - 7 days" ~ 2,
+                       LengthOfStay == "8 - 28 days" ~ 3,
+                       LengthOfStay == "29 days - 6 months" ~ 4,
+                       LengthOfStay == "> 6 months" ~ 5
+                     )
+                   ) %>%
+                   ggplot(aes(x = reorder(LengthOfStay, +Order), y = Amount)) +
+                   facet_wrap(vars(FinancialYear)) +
+                   geom_bar(position = "dodge", stat = "identity") +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Length of Patients Stay", 
+                        y = "Amount of Patients", 
+                        title = "Changes in Lengths of Stay", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )
+
+#calculating average length of stay for each year (decreasing trend)
+length.of.stay %>% filter(HBT == "S92000003",) %>%
+                   group_by(FinancialYear, LengthOfStay) %>%
+                   summarise(Amount = sum(NumberOfStays)) %>%
+                   mutate(
+                     Midpoint = case_when(
+                         LengthOfStay == "< 1 day" ~ 0.5,
+                         LengthOfStay == "1 - 7 days" ~ 4,
+                         LengthOfStay == "8 - 28 days" ~ 18,
+                         LengthOfStay == "29 days - 6 months" ~ 98.5,
+                         LengthOfStay == "> 6 months" ~ 100 
+                      ),
+                     TotalStays = Midpoint * Amount
+                   ) %>%
+                   group_by(FinancialYear) %>%
+                   summarise(TotalStaysYearly = sum(TotalStays), TotalAmount = sum(Amount)) %>%
+                   mutate(
+                     AverageStay = TotalStaysYearly / TotalAmount
+                   ) %>%
+                   ggplot(aes(y = AverageStay, x = FinancialYear)) +
+                   geom_col() +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9))
+                
 
 
 ```
