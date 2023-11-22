@@ -132,7 +132,7 @@ diagnosis <- diagnosis %>% mutate(
                )
               )
 
-#quick graph of diagnosis against financial year
+#bar chart for 1997/88 and 2021/22 based on diagnoses and amount of patients
 diagnosis %>% filter(HBT == "S92000003",
                      FinancialYear == "1997/98" | 
            FinancialYear == "2021/22") %>%
@@ -149,7 +149,7 @@ diagnosis %>% filter(HBT == "S92000003",
                         legend = "Financial Year"
                         )
 
-#bar chart for 1997/87 and 2021/22 based on length of stay and amount of patients
+#bar chart for 1997/88 and 2021/22 based on length of stay and amount of patients
 length.of.stay %>% filter(HBT == "S92000003",
                        FinancialYear == "1997/98" | 
                        FinancialYear == "2021/22") %>%
@@ -171,6 +171,32 @@ length.of.stay %>% filter(HBT == "S92000003",
                    labs(x = "Length of Patients Stay", 
                         y = "Amount of Patients", 
                         title = "Changes in Lengths of Stay", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )
+
+#bar chart for 1997/88 and 2021/22 based on age and amount of patients
+age.sex %>% filter(HBR == "S92000003",
+                       FinancialYear == "1997/98" | 
+                       FinancialYear == "2021/22") %>%
+                   group_by(FinancialYear, AgeGroup) %>%
+                   summarise(Amount = sum(PatientsCount)) %>%
+                   mutate(
+                     Order = case_when(
+                       AgeGroup == "0-17 years" ~ 1,
+                       AgeGroup == "18-24 years" ~ 2,
+                       AgeGroup == "25-39 years" ~ 3,
+                       AgeGroup == "40-64 years" ~ 4,
+                       AgeGroup == "65plus years" ~ 5
+                     )
+                   ) %>%
+                   ggplot(aes(x = reorder(AgeGroup, +Order), y = Amount)) +
+                   facet_wrap(vars(FinancialYear)) +
+                   geom_bar(position = "dodge", stat = "identity") +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Age of Patients", 
+                        y = "Amount of Patients", 
+                        title = "Changes in Age of Patients", 
                         subtitle = "from 1997 to 2022",
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
                         )
