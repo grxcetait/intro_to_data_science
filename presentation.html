@@ -4,7 +4,7 @@
     <title>IDS Project</title>
     <meta charset="utf-8" />
     <meta name="author" content="The Git Gods   Grace Tait, Khushi Wadhwa, Kieran Lewis, Caio Celano, &amp; Nor Danish Raziq" />
-    <meta name="date" content="2023-11-22" />
+    <meta name="date" content="2023-11-23" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -22,7 +22,7 @@ class: center, middle, inverse, title-slide
 ### University of Edinburgh
 ]
 .date[
-### 2023-11-22
+### 2023-11-23
 ]
 
 ---
@@ -42,27 +42,6 @@ class: center, middle, inverse, title-slide
 class: center, middle
 
 ## How has the length of stay in Scotland changed over the past 2 decades?
-
----
-
-#CRITERA
-
-- What is the quality of the research questions and/or policy question, and the relevancy of data to that question(s)?
-- Are statistical procedures carried out and explained correctly?
-- What is the quality of the statistical presentation, writing, and explanations?
-- Is the project carefully thought out? Are the limitations carefully considered? Does  it appear that time and effort went into the planning and implementation of the project?
-
----
-
-#POINTS TO COVER IN PRESENTATION
-
-- What choices we made, why
-What we found from each decision
-- Critique own methods
-- Provide suggestions for improving our analysis
-- Talk about issues relating to the reliability and validity of our data
-- Talk about the appropriateness of the statistical analysis 
-
 
 ---
 
@@ -120,7 +99,7 @@ class: inverse, center, middle
 
 #Bias' and how we avoided them
 
-- Description of different bias' we could have encounted
+- Description of different bias' we could have encountered
 
 - How we proceeded our investigation
 
@@ -140,213 +119,119 @@ class: inverse, center, middle
 
 ---
 
-#Our findings
+class: inverse, center, middle
 
-
-
-
-
+# Our data visualisations
 
 ---
 
-class: inverse, middle, center
-
-# Using xaringan
-
----
-
-# xaringan
-
-- The presentation is created using the `xaringan` package
-
-- Use `---` to separate slides and `--` for incremental builds
-
---
-
-- Like this
-
----
-
-# Layouts
-
-You can use plain text
-
-- or bullet points
-
-.pull-left[
-or text in two columns `\(^*\)`
-]
-.pull-right[
-- like
-- this
-]
-
-.footnote[
-[*] And add footnotes
-]
-
----
-
-# Code
-
-
-```r
-# a boring regression
-model &lt;- lm(dist ~ speed, data = cars)
-tidy(model)
-```
 
 ```
-## # A tibble: 2 × 5
-##   term        estimate std.error statistic  p.value
-##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)   -17.6      6.76      -2.60 1.23e- 2
-## 2 speed           3.93     0.416      9.46 1.49e-12
+## `summarise()` has grouped output by 'FinancialYear'. You can override using the
+## `.groups` argument.
 ```
 
-```r
-glance(model)
-```
-
-```
-## # A tibble: 1 × 12
-##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
-##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1     0.651         0.644  15.4      89.6 1.49e-12     1  -207.  419.  425.
-## # ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;
-```
-
----
-
-# Plots
-
-
-
-&lt;img src="presentation_files/figure-html/plot-iris-1.png" width="80%" /&gt;
-
----
-
-## Plot and text
-
-.pull-left[
-- Some text
-- goes here
-]
-.pull-right[
 &lt;img src="presentation_files/figure-html/unnamed-chunk-2-1.png" width="100%" /&gt;
+
+---
+
+
+```
+## `summarise()` has grouped output by 'FinancialYear'. You can override using the
+## `.groups` argument.
+## `geom_smooth()` using formula = 'y ~ x'
+```
+
+&lt;img src="presentation_files/figure-html/unnamed-chunk-3-1.png" width="100%" /&gt;
+
+---
+
+
+```
+## `summarise()` has grouped output by 'FinancialYear'. You can override using the
+## `.groups` argument.
+```
+
+&lt;img src="presentation_files/figure-html/unnamed-chunk-4-1.png" width="100%" /&gt;
+
+---
+
+
+```
+## `summarise()` has grouped output by 'FinancialYear'. You can override using the
+## `.groups` argument.
+```
+
+&lt;img src="presentation_files/figure-html/unnamed-chunk-5-1.png" width="100%" /&gt;
+
+---
+
+#Processing diagnosis data
+
+.pull-left[
+
+```r
+#mutating diagnosis to contain a column with the types of diagnosis based on the code
+diagnosis &lt;- diagnosis %&gt;% mutate(
+              DiagnosisName = case_when(
+                ICD10Codes == "F00 - F09 or Chapter G and second position F00" ~ "Organic, including symptomatic, mental disorders",
+                ICD10Codes == "F10 - F19" ~ "Mental &amp; behavioural disorders due to psychoactive substance use",
+                ICD10Codes == "F20 - F29" ~ "Schizophrenia, schizotypal, &amp; delusional disorders",
+                ICD10Codes == "F30 - F39" ~ "Mood (affective) disorders",
+                ICD10Codes == "F40 - F49" ~ "Neurotic, stress-related, &amp; somatoform disorders",
+                ICD10Codes == "F60 - F69" ~ "Disorders of adult personality &amp; behaviour",
+                ICD10Codes == "F50 - F59, F70 - F99" ~ "Other selected diagnoses principally affecting children &amp; young people"
+               )
+              ) 
+```
 ]
-
+.pull-right[
+- !! explaining what we did here
+]
+.footnotes[
+here is a footnote for an example
+]
 ---
 
-# Tables
 
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
+```
+## `summarise()` has grouped output by 'FinancialYear'. You can override using the
+## `.groups` argument.
+```
 
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:right;"&gt; Sepal.Length &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Sepal.Width &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Petal.Length &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Petal.Width &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; Species &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
+&lt;img src="presentation_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
 ---
-
-# Images
-
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="img/edinburgh-castle.jpg" alt="Image credit: Photo by Jörg Angeli on Unsplash." width="55%" /&gt;
-&lt;p class="caption"&gt;Image credit: Photo by Jörg Angeli on Unsplash.&lt;/p&gt;
-&lt;/div&gt;
-
-Or you can also include a full page image. See next slide.
-
----
-
 
 class: inverse, center, middle
-background-image: url(img/edinburgh-castle.jpg)
-background-size: contain
----
 
-# Math Expressions
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. &amp;#36;\alpha+\beta$ renders `\(\alpha+\beta\)`. You can use the display style with double dollar signs:
-
-```
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
-
-`$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$`
-
-Limitations:
-
-1. The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-1. There should not be spaces after the opening `$` or before the closing `$`.
-
-1. Math does not work on the title slide (see [#61](https://github.com/yihui/xaringan/issues/61) for a workaround).
+#Back to our question
 
 ---
 
-# Feeling adventurous?
+#Our question
 
-- Want to find out more about `xaringan`? See https://slides.yihui.name/xaringan/#1.
+- write our question
 
-- You are welcome to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
+- our answer to our question
 
-- But some of you might want to play around with slide styling. The 
-`xaringanthemer` provides some solutions for this that: https://pkg.garrickadenbuie.com/xaringanthemer.
+- any ethical considerations in relation to the investigation/findings
 
-- And if you want more bells and whistles, there is also `xaringanExtra`: https://pkg.garrickadenbuie.com/xaringanExtra.
+---
+
+#What are the advantages/limitations of the investigation we have performed
+
+- what are the implications?
+- how do they address the research question
+- suggestions for improving our analysis
+- issues relating to reliability and validity of our data
+- talk about the appropriateness of the statistical analysis
+
+---
+
+#extra stuff
+
+- still need to include a linear or logistic model?
+- valid assessment/interpretation of model output
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

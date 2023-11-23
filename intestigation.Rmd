@@ -242,4 +242,3 @@ length.of.stay %>% filter(HBT == "S92000003",) %>%
 
 
 ```
-

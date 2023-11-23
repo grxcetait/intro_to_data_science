@@ -31,6 +31,8 @@ library(tidymodels)
 library(palmerpenguins)
 library(knitr)
 library(xaringanthemer)
+library(tidyverse)
+library(ggplot2)
 ```
 
 ```{r setup, include=FALSE}
@@ -39,7 +41,24 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618,
 ```
 
 ```{r load-data, include=FALSE}
-# Load your data here
+# Load your data
+mental_health_inpatient_activity_age_sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
+y97_98<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="1997/98")
+y21_22<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="2021/22")
+plot1<-ggplot(y97_98,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+ labs(title = "Patient distribution by sex in 1997/98 in different age groups",
+       x = "Age Groups", 
+       y = "Number of Patients")
+plot2<-ggplot(y21_22,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+labs(title = "Patient distribution by sex in 2021/22 in different age groups",
+       x = "Age Groups", 
+       y = "Number of Patients")
+plot1
+plot2
+
+#ggplot(new_df1,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")
+
+age.sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
+length.of.stay <- read_csv("data/mental-health-inpatient-activity-length-of-stay.csv")
+diagnosis <- read_csv("data/mental-health-inpatient-activity-diagnosis-trend.csv")
 
 ```
 
@@ -54,27 +73,6 @@ style_xaringan(
 class: center, middle
 
 ## How has the length of stay in Scotland changed over the past 2 decades?
-
----
-
-#CRITERA
-
-- What is the quality of the research questions and/or policy question, and the relevancy of data to that question(s)?
-- Are statistical procedures carried out and explained correctly?
-- What is the quality of the statistical presentation, writing, and explanations?
-- Is the project carefully thought out? Are the limitations carefully considered? Does  it appear that time and effort went into the planning and implementation of the project?
-
----
-
-#POINTS TO COVER IN PRESENTATION
-
-- What choices we made, why
-What we found from each decision
-- Critique own methods
-- Provide suggestions for improving our analysis
-- Talk about issues relating to the reliability and validity of our data
-- Talk about the appropriateness of the statistical analysis 
-
 
 ---
 
@@ -132,7 +130,7 @@ class: inverse, center, middle
 
 #Bias' and how we avoided them
 
-- Description of different bias' we could have encounted
+- Description of different bias' we could have encountered
 
 - How we proceeded our investigation
 
@@ -152,155 +150,192 @@ class: inverse, center, middle
 
 ---
 
-#Our findings
+class: inverse, center, middle
 
-
-
-
-
+# Our data visualisations
 
 ---
 
-class: inverse, middle, center
-
-# Using xaringan
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+#Bar chart for number of patients vs. financial year
+age.sex %>% 
+  filter(HBR == "S92000003") %>%
+  group_by(FinancialYear, Sex) %>%
+  summarise(amount = sum(PatientsCount)) %>%
+  ggplot(aes(y = FinancialYear, 
+             x = amount, 
+             fill = Sex)) +
+  geom_col() +
+  labs(x = "Financial Year",
+       y = "Number of Patients",
+       title = "Number of Patients Versus Financial Year")
+```
 
 ---
 
-# xaringan
-
-- The presentation is created using the `xaringan` package
-
-- Use `---` to separate slides and `--` for incremental builds
-
---
-
-- Like this
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+#calculating average length of stay for each year (decreasing trend)
+length.of.stay %>% filter(HBT == "S92000003",) %>%
+                   group_by(FinancialYear, LengthOfStay) %>%
+                   summarise(Amount = sum(NumberOfStays)) %>%
+                   mutate(
+                     Midpoint = case_when(
+                         LengthOfStay == "< 1 day" ~ 0.5,
+                         LengthOfStay == "1 - 7 days" ~ 4,
+                         LengthOfStay == "8 - 28 days" ~ 18,
+                         LengthOfStay == "29 days - 6 months" ~ 98.5,
+                         LengthOfStay == "> 6 months" ~ 100 
+                      ),
+                     TotalStays = Midpoint * Amount
+                   ) %>%
+                   group_by(FinancialYear) %>%
+                   summarise(TotalStaysYearly = sum(TotalStays), TotalAmount = sum(Amount)) %>%
+                   mutate(
+                     AverageStay = TotalStaysYearly / TotalAmount,
+                     FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
+                   ) %>%
+                   ggplot(aes(y = AverageStay, x = FinancialYear)) +
+                   geom_point() +
+                   geom_smooth(method = "lm", se = FALSE) +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   ylim(0,40)
+```
 
 ---
 
-# Layouts
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+#bar chart for 1997/88 and 2021/22 based on length of stay and amount of patients
+length.of.stay %>% filter(HBT == "S92000003",
+                       FinancialYear == "1997/98" | 
+                       FinancialYear == "2021/22") %>%
+                   group_by(FinancialYear, LengthOfStay) %>%
+                   summarise(Amount = sum(NumberOfStays)) %>%
+                   mutate(
+                     Order = case_when(
+                       LengthOfStay == "< 1 day" ~ 1,
+                       LengthOfStay == "1 - 7 days" ~ 2,
+                       LengthOfStay == "8 - 28 days" ~ 3,
+                       LengthOfStay == "29 days - 6 months" ~ 4,
+                       LengthOfStay == "> 6 months" ~ 5
+                     )
+                   ) %>%
+                   ggplot(aes(x = reorder(LengthOfStay, +Order), y = Amount)) +
+                   facet_wrap(vars(FinancialYear)) +
+                   geom_bar(position = "dodge", stat = "identity") +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Length of Patients Stay", 
+                        y = "Amount of Patients", 
+                        title = "Changes in Lengths of Stay", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )
+```
 
-You can use plain text
+---
 
-- or bullet points
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+#bar chart for 1997/88 and 2021/22 based on age and amount of patients
+age.sex %>% filter(HBR == "S92000003",
+                       FinancialYear == "1997/98" | 
+                       FinancialYear == "2021/22") %>%
+                   group_by(FinancialYear, AgeGroup) %>%
+                   summarise(Amount = sum(PatientsCount)) %>%
+                   mutate(
+                     Order = case_when(
+                       AgeGroup == "0-17 years" ~ 1,
+                       AgeGroup == "18-24 years" ~ 2,
+                       AgeGroup == "25-39 years" ~ 3,
+                       AgeGroup == "40-64 years" ~ 4,
+                       AgeGroup == "65plus years" ~ 5
+                     )
+                   ) %>%
+                   ggplot(aes(x = reorder(AgeGroup, +Order), y = Amount)) +
+                   facet_wrap(vars(FinancialYear)) +
+                   geom_bar(position = "dodge", stat = "identity") +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Age of Patients", 
+                        y = "Amount of Patients", 
+                        title = "Changes in Age of Patients", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )
+```
+
+---
+
+#Processing diagnosis data
 
 .pull-left[
-or text in two columns $^*$
+```{r}
+#mutating diagnosis to contain a column with the types of diagnosis based on the code
+diagnosis <- diagnosis %>% mutate(
+              DiagnosisName = case_when(
+                ICD10Codes == "F00 - F09 or Chapter G and second position F00" ~ "Organic, including symptomatic, mental disorders",
+                ICD10Codes == "F10 - F19" ~ "Mental & behavioural disorders due to psychoactive substance use",
+                ICD10Codes == "F20 - F29" ~ "Schizophrenia, schizotypal, & delusional disorders",
+                ICD10Codes == "F30 - F39" ~ "Mood (affective) disorders",
+                ICD10Codes == "F40 - F49" ~ "Neurotic, stress-related, & somatoform disorders",
+                ICD10Codes == "F60 - F69" ~ "Disorders of adult personality & behaviour",
+                ICD10Codes == "F50 - F59, F70 - F99" ~ "Other selected diagnoses principally affecting children & young people"
+               )
+              ) 
+```
 ]
 .pull-right[
-- like
-- this
+- !! explaining what we did here
 ]
-
-.footnote[
-[*] And add footnotes
+.footnotes[
+here is a footnote for an example
 ]
-
 ---
 
-# Code
-
-```{r boring-regression}
-# a boring regression
-model <- lm(dist ~ speed, data = cars)
-tidy(model)
-glance(model)
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+#bar chart for 1997/88 and 2021/22 based on diagnoses and amount of patients
+diagnosis %>% filter(HBT == "S92000003",
+                     FinancialYear == "1997/98" | 
+           FinancialYear == "2021/22") %>%
+              group_by(FinancialYear, DiagnosisName) %>%
+              summarise(amount = sum(PatientsCount)) %>%
+              ggplot(aes(x = amount, y = DiagnosisName, fill = FinancialYear)) +
+              theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+              geom_bar(position = "dodge", stat = "identity") +
+              labs(y = "Diagnoses in Patients", 
+                        x = "Amount of Patients", 
+                        title = "Changes in Diagnoses", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022",
+                        legend = "Financial Year"
+                        )
 ```
-
 ---
-
-# Plots
-
-```{r recode-species, echo = FALSE}
-# In this chunk I'm doing a bunch of analysis that I don't want to present 
-# in my slides. But I need the resulting data frame for a plot I want to present.
-iris_modified <- iris %>%
-  mutate(Species = fct_other(Species, keep = "setosa"))
-```
-
-```{r plot-iris, echo = FALSE}
-# Code hidden with echo = FALSE
-# Uses modified iris dataset from previous chunk
-# Play around with height and width until you're happy with the look
-ggplot(data = iris_modified, mapping = aes(x = Sepal.Width, y = Sepal.Length, color = Species)) +
-  geom_point() + 
-  theme_minimal() # theme options: https://ggplot2.tidyverse.org/reference/ggtheme.html
-```
-
----
-
-## Plot and text
-
-.pull-left[
-- Some text
-- goes here
-]
-.pull-right[
-```{r warning=FALSE, out.width="100%", fig.width=4, echo=FALSE}
-# see how I changed out.width and fig.width from defaults
-# to make the figure bigger
-ggplot(penguins, aes(x = bill_length_mm, y = species, color = species)) +
-  geom_boxplot() +
-  theme_minimal()
-```
-]
-
----
-
-# Tables
-
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
-
-```{r iris-table, echo = FALSE}
-kable(head(iris), format = "html")
-```
-
----
-
-# Images
-
-```{r castle, echo = FALSE, out.width = "55%", fig.align = "center", fig.cap = "Image credit: Photo by Jörg Angeli on Unsplash."}
-include_graphics("img/edinburgh-castle.jpg")
-```
-
-Or you can also include a full page image. See next slide.
-
----
-
 
 class: inverse, center, middle
-background-image: url(img/edinburgh-castle.jpg)
-background-size: contain
----
 
-# Math Expressions
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. &#36;\alpha+\beta$ renders $\alpha+\beta$. You can use the display style with double dollar signs:
-
-```
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
-
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-
-Limitations:
-
-1. The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-1. There should not be spaces after the opening `$` or before the closing `$`.
-
-1. Math does not work on the title slide (see [#61](https://github.com/yihui/xaringan/issues/61) for a workaround).
+#Back to our question
 
 ---
 
-# Feeling adventurous?
+#Our question
 
-- Want to find out more about `xaringan`? See https://slides.yihui.name/xaringan/#1.
+- write our question
 
-- You are welcome to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
+- our answer to our question
 
-- But some of you might want to play around with slide styling. The 
-`xaringanthemer` provides some solutions for this that: https://pkg.garrickadenbuie.com/xaringanthemer.
+- any ethical considerations in relation to the investigation/findings
 
-- And if you want more bells and whistles, there is also `xaringanExtra`: https://pkg.garrickadenbuie.com/xaringanExtra.
+---
+
+#What are the advantages/limitations of the investigation we have performed
+
+- what are the implications?
+- how do they address the research question
+- suggestions for improving our analysis
+- issues relating to reliability and validity of our data
+- talk about the appropriateness of the statistical analysis
+
+---
+
+#extra stuff
+
+- still need to include a linear or logistic model?
+- valid assessment/interpretation of model output
