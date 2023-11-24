@@ -14,6 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r load-lib, message = FALSE}
 library(tidyverse)
 library(ggplot2)
+library(tidymodels)
 # Add any other libraries here
 
 
@@ -214,7 +215,8 @@ age.sex %>% filter(HBR == "S92000003",
                         )
 
 #calculating average length of stay for each year (decreasing trend)
-length.of.stay %>% filter(HBT == "S92000003",) %>%
+length.of.stay.single <- length.of.stay %>% 
+                   filter(HBT == "S92000003",) %>%
                    group_by(FinancialYear, LengthOfStay) %>%
                    summarise(Amount = sum(NumberOfStays)) %>%
                    mutate(
@@ -232,13 +234,32 @@ length.of.stay %>% filter(HBT == "S92000003",) %>%
                    mutate(
                      AverageStay = TotalStaysYearly / TotalAmount,
                      FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
-                   ) %>%
-                   ggplot(aes(y = AverageStay, x = FinancialYear)) +
+                   )
+
+length.of.stay.single %>%                   
+                   ggplot(aes(y = AverageStay, x = FinancialYear, color = "color")) +
                    geom_point() +
                    geom_smooth(method = "lm", se = FALSE) +
                    theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
-                   ylim(0,40)
+                   ylim(20,40) +
+                   coord_fixed(ratio = 0.6) +
+                   labs(x = "Year", 
+                        y = "Average Stay", 
+                        title = "Changes in Average Stay", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )
                 
+model1 <- linear_reg() %>%
+          set_engine("lm") %>%
+          fit(AverageStay ~ FinancialYear, data = length.of.stay.single)
 
+tidy(model1)
+
+model1_aug <- augment(model1$fit)
+ggplot(model1_aug, mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(alpha = 0.5) +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted Average Stay", y = "Residuals")
 
 ```
