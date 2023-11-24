@@ -214,7 +214,7 @@ age.sex %>% filter(HBR == "S92000003",
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
                         )
 
-#calculating average length of stay for each year (decreasing trend)
+#making financial years into a single year in order to use them numerically, along with calculating the average stay based on taking a mean of a grouped dataset. (midpoint of > 6 months length of stay estimated at 100 as no clear value)
 length.of.stay.single <- length.of.stay %>% 
                    filter(HBT == "S92000003",) %>%
                    group_by(FinancialYear, LengthOfStay) %>%
@@ -236,6 +236,7 @@ length.of.stay.single <- length.of.stay %>%
                      FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
                    )
 
+#calculating average length of stay for each year (decreasing trend)
 length.of.stay.single %>%                   
                    ggplot(aes(y = AverageStay, x = FinancialYear, color = "color")) +
                    geom_point() +
@@ -250,16 +251,18 @@ length.of.stay.single %>%
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
                         )
                 
+#using a linear model to model the length of stay against the financial year
 model1 <- linear_reg() %>%
           set_engine("lm") %>%
           fit(AverageStay ~ FinancialYear, data = length.of.stay.single)
 
 tidy(model1)
 
+#creating a residuals graph to display no clear pattern, showing evidence of a linear trend from 1997 to 2022
 model1_aug <- augment(model1$fit)
 ggplot(model1_aug, mapping = aes(x = .fitted, y = .resid)) +
   geom_point(alpha = 0.5) +
   geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
-  labs(x = "Predicted Average Stay", y = "Residuals")
+  labs(x = "Predicted Average Stay", y = "Residuals", title = "Graph of the Residuals from the Linear Model of Length of Stay")
 
 ```
