@@ -33,6 +33,7 @@ library(knitr)
 library(xaringanthemer)
 library(tidyverse)
 library(ggplot2)
+library(readr)
 ```
 
 ```{r setup, include=FALSE}
@@ -40,8 +41,9 @@ library(ggplot2)
 knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%")
 ```
 
-```{r load-data, include=FALSE}
+```{r load-data, include=FALSE, show_col_types = FALSE}
 # Load your data
+options(readr.show_col_types = FALSE)
 mental_health_inpatient_activity_age_sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
 y97_98<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="1997/98")
 y21_22<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="2021/22")
@@ -155,6 +157,20 @@ class: inverse, center, middle
 # Our data visualisations
 
 ---
+
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+mental_health_inpatient_activity_age_sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
+y97_98<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="1997/98")
+y21_22<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="2021/22")
+plot1<-ggplot(y97_98,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+ labs(title = "Patient distribution by sex in 1997/98 in different age groups",
+       x = "Age Groups", 
+       y = "Number of Patients")+theme_minimal()
+plot2<-ggplot(y21_22,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+labs(title = "Patient distribution by sex in 2021/22 in different age groups",
+       x = "Age Groups", 
+       y = "Number of Patients")+theme_minimal()
+plot1
+plot2
+```
 
 ```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
 #Bar chart for number of patients vs. financial year
@@ -278,7 +294,7 @@ diagnosis <- diagnosis %>% mutate(
                 ICD10Codes == "F60 - F69" ~ "Disorders of adult personality & behaviour",
                 ICD10Codes == "F50 - F59, F70 - F99" ~ "Other selected diagnoses principally affecting children & young people"
                )
-              )+theme_minimal()
+              )
 ```
 ]
 .pull-right[
