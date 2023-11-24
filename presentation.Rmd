@@ -47,10 +47,10 @@ y97_98<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="1997/98"
 y21_22<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="2021/22")
 plot1<-ggplot(y97_98,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+ labs(title = "Patient distribution by sex in 1997/98 in different age groups",
        x = "Age Groups", 
-       y = "Number of Patients")
+       y = "Number of Patients")+theme_minimal()
 plot2<-ggplot(y21_22,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+labs(title = "Patient distribution by sex in 2021/22 in different age groups",
        x = "Age Groups", 
-       y = "Number of Patients")
+       y = "Number of Patients")+theme_minimal()
 plot1
 plot2
 
@@ -168,7 +168,7 @@ age.sex %>%
   geom_col() +
   labs(x = "Financial Year",
        y = "Number of Patients",
-       title = "Number of Patients Versus Financial Year")
+       title = "Number of Patients Versus Financial Year")+theme_minimal()
 ```
 
 ---
@@ -198,7 +198,7 @@ length.of.stay %>% filter(HBT == "S92000003",) %>%
                    geom_point() +
                    geom_smooth(method = "lm", se = FALSE, formula = 'y ~ x') +
                    theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
-                   ylim(0,40)
+                   ylim(0,40)+theme_minimal()
 ```
 
 ---
@@ -228,7 +228,7 @@ length.of.stay %>% filter(HBT == "S92000003",
                         title = "Changes in Lengths of Stay", 
                         subtitle = "from 1997 to 2022",
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
-                        )
+                        )+theme_minimal()
 ```
 
 ---
@@ -258,7 +258,7 @@ age.sex %>% filter(HBR == "S92000003",
                         title = "Changes in Age of Patients", 
                         subtitle = "from 1997 to 2022",
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
-                        )
+                        )+theme_minimal()
 ```
 
 ---
@@ -278,7 +278,7 @@ diagnosis <- diagnosis %>% mutate(
                 ICD10Codes == "F60 - F69" ~ "Disorders of adult personality & behaviour",
                 ICD10Codes == "F50 - F59, F70 - F99" ~ "Other selected diagnoses principally affecting children & young people"
                )
-              ) 
+              )+theme_minimal()
 ```
 ]
 .pull-right[
@@ -305,7 +305,7 @@ diagnosis %>% filter(HBT == "S92000003",
                         subtitle = "from 1997 to 2022",
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022",
                         legend = "Financial Year"
-                        )
+                        )+theme_minimal()
 ```
 ---
 
