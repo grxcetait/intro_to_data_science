@@ -174,10 +174,12 @@ age.sex %>%
 ---
 
 ```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
-#calculating average length of stay for each year (decreasing trend)
-length.of.stay %>% filter(HBT == "S92000003",) %>%
+
+#making financial years into a single year in order to use them numerically, along with calculating the average stay based on taking a mean of a grouped dataset. (midpoint of > 6 months length of stay estimated at 100 as no clear value)
+length.of.stay.single <- length.of.stay %>% 
+                   filter(HBT == "S92000003",) %>%
                    group_by(FinancialYear, LengthOfStay) %>%
-                   summarise(Amount = sum(NumberOfStays), .groups = 'drop') %>%
+                   summarise(Amount = sum(NumberOfStays), .groups = "drop") %>%
                    mutate(
                      Midpoint = case_when(
                          LengthOfStay == "< 1 day" ~ 0.5,
@@ -193,12 +195,22 @@ length.of.stay %>% filter(HBT == "S92000003",) %>%
                    mutate(
                      AverageStay = TotalStaysYearly / TotalAmount,
                      FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
-                   ) %>%
-                   ggplot(aes(y = AverageStay, x = FinancialYear)) +
+                   )
+
+#calculating average length of stay for each year (decreasing trend)
+length.of.stay.single %>%                   
+                   ggplot(aes(y = AverageStay, x = FinancialYear, color = "color")) +
                    geom_point() +
-                   geom_smooth(method = "lm", se = FALSE, formula = 'y ~ x') +
-                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
-                   ylim(0,40)
+                   geom_smooth(method = "lm", se = FALSE, formula = "y ~ x") +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9), legend.position = "none") +
+                   ylim(20,40) +
+                   coord_fixed(ratio = 0.6) +
+                   labs(x = "Year", 
+                        y = "Average Stay", 
+                        title = "Changes in Average Stay", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )
 ```
 
 ---
