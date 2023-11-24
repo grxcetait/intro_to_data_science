@@ -242,9 +242,6 @@ length.of.stay.single %>%
                    geom_point() +
                    geom_smooth(method = "lm", se = FALSE) +
                    theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
-<<<<<<< HEAD
-                   ylim(0,40)+theme_minimal()
-=======
                    ylim(20,40) +
                    coord_fixed(ratio = 0.6) +
                    labs(x = "Year", 
@@ -253,7 +250,6 @@ length.of.stay.single %>%
                         subtitle = "from 1997 to 2022",
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
                         )
->>>>>>> f1514fd6d6c8b43a64978a027858f389c9b9d1ab
                 
 #using a linear model to model the length of stay against the financial year
 model1 <- linear_reg() %>%
