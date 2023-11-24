@@ -49,11 +49,19 @@ Topics looking for:
 Report writing
 - Introduction
  - What is your data? 
+  - Our data informs about inpatients with mental health problems who were admitted to Scottish hospitals for the day or for a prolonged period of time during between the years 1997-2022.
  - What research questions are you investigating?
  - Is there any relevant background information/literature that can help give context to your data/questions?
+  - It is important to note that awareness of mental health has grown significantly over the past decades. This may have had effects on the evolution of treatments for mental health problems.
 - Methods
  - Summarise what cleaning/preprocessing you have done to your data
+  - Load years 1997/98 and 2021/22 and attribute to separate objects using filter. Original file names are long so it makes it easier to find and differentiate relevant data.
+  - Decode the ICD10 diagnosis codes to the common disease names.
+  - Find midpoints of continuous variables such as length of stay.
  - Brief description of data science techniques you have used in your investigation
+  - Data tyding: attributed names to objects, made use of certain variables by mutating them
+  - Plotting: using a plethora of plot types (bar, scatter, histogram), labelling
+  - Building models: 
 - Results
  - Tables, figures and summary values from your exploratory investigation
  - Ensure they are well labelled, neat and directly relevant to the test
@@ -69,7 +77,7 @@ Report writing
 
 ## Research Question
 
-Describe your research question here. Include why this question might be of interest. 
+To what extent has the length of stay of mental health inpatients in Scotland changed over the years 1997 to 2022? This particular question was preferred due to its narrower scope, allowing us to investigate and comment on trends regarding variables such as age, sex, and diagnoses. Further, and more importantly, the investigation of this question may provide additional insight into how the quality of mental health treatments changed.
 
 
 

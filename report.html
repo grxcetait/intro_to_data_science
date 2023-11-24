@@ -11,7 +11,7 @@
 
 <meta name="author" content="by The Git Gods: Kieran Lewis, Khushi Wadhwa, Caio Celano, Grace Tait &amp; Nor Danish Raziq" />
 
-<meta name="date" content="2023-11-22" />
+<meta name="date" content="2023-11-24" />
 
 <title>Project title</title>
 
@@ -353,7 +353,7 @@ display: none;
 <h1 class="title toc-ignore">Project title</h1>
 <h4 class="author">by The Git Gods: Kieran Lewis, Khushi Wadhwa, Caio
 Celano, Grace Tait &amp; Nor Danish Raziq</h4>
-<h4 class="date">2023-11-22</h4>
+<h4 class="date">2023-11-24</h4>
 
 </div>
 
@@ -376,27 +376,44 @@ Construction of an appropriate model, either a linear or logistic model
 data</li>
 <li>Talk about the appropriateness of the statistical analysis</li>
 </ul>
-<p>Report writing - Introduction - What is your data? - What research
-questions are you investigating? - Is there any relevant background
-information/literature that can help give context to your
-data/questions? - Methods - Summarise what cleaning/preprocessing you
-have done to your data - Brief description of data science techniques
-you have used in your investigation - Results - Tables, figures and
-summary values from your exploratory investigation - Ensure they are
-well labelled, neat and directly relevant to the test - Avoid cluttering
-with unnecessary data - Summary of a fitted statistical model, such as
-estimates, plots and git statistic - A brief explanation of what the
-results mean in the given context of your data - Discussion - Answer
-your research question - What are the advantages/limitations of the
-investigation you have performed? - Discuss their implications, how they
-address your research question, and any limitations - If applicable, are
-there any ethical considerations in relation to your
-investigation/findings?</p>
+<p>Report writing - Introduction - What is your data? - Our data informs
+about inpatients with mental health problems who were admitted to
+Scottish hospitals for the day or for a prolonged period of time during
+between the years 1997-2022. - What research questions are you
+investigating? - Is there any relevant background information/literature
+that can help give context to your data/questions? - It is important to
+note that awareness of mental health has grown significantly over the
+past decades. This may have had effects on the evolution of treatments
+for mental health problems. - Methods - Summarise what
+cleaning/preprocessing you have done to your data - Load years 1997/98
+and 2021/22 and attribute to separate objects using filter. Original
+file names are long so it makes it easier to find and differentiate
+relevant data. - Decode the ICD10 diagnosis codes to the common disease
+names. - Find midpoints of continuous variables such as length of stay.
+- Brief description of data science techniques you have used in your
+investigation - Data tyding: attributed names to objects, made use of
+certain variables by mutating them - Plotting: using a plethora of plot
+types (bar, scatter, histogram), labelling - Building models: - Results
+- Tables, figures and summary values from your exploratory investigation
+- Ensure they are well labelled, neat and directly relevant to the test
+- Avoid cluttering with unnecessary data - Summary of a fitted
+statistical model, such as estimates, plots and git statistic - A brief
+explanation of what the results mean in the given context of your data -
+Discussion - Answer your research question - What are the
+advantages/limitations of the investigation you have performed? -
+Discuss their implications, how they address your research question, and
+any limitations - If applicable, are there any ethical considerations in
+relation to your investigation/findings?</p>
 </div>
 <div id="research-question" class="section level2">
 <h2>Research Question</h2>
-<p>Describe your research question here. Include why this question might
-be of interest.</p>
+<p>To what extent has the length of stay of mental health inpatients in
+Scotland changed over the years 1997 to 2022? This particular question
+was preferred due to its narrower scope, allowing us to investigate and
+comment on trends regarding variables such as age, sex, and diagnoses.
+Further, and more importantly, the investigation of this question may
+provide additional insight into how the quality of mental health
+treatments changed.</p>
 </div>
 <div id="data" class="section level2">
 <h2>Data</h2>
