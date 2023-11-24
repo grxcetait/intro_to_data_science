@@ -92,7 +92,7 @@ class: inverse, center, middle
 
 - Period covered is financial years 1997/98 - 2021/22
 
-- We chose this dataset because there were many variables that could be linked together and we knew there would be many different questions and relationships to analyse
+- We chose this dataset because there were many variables that could be linked together so we could come up with many different questions and relationships to analyse
 
 ---
 
@@ -103,8 +103,6 @@ class: inverse, center, middle
 - Create data visualisations from our initial ideas to see if there are any trends or if it would be worth investigating further
 
 - Look for ways to link the datasets to obtain our chosen variables
-
-- ((Look out for any NA values and create summary statistics))
 
 ---
 
@@ -130,7 +128,9 @@ class: inverse, center, middle
 
 #Bias' and how we avoided them
 
-- Description of different bias' we could have encountered
+- Initial bias we confronted was we assumed that length of stay would be affected by diagnosis
+
+ - Because different 
 
 - How we proceeded our investigation
 
@@ -177,7 +177,7 @@ age.sex %>%
 #calculating average length of stay for each year (decreasing trend)
 length.of.stay %>% filter(HBT == "S92000003",) %>%
                    group_by(FinancialYear, LengthOfStay) %>%
-                   summarise(Amount = sum(NumberOfStays)) %>%
+                   summarise(Amount = sum(NumberOfStays), .groups = 'drop') %>%
                    mutate(
                      Midpoint = case_when(
                          LengthOfStay == "< 1 day" ~ 0.5,
@@ -196,7 +196,7 @@ length.of.stay %>% filter(HBT == "S92000003",) %>%
                    ) %>%
                    ggplot(aes(y = AverageStay, x = FinancialYear)) +
                    geom_point() +
-                   geom_smooth(method = "lm", se = FALSE) +
+                   geom_smooth(method = "lm", se = FALSE, formula = 'y ~ x') +
                    theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
                    ylim(0,40)
 ```
@@ -332,6 +332,19 @@ class: inverse, center, middle
 - suggestions for improving our analysis
 - issues relating to reliability and validity of our data
 - talk about the appropriateness of the statistical analysis
+
+
+---
+
+#How we respected the four respects
+
+- respect the people
+
+- respect the data
+
+- respect the visualisation
+
+- 
 
 ---
 
