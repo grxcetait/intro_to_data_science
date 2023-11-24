@@ -29,6 +29,44 @@ library(tidyverse)
 ```
 
 
+## Critera 
+
+Topics looking for:
+- loading , processing and cleaning of data
+- Effective summarisation of the data in both numerical and visual forms
+- Appropriate management of various variable types, specifically numerical and categorical variables
+- Evidence of effective communication, whether in numerical output and in data visualisations
+- Highlighting any ethical considerations as part of your data science investigation
+- Construction of an appropriate model, either a linear or logistic model
+- Valid assessment/interpretation of model output
+
+- What choices we made, why, what we found from each decision
+- Critique own methods
+- Provide suggestions for improving our analysis
+- Talk about issues relating to the reliability and validity of our data
+- Talk about the appropriateness of the statistical analysis
+
+Report writing
+- Introduction
+ - What is your data? 
+ - What research questions are you investigating?
+ - Is there any relevant background information/literature that can help give context to your data/questions?
+- Methods
+ - Summarise what cleaning/preprocessing you have done to your data
+ - Brief description of data science techniques you have used in your investigation
+- Results
+ - Tables, figures and summary values from your exploratory investigation
+ - Ensure they are well labelled, neat and directly relevant to the test
+ - Avoid cluttering with unnecessary data
+ - Summary of a fitted statistical model, such as estimates, plots and git statistic
+ - A brief explanation of what the results mean in the given context of your data
+- Discussion
+ - Answer your research question
+ - What are the advantages/limitations of the investigation you have performed?
+ - Discuss their implications, how they address your research question, and any limitations
+ - If applicable, are there any ethical considerations in relation to your investigation/findings?
+
+
 ## Research Question
 
 Describe your research question here. Include why this question might be of interest. 

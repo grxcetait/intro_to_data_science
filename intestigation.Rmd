@@ -230,13 +230,15 @@ length.of.stay %>% filter(HBT == "S92000003",) %>%
                    group_by(FinancialYear) %>%
                    summarise(TotalStaysYearly = sum(TotalStays), TotalAmount = sum(Amount)) %>%
                    mutate(
-                     AverageStay = TotalStaysYearly / TotalAmount
+                     AverageStay = TotalStaysYearly / TotalAmount,
+                     FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
                    ) %>%
                    ggplot(aes(y = AverageStay, x = FinancialYear)) +
-                   geom_col() +
-                   theme(axis.text.x=element_text(angle=45, hjust=0.9))
+                   geom_point() +
+                   geom_smooth(method = "lm", se = FALSE) +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   ylim(0,40)
                 
 
 
 ```
-
