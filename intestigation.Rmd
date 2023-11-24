@@ -78,6 +78,7 @@ plot2
 age.sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
 length.of.stay <- read_csv("data/mental-health-inpatient-activity-length-of-stay.csv")
 diagnosis <- read_csv("data/mental-health-inpatient-activity-diagnosis-trend.csv")
+readmissions <- read_csv("data/mental-health-inpatient-activity-readmissions.csv")
 
 #Bar chart for number of patients vs. financial year
 age.sex %>% 
@@ -265,4 +266,34 @@ ggplot(model1_aug, mapping = aes(x = .fitted, y = .resid)) +
   geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
   labs(x = "Predicted Average Stay", y = "Residuals", title = "Graph of the Residuals from the Linear Model of Length of Stay")
 
+#readmissions graph
+readmissions.single <- readmissions %>%
+  filter(HBT == "S92000003") %>%
+  mutate(
+  FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
+  )
+
+readmissions.single %>%                   
+                   ggplot(aes(y = PercentageOfReadmissionsWithin28Days, x = FinancialYear)) +
+                   geom_path() +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Year", 
+                        y = "Percent of Readmissions", 
+                        title = "Changes in Readmissions", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )
+
+readmissions.single %>%                   
+                   ggplot(aes(y = PercentageOfReadmissionsWithin133Days, x = FinancialYear)) +
+                   geom_path() +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Year", 
+                        y = "Percent of Readmissions", 
+                        title = "Changes in Readmissions", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )
+
+  
 ```
