@@ -60,7 +60,7 @@ style_xaringan(
   title_slide_background_image = "img/background.jpg"
 )
 ```
----
+
 class: center, middle
 #Research question: 
 ## How has the length of stay in Scotland changed over the past 2 decades?
@@ -186,48 +186,36 @@ plot2
 
 
 ---
-```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
-
-#making financial years into a single year in order to use them numerically, along with calculating the average stay based on taking a mean of a grouped dataset. (midpoint of > 6 months length of stay estimated at 100 as no clear value)
-length.of.stay.single <- length.of.stay %>% 
-                   filter(HBT == "S92000003",) %>%
+```{r warning=FALSE, out.width="100%", fig.width=12,out.height="90%", echo=FALSE}
+length.of.stay %>% filter(HBT == "S92000003",
+                       FinancialYear == "1997/98" | 
+                       FinancialYear == "2021/22") %>%
                    group_by(FinancialYear, LengthOfStay) %>%
-                   summarise(Amount = sum(NumberOfStays), .groups = "drop") %>%
+                   summarise(Amount = sum(NumberOfStays),.groups = "drop") %>%
                    mutate(
-                     Midpoint = case_when(
-                         LengthOfStay == "< 1 day" ~ 0.5,
-                         LengthOfStay == "1 - 7 days" ~ 4,
-                         LengthOfStay == "8 - 28 days" ~ 18,
-                         LengthOfStay == "29 days - 6 months" ~ 98.5,
-                         LengthOfStay == "> 6 months" ~ 100 
-                      ),
-                     TotalStays = Midpoint * Amount
+                     Order = case_when(
+                       LengthOfStay == "< 1 day" ~ 1,
+                       LengthOfStay == "1 - 7 days" ~ 2,
+                       LengthOfStay == "8 - 28 days" ~ 3,
+                       LengthOfStay == "29 days - 6 months" ~ 4,
+                       LengthOfStay == "> 6 months" ~ 5
+                     )
                    ) %>%
-                   group_by(FinancialYear) %>%
-                   summarise(TotalStaysYearly = sum(TotalStays), TotalAmount = sum(Amount)) %>%
-                   mutate(
-                     AverageStay = TotalStaysYearly / TotalAmount,
-                     FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
-                   )
-length.of.stay.single
+                   ggplot(aes(x = reorder(LengthOfStay, +Order), y = Amount)) +
+                   facet_wrap(vars(FinancialYear)) +
+                   geom_bar(position = "dodge", stat = "identity",fill="forestgreen") +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Length of Patients Stay", 
+                        y = "Amount of Patients", 
+                        title = "Changes in Lengths of Stay", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )+theme_minimal()
+
 ```
 ---
 ```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
-#calculating average length of stay for each year (decreasing trend)
-length.of.stay.single %>%                   
-                   ggplot(aes(y = AverageStay, x = FinancialYear, color = "color")) +
-                   geom_point() +
-                   geom_smooth(method = "lm", se = FALSE, formula = "y ~ x") +
-                   theme(axis.text.x=element_text(angle=45, hjust=0.9), legend.position = "none") +
-                   ylim(20,40) +
-                   coord_fixed(ratio = 0.6) +
-                   labs(x = "Year", 
-                        y = "Average Stay", 
-                        title = "Changes in Average Stay", 
-                        subtitle = "from 1997 to 2022",
-                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
-                        ) +
-                   theme_minimal()
+
 ```
 
 ---
@@ -238,14 +226,14 @@ length.of.stay %>%
          FinancialYear == "1997/98" | 
            FinancialYear == "2021/22") %>%
   group_by(FinancialYear, LengthOfStay) %>%
-  summarise(amount = sum(NumberOfStays)) %>%
+  summarise(amount = sum(NumberOfStays),.groups="drop") %>%
   ggplot(aes(y = FinancialYear,
              x = amount, 
              fill = LengthOfStay)) +
   geom_col(position = "fill") +
   labs(x = "Number of Patients",
        y = "Financial Year",
-       title = "Number of Patients Versus Length of Stay",
+       title = "Number of Patients vs Length of Stay",
        subtitle = "Comparing 1997/98 and 2021/22") +
   scale_fill_discrete(breaks = c('< 1 day', 
                                  '1 - 7 days',
@@ -262,7 +250,7 @@ age.sex %>% filter(HBR == "S92000003",
                        FinancialYear == "1997/98" | 
                        FinancialYear == "2021/22") %>%
                    group_by(FinancialYear, AgeGroup) %>%
-                   summarise(Amount = sum(PatientsCount)) %>%
+                   summarise(Amount = sum(PatientsCount),.groups="drop") %>%
                    mutate(
                      Order = case_when(
                        AgeGroup == "0-17 years" ~ 1,
@@ -274,7 +262,7 @@ age.sex %>% filter(HBR == "S92000003",
                    ) %>%
                    ggplot(aes(x = reorder(AgeGroup, +Order), y = Amount)) +
                    facet_wrap(vars(FinancialYear)) +
-                   geom_bar(position = "dodge", stat = "identity") +
+                   geom_bar(position = "dodge", stat = "identity",fill="forestgreen") +
                    theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
                    labs(x = "Age of Patients", 
                         y = "Amount of Patients", 
@@ -318,7 +306,7 @@ diagnosis %>% filter(HBT == "S92000003",
                      FinancialYear == "1997/98" | 
            FinancialYear == "2021/22") %>%
               group_by(FinancialYear, DiagnosisName) %>%
-              summarise(amount = sum(PatientsCount)) %>%
+              summarise(amount = sum(PatientsCount),.groups="drop") %>%
               ggplot(aes(x = amount, y = DiagnosisName, fill = FinancialYear)) +
               theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
               geom_bar(position = "dodge", stat = "identity") +
