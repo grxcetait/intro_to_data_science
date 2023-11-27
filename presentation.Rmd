@@ -14,8 +14,8 @@ output:
       highlightLines: true
       countIncrementalSlides: false
       
----
 
+---
 ```{r install-package, include = FALSE, eval = FALSE}
 # Copy and paste the following code into your console to download and install
 # the `xaringan` package that contains all of the code which allows you 
@@ -34,52 +34,40 @@ library(xaringanthemer)
 library(tidyverse)
 library(ggplot2)
 library(readr)
+options(readr.show_col_types = FALSE)
 ```
 
 ```{r setup, include=FALSE}
 # For better figure resolution
-knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.asp = 0.618, out.width = "80%")
+knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.height=4,fig.asp = 0.618, out.width = "100%")
 ```
 
 ```{r load-data, include=FALSE, show_col_types = FALSE}
 # Load your data
-options(readr.show_col_types = FALSE)
-mental_health_inpatient_activity_age_sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
-y97_98<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="1997/98")
-y21_22<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="2021/22")
-plot1<-ggplot(y97_98,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+ labs(title = "Patient distribution by sex in 1997/98 in different age groups",
-       x = "Age Groups", 
-       y = "Number of Patients")+theme_minimal()
-plot2<-ggplot(y21_22,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+labs(title = "Patient distribution by sex in 2021/22 in different age groups",
-       x = "Age Groups", 
-       y = "Number of Patients")+theme_minimal()
-plot1
-plot2
-
 #ggplot(new_df1,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")
 
 age.sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
 length.of.stay <- read_csv("data/mental-health-inpatient-activity-length-of-stay.csv")
 diagnosis <- read_csv("data/mental-health-inpatient-activity-diagnosis-trend.csv")
-
+readmissions <- read_csv("data/mental-health-inpatient-activity-readmissions.csv")
+options(readr.show_col_types = FALSE)
 ```
 
 ```{r include=FALSE}
 
 #Background image
 style_xaringan(
-  title_slide_background_image = "img/confetti.jpg"
+  title_slide_background_image = "img/background.jpg"
 )
 ```
-
+---
 class: center, middle
-
+#Research question: 
 ## How has the length of stay in Scotland changed over the past 2 decades?
 
 ---
 
 class: inverse, center, middle
-
 # About our dataset
 
 ---
@@ -158,37 +146,46 @@ class: inverse, center, middle
 
 ---
 
-```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
-mental_health_inpatient_activity_age_sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
-y97_98<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="1997/98")
-y21_22<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="2021/22")
-plot1<-ggplot(y97_98,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+ labs(title = "Patient distribution by sex in 1997/98 in different age groups",
-       x = "Age Groups", 
-       y = "Number of Patients")+theme_minimal()
-plot2<-ggplot(y21_22,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+labs(title = "Patient distribution by sex in 2021/22 in different age groups",
-       x = "Age Groups", 
-       y = "Number of Patients")+theme_minimal()
-plot1
-plot2
-```
-
-```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+```{r warning=FALSE, out.width="120%",out.height="50%", echo=FALSE}
 #Bar chart for number of patients vs. financial year
 age.sex %>% 
   filter(HBR == "S92000003") %>%
   group_by(FinancialYear, Sex) %>%
-  summarise(amount = sum(PatientsCount)) %>%
+  summarise(amount = sum(PatientsCount),.groups="drop") %>%
   ggplot(aes(y = FinancialYear, 
              x = amount, 
              fill = Sex)) +
   geom_col() +
   labs(x = "Financial Year",
        y = "Number of Patients",
-       title = "Number of Patients Versus Financial Year")+theme_minimal()
+       title = "Number of Patients vs Financial Year")+theme_minimal()
 ```
+.footnotes[
+This is a graph showing the total number of patients in each year from our dataset. 
+]
 
 ---
+.pull-left[
+```{r warning=FALSE, out.height="70%",echo=FALSE,fig.align = 'center'}
+mental_health_inpatient_activity_age_sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
+y97_98<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="1997/98")
+y21_22<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="2021/22")
+plot1<-ggplot(y97_98,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+ labs(title = "Patient distribution by sex in 1997/98 in different age groups",
+       x = "Age Groups", 
+       y = "Number of Patients")+theme_minimal()+ylim(0,6000)
 
+plot2<-ggplot(y21_22,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+labs(title = "Patient distribution by sex in 2021/22 in different age groups",
+       x = "Age Groups", 
+       y = "Number of Patients")+theme_minimal()+ylim(0,6000)
+plot1
+plot2
+```
+]
+.pull-right[
+- These are bar charts comparing the patient distribution by sex in 2 financial years, 1997/98 and 2021/22. The trend of the graphs remains similar, although the total number of patients in each age group has mostly decreased.]
+
+
+---
 ```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
 
 #making financial years into a single year in order to use them numerically, along with calculating the average stay based on taking a mean of a grouped dataset. (midpoint of > 6 months length of stay estimated at 100 as no clear value)
@@ -212,7 +209,10 @@ length.of.stay.single <- length.of.stay %>%
                      AverageStay = TotalStaysYearly / TotalAmount,
                      FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
                    )
-
+length.of.stay.single
+```
+---
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
 #calculating average length of stay for each year (decreasing trend)
 length.of.stay.single %>%                   
                    ggplot(aes(y = AverageStay, x = FinancialYear, color = "color")) +
@@ -228,37 +228,30 @@ length.of.stay.single %>%
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
                         ) +
                    theme_minimal()
-
 ```
 
 ---
 
 ```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
-#bar chart for 1997/88 and 2021/22 based on length of stay and amount of patients
-length.of.stay %>% filter(HBT == "S92000003",
-                       FinancialYear == "1997/98" | 
-                       FinancialYear == "2021/22") %>%
-                   group_by(FinancialYear, LengthOfStay) %>%
-                   summarise(Amount = sum(NumberOfStays)) %>%
-                   mutate(
-                     Order = case_when(
-                       LengthOfStay == "< 1 day" ~ 1,
-                       LengthOfStay == "1 - 7 days" ~ 2,
-                       LengthOfStay == "8 - 28 days" ~ 3,
-                       LengthOfStay == "29 days - 6 months" ~ 4,
-                       LengthOfStay == "> 6 months" ~ 5
-                     )
-                   ) %>%
-                   ggplot(aes(x = reorder(LengthOfStay, +Order), y = Amount)) +
-                   facet_wrap(vars(FinancialYear)) +
-                   geom_bar(position = "dodge", stat = "identity") +
-                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
-                   labs(x = "Length of Patients Stay", 
-                        y = "Amount of Patients", 
-                        title = "Changes in Lengths of Stay", 
-                        subtitle = "from 1997 to 2022",
-                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
-                        )+theme_minimal()
+length.of.stay %>%
+  filter(HBT == "S92000003",
+         FinancialYear == "1997/98" | 
+           FinancialYear == "2021/22") %>%
+  group_by(FinancialYear, LengthOfStay) %>%
+  summarise(amount = sum(NumberOfStays)) %>%
+  ggplot(aes(y = FinancialYear,
+             x = amount, 
+             fill = LengthOfStay)) +
+  geom_col(position = "fill") +
+  labs(x = "Number of Patients",
+       y = "Financial Year",
+       title = "Number of Patients Versus Length of Stay",
+       subtitle = "Comparing 1997/98 and 2021/22") +
+  scale_fill_discrete(breaks = c('< 1 day', 
+                                 '1 - 7 days',
+                                 '8 - 28 days',
+                                 '29 days - 6 months',
+                                 '> 6 months'))+theme_minimal()
 ```
 
 ---

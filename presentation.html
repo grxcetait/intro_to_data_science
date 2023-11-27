@@ -4,7 +4,7 @@
     <title>IDS Project</title>
     <meta charset="utf-8" />
     <meta name="author" content="The Git Gods   Grace Tait, Khushi Wadhwa, Kieran Lewis, Caio Celano, &amp; Nor Danish Raziq" />
-    <meta name="date" content="2023-11-24" />
+    <meta name="date" content="2023-11-27" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -22,7 +22,7 @@ class: center, middle, inverse, title-slide
 ### University of Edinburgh
 ]
 .date[
-### 2023-11-24
+### 2023-11-27
 ]
 
 ---
@@ -37,16 +37,14 @@ class: center, middle, inverse, title-slide
 
 
 
-
-
+---
 class: center, middle
-
+#Research question: 
 ## How has the length of stay in Scotland changed over the past 2 decades?
 
 ---
 
 class: inverse, center, middle
-
 # About our dataset
 
 ---
@@ -125,28 +123,38 @@ class: inverse, center, middle
 
 ---
 
-&lt;img src="presentation_files/figure-html/unnamed-chunk-2-1.png" width="100%" /&gt;&lt;img src="presentation_files/figure-html/unnamed-chunk-2-2.png" width="100%" /&gt;
+&lt;img src="presentation_files/figure-html/unnamed-chunk-2-1.png" width="120%" height="50%" /&gt;
+.footnotes[
+This is a graph showing the total number of patients in each year from our dataset. 
+]
 
+---
+.pull-left[
+&lt;img src="presentation_files/figure-html/unnamed-chunk-3-1.png" width="100%" height="70%" style="display: block; margin: auto;" /&gt;&lt;img src="presentation_files/figure-html/unnamed-chunk-3-2.png" width="100%" height="70%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+- These are bar charts comparing the patient distribution by sex in 2 financial years, 1997/98 and 2021/22. The trend of the graphs remains similar, although the total number of patients in each age group has mostly decreased.]
 
-```
-## `summarise()` has grouped output by 'FinancialYear'. You can override using the
-## `.groups` argument.
-```
-
-&lt;img src="presentation_files/figure-html/unnamed-chunk-3-1.png" width="100%" /&gt;
 
 ---
 
-&lt;img src="presentation_files/figure-html/unnamed-chunk-4-1.png" width="100%" /&gt;
-
+```
+## # A tibble: 25 × 4
+##    FinancialYear TotalStaysYearly TotalAmount AverageStay
+##            &lt;dbl&gt;            &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+##  1          1997          2767130       76290        36.3
+##  2          1998          2823390       76010        37.1
+##  3          1999          2694760       74390        36.2
+##  4          2000          2588815       72190        35.9
+##  5          2001          2570395       70670        36.4
+##  6          2002          2544370       69700        36.5
+##  7          2003          2517635       67840        37.1
+##  8          2004          2411560       65320        36.9
+##  9          2005          2324875       62860        37.0
+## 10          2006          2218070       62230        35.6
+## # ℹ 15 more rows
+```
 ---
-
-
-```
-## `summarise()` has grouped output by 'FinancialYear'. You can override using the
-## `.groups` argument.
-```
-
 &lt;img src="presentation_files/figure-html/unnamed-chunk-5-1.png" width="100%" /&gt;
 
 ---
@@ -158,6 +166,16 @@ class: inverse, center, middle
 ```
 
 &lt;img src="presentation_files/figure-html/unnamed-chunk-6-1.png" width="100%" /&gt;
+
+---
+
+
+```
+## `summarise()` has grouped output by 'FinancialYear'. You can override using the
+## `.groups` argument.
+```
+
+&lt;img src="presentation_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
 
 ---
 
@@ -194,7 +212,7 @@ here is a footnote for an example
 ## `.groups` argument.
 ```
 
-&lt;img src="presentation_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
+&lt;img src="presentation_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
 ---
 
 class: inverse, center, middle
