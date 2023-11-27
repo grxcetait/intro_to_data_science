@@ -63,7 +63,7 @@ style_xaringan(
 
 class: center, middle
 #Research question: 
-## How has the length of stay in Scotland changed over the past 2 decades?
+## How has the length of stay in hospitals in Scotland changed over the past 2 decades for people diagnosed with different mental health conditions?
 
 ---
 
@@ -145,8 +145,7 @@ class: inverse, center, middle
 # Our data visualisations
 
 ---
-
-```{r warning=FALSE, out.width="120%",out.height="50%", echo=FALSE}
+```{r warning=FALSE, fig.height=6, fit.width=12, echo=FALSE}
 #Bar chart for number of patients vs. financial year
 age.sex %>% 
   filter(HBR == "S92000003") %>%
@@ -161,7 +160,7 @@ age.sex %>%
        title = "Number of Patients vs Financial Year")+theme_minimal()
 ```
 .footnotes[
-This is a graph showing the total number of patients in each year from our dataset. 
+- This is a graph showing the total number of patients in each year from our dataset. The proportion of male to females roughly remains the same throughout the years. 
 ]
 
 ---
@@ -186,6 +185,7 @@ plot2
 
 
 ---
+
 ```{r warning=FALSE, out.width="100%", fig.width=12,out.height="90%", echo=FALSE}
 length.of.stay %>% filter(HBT == "S92000003",
                        FinancialYear == "1997/98" | 
@@ -213,39 +213,12 @@ length.of.stay %>% filter(HBT == "S92000003",
                         )+theme_minimal()
 
 ```
----
-```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
-
-```
-
+.footnotes[
+- The number of patients who stayed in the hospital for 8-28 days and 29 days- 6 months decreased a lot in 2021/22 as compared to 1997/98. 
+]
 ---
 
 ```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
-length.of.stay %>%
-  filter(HBT == "S92000003",
-         FinancialYear == "1997/98" | 
-           FinancialYear == "2021/22") %>%
-  group_by(FinancialYear, LengthOfStay) %>%
-  summarise(amount = sum(NumberOfStays),.groups="drop") %>%
-  ggplot(aes(y = FinancialYear,
-             x = amount, 
-             fill = LengthOfStay)) +
-  geom_col(position = "fill") +
-  labs(x = "Number of Patients",
-       y = "Financial Year",
-       title = "Number of Patients vs Length of Stay",
-       subtitle = "Comparing 1997/98 and 2021/22") +
-  scale_fill_discrete(breaks = c('< 1 day', 
-                                 '1 - 7 days',
-                                 '8 - 28 days',
-                                 '29 days - 6 months',
-                                 '> 6 months'))+theme_minimal()
-```
-
----
-
-```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
-#bar chart for 1997/88 and 2021/22 based on age and amount of patients
 age.sex %>% filter(HBR == "S92000003",
                        FinancialYear == "1997/98" | 
                        FinancialYear == "2021/22") %>%
@@ -271,9 +244,86 @@ age.sex %>% filter(HBR == "S92000003",
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
                         )+theme_minimal()
 ```
+.footnotes[
+- A significant drop can be seen in the number of patients aged 25-39 years in the year 2021/22 as compared to 1997/98. The number of patients aged 0-17 years and 18-24 years old have also dropped.
+]
+---
+
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+length.of.stay %>%
+  filter(HBT == "S92000003",
+         FinancialYear == "1997/98" | 
+           FinancialYear == "2021/22") %>%
+  group_by(FinancialYear, LengthOfStay) %>%
+  summarise(amount = sum(NumberOfStays),.groups = "drop") %>%
+  ggplot(aes(y = FinancialYear,
+             x = amount, 
+             fill = LengthOfStay)) +
+  geom_col(position = "fill") +
+  labs(x = "Number of Patients",
+       y = "Financial Year",
+       title = "Number of Patients vs Length of Stay",
+       subtitle = "Comparing 1997/98 and 2021/22") +
+  scale_fill_discrete(breaks = c('< 1 day', 
+                                 '1 - 7 days',
+                                 '8 - 28 days',
+                                 '29 days - 6 months',
+                                 '> 6 months'))+theme_minimal()
+```
 
 ---
 
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+length.of.stay.single <- length.of.stay %>% 
+                   filter(HBT == "S92000003",) %>%
+                   group_by(FinancialYear, LengthOfStay) %>%
+                   summarise(Amount = sum(NumberOfStays),.groups = "drop") %>%
+                   mutate(
+                     Midpoint = case_when(
+                         LengthOfStay == "< 1 day" ~ 0.5,
+                         LengthOfStay == "1 - 7 days" ~ 4,
+                         LengthOfStay == "8 - 28 days" ~ 18,
+                         LengthOfStay == "29 days - 6 months" ~ 98.5,
+                         LengthOfStay == "> 6 months" ~ 100 
+                      ),
+                     TotalStays = Midpoint * Amount
+                   ) %>%
+                   group_by(FinancialYear) %>%
+                   summarise(TotalStaysYearly = sum(TotalStays), TotalAmount = sum(Amount)) %>%
+                   mutate(
+                     AverageStay = TotalStaysYearly / TotalAmount,
+                     FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
+                   )
+
+length.of.stay.single %>%                   
+                   ggplot(aes(y = AverageStay, x = FinancialYear)) +
+                   geom_point(color="red") +
+                   geom_smooth(method = "lm", se = FALSE,color="black") +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   ylim(20,40) +
+                   coord_fixed(ratio = 0.6) +
+                   labs(x = "Year", 
+                        y = "Average Stay", 
+                        title = "Changes in Average Stay", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )+theme_minimal()
+model1 <- linear_reg() %>%
+          set_engine("lm") %>%
+          fit(AverageStay ~ FinancialYear, data = length.of.stay.single)
+
+tidy(model1)
+```
+
+---
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+model1_aug <- augment(model1$fit)
+ggplot(model1_aug, mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(color="red") +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted Average Stay", y = "Residuals", title = "Graph of the Residuals from the Linear Model of Length of Stay")+theme_minimal()
+```
+---
 #Processing diagnosis data
 
 .pull-left[
@@ -293,10 +343,10 @@ diagnosis <- diagnosis %>% mutate(
 ```
 ]
 .pull-right[
-- !! explaining what we did here
+- To respect the data and the people, we added a column to the dataset with the diagnosis name that was relating to each of the diagnosis codes. This makes it easier to understand what the graph is showing, without having to memorise what each of the codes stand for. 
 ]
 .footnotes[
-here is a footnote for an example
+- Data wrangling as we added a new variable to the data. 
 ]
 ---
 
@@ -319,7 +369,36 @@ diagnosis %>% filter(HBT == "S92000003",
                         )+theme_minimal()
 ```
 ---
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+readmissions.single <- readmissions %>%
+  filter(HBT == "S92000003") %>%
+  mutate(
+  FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
+  )
 
+readmissions.single %>%                   
+                   ggplot(aes(y = PercentageOfReadmissionsWithin28Days, x = FinancialYear)) +
+                   geom_path() +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Year", 
+                        y = "Percent of Readmissions", 
+                        title = "Percentage of Readmissions Within 28 days", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )+theme_minimal()
+
+readmissions.single %>%                   
+                   ggplot(aes(y = PercentageOfReadmissionsWithin133Days, x = FinancialYear)) +
+                   geom_path() +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Year", 
+                        y = "Percent of Readmissions", 
+                        title = "Percentage of Readmissions Within 133 days. ", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )+theme_minimal()
+```
+---
 class: inverse, center, middle
 
 #Back to our question
@@ -349,13 +428,15 @@ class: inverse, center, middle
 
 #How we respected the four respects
 
-- respect the people
+- **Respect the People:**As this data included some medical codes for the different diagnosis, we thought it was a good idea to write out what each of the codes stood for instead, to make the data understandable by everyone. 
 
-- respect the data
+- **Respect the Data:**We used appropriate visualisation styles for the data types and made sure every graph was titled, labelled, colored and very easy to interpret.  
 
-- respect the visualisation
+- **Respect the Mathematics:**The scale and range of the axes in all the graphs was apt for the data being plotted 
 
-- 
+- **Respect the Computers:**We did not overtax the computer. 
+
+
 
 ---
 

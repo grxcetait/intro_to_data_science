@@ -40,7 +40,7 @@ class: center, middle, inverse, title-slide
 
 class: center, middle
 #Research question: 
-## How has the length of stay in Scotland changed over the past 2 decades?
+## How has the length of stay in hospitals in Scotland changed over the past 2 decades for people diagnosed with different mental health conditions?
 
 ---
 
@@ -122,10 +122,9 @@ class: inverse, center, middle
 # Our data visualisations
 
 ---
-
-&lt;img src="presentation_files/figure-html/unnamed-chunk-2-1.png" width="120%" height="50%" /&gt;
+&lt;img src="presentation_files/figure-html/unnamed-chunk-2-1.png" width="100%" /&gt;
 .footnotes[
-This is a graph showing the total number of patients in each year from our dataset. 
+- This is a graph showing the total number of patients in each year from our dataset. The proportion of male to females roughly remains the same throughout the years. 
 ]
 
 ---
@@ -137,20 +136,41 @@ This is a graph showing the total number of patients in each year from our datas
 
 
 ---
+
 &lt;img src="presentation_files/figure-html/unnamed-chunk-4-1.png" width="100%" height="90%" /&gt;
+.footnotes[
+- The number of patients who stayed in the hospital for 8-28 days and 29 days- 6 months decreased a lot in 2021/22 as compared to 1997/98. 
+]
 ---
 
-
+&lt;img src="presentation_files/figure-html/unnamed-chunk-5-1.png" width="100%" /&gt;
+.footnotes[
+- A significant drop can be seen in the number of patients aged 25-39 years in the year 2021/22 as compared to 1997/98. The number of patients aged 0-17 years and 18-24 years old have also dropped.
+]
 ---
 
 &lt;img src="presentation_files/figure-html/unnamed-chunk-6-1.png" width="100%" /&gt;
 
 ---
 
+
+```
+## `geom_smooth()` using formula = 'y ~ x'
+```
+
 &lt;img src="presentation_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
 
----
+```
+## # A tibble: 2 × 5
+##   term          estimate std.error statistic  p.value
+##   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    909.      57.1         15.9 6.46e-14
+## 2 FinancialYear   -0.436    0.0284     -15.3 1.41e-13
+```
 
+---
+&lt;img src="presentation_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
+---
 #Processing diagnosis data
 
 .pull-left[
@@ -171,16 +191,17 @@ diagnosis &lt;- diagnosis %&gt;% mutate(
 ```
 ]
 .pull-right[
-- !! explaining what we did here
+- To respect the data and the people, we added a column to the dataset with the diagnosis name that was relating to each of the diagnosis codes. This makes it easier to understand what the graph is showing, without having to memorise what each of the codes stand for. 
 ]
 .footnotes[
-here is a footnote for an example
+- Data wrangling as we added a new variable to the data. 
 ]
 ---
 
-&lt;img src="presentation_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
+&lt;img src="presentation_files/figure-html/unnamed-chunk-10-1.png" width="100%" /&gt;
 ---
-
+&lt;img src="presentation_files/figure-html/unnamed-chunk-11-1.png" width="100%" /&gt;&lt;img src="presentation_files/figure-html/unnamed-chunk-11-2.png" width="100%" /&gt;
+---
 class: inverse, center, middle
 
 #Back to our question
@@ -210,13 +231,15 @@ class: inverse, center, middle
 
 #How we respected the four respects
 
-- respect the people
+- **Respect the People:**As this data included some medical codes for the different diagnosis, we thought it was a good idea to write out what each of the codes stood for instead, to make the data understandable by everyone. 
 
-- respect the data
+- **Respect the Data:**We used appropriate visualisation styles for the data types and made sure every graph was titled, labelled, colored and very easy to interpret.  
 
-- respect the visualisation
+- **Respect the Mathematics:**The scale and range of the axes in all the graphs was apt for the data being plotted 
 
-- 
+- **Respect the Computers:**We did not overtax the computer. 
+
+
 
 ---
 
