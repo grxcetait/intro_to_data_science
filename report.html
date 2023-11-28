@@ -11,7 +11,7 @@
 
 <meta name="author" content="by The Git Gods: Kieran Lewis, Khushi Wadhwa, Caio Celano, Grace Tait &amp; Nor Danish Raziq" />
 
-<meta name="date" content="2023-11-27" />
+<meta name="date" content="2023-11-28" />
 
 <title>Project title</title>
 
@@ -353,7 +353,7 @@ display: none;
 <h1 class="title toc-ignore">Project title</h1>
 <h4 class="author">by The Git Gods: Kieran Lewis, Khushi Wadhwa, Caio
 Celano, Grace Tait &amp; Nor Danish Raziq</h4>
-<h4 class="date">2023-11-27</h4>
+<h4 class="date">2023-11-28</h4>
 
 </div>
 
@@ -456,13 +456,30 @@ aware of people’s mental health, and so it is interesting to see how
 this has evolved over the past decades and how patients have been
 responding to this. NHS Scotland made available a dataset with
 information about mental health inpatients in hospitals in Scotland,
-dating back to 1997, which set the basis of this investigation. Of all
-variables, the length of stay of an inpatient seemed most compelling to
-explore, as it may be the one impacted most by the advances of mental
-health awareness. This leads us to a guiding research question to be
-answered by this investigation: ‘to what extent has the length of stay
-of mental health inpatients in Scotland changed over the years 1997 to
-2022?’</p>
+dating back to 1997, which set the basis of this investigation. We
+decided to use variables such as age, sex and diagnosis to attempt to
+explain changes in the length of stay, as the latter may be the one
+impacted most by the advances of mental health awareness. This leads us
+to a guiding research question to be answered by this investigation: ‘to
+what extent has the length of stay of mental health inpatients in
+Scotland changed over the years 1997 to 2022?’</p>
+<p>To explore this research question, our method was heavily reliant on
+data tidying and processing, since the data provided was quite messy.
+The main advantage with doing this is that we were able to make the
+application of data science much more straightforward and less
+convoluted. It would also allow us to more easily find correlations
+between length of stay and other useful variables, which may help answer
+the research question. Firstly, we had to load the data for 1997 and
+2022, the more relevant years for our research, into separate objects
+using filter. Since the data was within the same dataset, this would
+make it much easier to work with and create useful results. Further, we
+had to translate the ICD10 codes for diagnoses into the common names and
+categories of the mental illnesses, since most would not know what each
+code stands for. A particular feature of this dataset is the number of
+continuous variables present, especially length of stay. Thus, we
+mutated each period of time into the midpoint value, e.g. 1-7 days was
+mutated to 4 days. This was done especially in order to allow us to find
+a linear model for th</p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
