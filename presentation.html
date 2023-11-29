@@ -4,7 +4,7 @@
     <title>IDS Project</title>
     <meta charset="utf-8" />
     <meta name="author" content="The Git Gods   Grace Tait, Khushi Wadhwa, Kieran Lewis, Caio Celano, &amp; Nor Danish Raziq" />
-    <meta name="date" content="2023-11-27" />
+    <meta name="date" content="2023-11-29" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -22,7 +22,7 @@ class: center, middle, inverse, title-slide
 ### University of Edinburgh
 ]
 .date[
-### 2023-11-27
+### 2023-11-29
 ]
 
 ---
@@ -93,27 +93,33 @@ class: inverse, center, middle
   
 ---
 
-#Bias' and how we avoided them
+#Biases and how we avoided them
 
-- Initial bias we confronted was we assumed that length of stay would be affected by diagnosis
+- Initial biases we confronted was we assumed there would be relationships between specific variables and predicted trends
 
- - Because different 
+ - Assumed number of patients would increase in hospitals due to increasing population
+ 
+ - Assumed length of stay would decrease due to improved treatment methods
 
 - How we proceeded our investigation
+
+ - Plotted graphs to visualise relationships between variables then exploring any trends the graphs showed instead of our predicted trends
 
 ---
 
 #Cleaning and processing our data
 
-- Saw an opportunity to link datasets by diagnosis
+- Renamed frequently used datasets to be more effective at showing the variables and information contained
 
-- It would exclude any patients with missing diagnosis and provide the patients' characteristics 
- 
-- ((Any summary statistics we created))
+- Filtered each dataset to contain the area code for Scotland 
 
-- !! what cleaning and processing we did
+- Filtered each dataset to group different variables together
 
-- !! brief description of data science techniques we used in our investigation
+ - Eg. financial year, age, length of stay
+
+- Renamed diagnosis variables from codes to the diagnosis names
+
+ - Made it more clear when plotting graphs
 
 ---
 
@@ -210,11 +216,9 @@ class: inverse, center, middle
 
 #Our question
 
-- write our question
+- The average length of stay has decreased over the past 2 decades
 
-- our answer to our question
-
-- any ethical considerations in relation to the investigation/findings
+ - The total number of patients with stays between 8-25 
 
 ---
 
@@ -239,14 +243,6 @@ class: inverse, center, middle
 
 - **Respect the Computers:**We did not overtax the computer. 
 
-
-
----
-
-#extra stuff
-
-- still need to include a linear or logistic model?
-- valid assessment/interpretation of model output
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
