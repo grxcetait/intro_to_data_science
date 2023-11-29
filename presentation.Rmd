@@ -120,13 +120,16 @@ class: inverse, center, middle
 
 - Initial biases we confronted was we assumed there would be relationships between specific variables and predicted trends
 
- - Assumed number of patients would increase in hospitals due to increasing population
+- Assumed number of patients would increase in hospitals due to increasing population
  
- - Assumed length of stay would decrease due to improved treatment methods
+- Assumed length of stay would decrease due to improved treatment methods
+
+- We decided to use data from every hospital in Scotlandas this helped reduce selection bias and also to accurately represent the diversity of cases and treatment approaches across the entire healthcare system.
 
 - How we proceeded our investigation
 
- - Plotted graphs to visualise relationships between variables then exploring any trends the graphs showed instead of our predicted trends
+
+- Plotted graphs to visualise relationships between variables then exploring any trends the graphs showed instead of our predicted trends
 
 ---
 
@@ -392,7 +395,10 @@ readmissions.single %>%
                         subtitle = "from 1997 to 2022",
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
                         )+theme_minimal()
+```
+---
 
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
 readmissions.single %>%                   
                    ggplot(aes(y = PercentageOfReadmissionsWithin133Days, x = FinancialYear)) +
                    geom_path() +
@@ -411,22 +417,36 @@ class: inverse, center, middle
 
 ---
 
-#Our question
+#Our findings
 
 - The average length of stay has decreased over the past 2 decades
 
- - The total number of patients with stays between 8-25 
+- The total number of patients with stays between 8-25 has decreased significantly whereas the number of stays between 29 days - 6 months and more than 6 months have also shown a decrease. 
+ 
+- Most patients in the year 2021/22 stayed in the hospitals for only up to week, whereas the most common length of stay in 1997/98 was 8 - 28 days. 
+ 
+- Number of stays which were less than one day have also increased significantly in 2021/22, indicating that treatments may have gotten better and therefore quicker. 
+
+- The percentage of readmissions within 28 days has shown a gradual increase since 2010 however the percentage of re-admissions within 133 days has shown a significant overall decrease since 2000. 
 
 ---
 
 #What are the advantages/limitations of the investigation we have performed
 
-- what are the implications?
-- how do they address the research question
-- suggestions for improving our analysis
-- issues relating to reliability and validity of our data
-- talk about the appropriateness of the statistical analysis
+- The decrease in the lengths of stay over the 2 years implies that the mental health care system has gotten better and the treatments are now quicker than they were 2 decades ago. The percentage of re-admissions within 133 days has decreased which implies that the healthcare has gotten better, resulting in fewer relapses after treatments. 
 
+- To get a general idea of trend, we chose to use data from all the hospitals in Scotland. This acted as an advantage because it provided a more comprehensive and representative picture of the entire population. This was important to draw conclusions and get a more comprehensive assessment of trends over time, enabling us to identify patterns.
+
+- Reliability and validity of our data: The dataset we used for out analysis was from the official government website. This means that the data was not systematically skewed or influenced by external factors, increasing validity. 
+
+- As we went on with the research, we kept making new graphs to further answer our questions and analyse the trends. This also means that some of the initial graphs we made may not have a direct correlation with the final answer. 
+
+---
+# Issues we faced and suggestions to improve our analysis
+
+- Since we used data from all the hospitals in Scotland, we had a lot of data to work with. This meant that a lot of effort was required in data cleaning, processing, and analysis. 
+
+- While using data from all hospitals in Scotland increased generalisability, it may have over-generalised the findings. This means that the findings from the analysis may not apply to every single hospital individually, especially if there are significant differneces in healthcare practices or patient populations. 
 
 ---
 
