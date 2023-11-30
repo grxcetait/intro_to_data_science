@@ -331,7 +331,7 @@ length.of.stay.single <- length.of.stay %>%
                          LengthOfStay == "1 - 7 days" ~ 4,
                          LengthOfStay == "8 - 28 days" ~ 18,
                          LengthOfStay == "29 days - 6 months" ~ 98.5,
-                         LengthOfStay == "> 6 months" ~ 100 
+                         LengthOfStay == "> 6 months" ~ 168 
                       ),
                      TotalStays = Midpoint * Amount
                    ) %>%
@@ -348,8 +348,6 @@ length.of.stay.single %>%
                    geom_smooth(method = "lm", se = FALSE,color="black",
                                formula = y ~ x) +
                    theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
-                   ylim(20,40) +
-                   coord_fixed(ratio = 0.6) +
                    labs(x = "Year", 
                         y = "Average Stay", 
                         title = "Changes in Average Stay", 
@@ -369,7 +367,8 @@ tidy(model1)
 ```
 
 .footnotes[
-
+This gives the equation:
+Average Stay = 1017 - 0.517(Year)
 ]
 
 ---
@@ -391,7 +390,7 @@ class: inverse, center, middle
 
 #Our findings
 
-- The average length of stay has decreased by 9 days over the past 2 decades, which is a decrease of approximately 0.4 days each year.
+- The average length of stay has decreased by 9 days over the past 2 decades, which is a decrease of approximately 0.5 days each year.
 
 - The number of patients with long stays (8-28 days, 29 days - 6 months, 6+ months) has significantly decreased
  
