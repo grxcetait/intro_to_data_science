@@ -11,7 +11,7 @@
 
 <meta name="author" content="by The Git Gods: Kieran Lewis, Khushi Wadhwa, Caio Celano, Grace Tait &amp; Nor Danish Raziq" />
 
-<meta name="date" content="2023-11-29" />
+<meta name="date" content="2023-11-30" />
 
 <title>Project title</title>
 
@@ -353,7 +353,7 @@ display: none;
 <h1 class="title toc-ignore">Project title</h1>
 <h4 class="author">by The Git Gods: Kieran Lewis, Khushi Wadhwa, Caio
 Celano, Grace Tait &amp; Nor Danish Raziq</h4>
-<h4 class="date">2023-11-29</h4>
+<h4 class="date">2023-11-30</h4>
 
 </div>
 
@@ -448,26 +448,26 @@ Word to do a Word Count!</p>
 plots. Make sure to hide your code with <code>echo = FALSE</code> unless
 the point you are trying to make is about the code itself, in which case
 you should show your code.</p>
-<p>#introduction Although mental health has been a topic of great
-interest amongst researchers since the start of the 20th century, its
-importance and impact on people’s well-being has only recently started
-to be taken into account. People, hospitals, businesses, and governments
-have become more aware of people’s mental health, and so it is
-interesting to see how this has evolved over the past decades and how
-patients have been responding to this. NHS Scotland made available a
-dataset with information about mental health inpatients in hospitals in
-Scotland, dating back to 1997, which set the basis of this
-investigation. We decided to use variables such as age, sex and
-diagnosis to attempt to explain changes in the length of stay, as the
-latter may be the one impacted most by the advances of mental health
-awareness. This leads us to a guiding research question to be answered
-by this investigation: ‘to what extent has the length of stay of mental
-health inpatients in Scotland changed over the years 1997 to 2022?’</p>
-<p>#Methodology To explore this research question, our method was
-heavily reliant on data tidying and processing, since the data provided
-was quite messy. The main advantage with doing this is that we were able
-to make the application of data science much more straightforward and
-less convoluted. It would also allow us to more easily find correlations
+<p>#Report Although mental health has been a topic of great interest
+amongst researchers since the start of the 20th century, its importance
+and impact on people’s well-being has only recently started to be taken
+into account. People, hospitals, businesses, and governments have become
+more aware of people’s mental health, and so it is interesting to see
+how this has evolved over the past decades and how patients have been
+responding to this. NHS Scotland made available a dataset with
+information about mental health inpatients in hospitals in Scotland,
+dating back to 1997, which set the basis of this investigation. We
+decided to use variables such as age, sex and diagnosis to attempt to
+explain changes in the length of stay, as the latter may be the one
+impacted most by the advances of mental health awareness. This leads us
+to a guiding research question to be answered by this investigation: ‘to
+what extent has the length of stay of mental health inpatients in
+Scotland changed over the years 1997 to 2022?’</p>
+<p>To explore this research question, our method was heavily reliant on
+data tidying and processing, since the data provided was quite messy.
+The main advantage with doing this is that we were able to make the
+application of data science much more straightforward and less
+convoluted. It would also allow us to more easily find correlations
 between length of stay and other useful variables, which may help answer
 the research question. Firstly, we had to load the data for 1997 and
 2022, the more relevant years for our research, into separate objects
@@ -487,8 +487,86 @@ datasets of these different variables in order to investigate how they
 affect length of stay. However, we found out that there were no common
 rows between the datasets, meaning we could not join. Since we still
 wanted to explore these other variables, instead we chose to visualise
-age, sex and gender as sub-categories to see trends within these
-groups.</p>
+age, sex and gender as sub-categories to see trends within these groups.
+The presentation shows eight visualisations, with most of them being bar
+plots, histograms or variations of that. We found these bar plots
+particularly useful for the variable we were investigating. Since we are
+trying to show the changes in a quantifiable variable, length of stay of
+inpatients in Scottish hospitals, magnitudes were put into proportion by
+the bars allowing for easier visualisation that respects the people.
+Moreover, histograms helped us bring all years together without using
+separate graphs, making things tidier and less convoluted. On the
+readmissions graphs, we felt those were necessary to complement the
+changes in lengths of stay time periods. A smooth line graph was perfect
+for that, showing a change in a value over time.</p>
+<p>Overall, our method consisted in organising the data into the
+relevant years, which allowed us to mutate information into tidier and
+more understandable variable names. With that, we used bar plots and
+histograms to show categorical values and their values at different
+years, namely length of stay. Our usage of smooth line graphs was more
+limited to continuous variables such as the percentage of
+readmissions.</p>
+<p>#Analysis Of The Data After all the data wrangling and visualisation
+we started analysing the data to notice any trends or patterns in it.
+From our first graph below, we refer to the number of patients from each
+age group and sex in 1997/97 and we were able to see that as the age
+increases, there tends to be an increasing number of patients and we
+continue to see this trend for other years. We looked into this
+occurence to see if there was any inherent reason for this. From an
+article published by WHO “World Health Organisation” older ages are more
+susceptible to mental health problems due to having more experiences
+which could have some accumulation of adversities leading to built up
+psychological distresses{1}. The treatment of many older adults such as
+dire living conditions etc. would also cause mental illnesses such as
+depression and anxiety which we could see is quite common in our
+data(seen in the next graphs). This may have contributed to the trend
+that we saw.</p>
+<p>(Insert Graph)</p>
+<p>A trend we did not expect to see, where the number of patients in a
+hospital has a subtle decreasing trend as seen from our graph of “Number
+of Patients Versus Financial Year”. We expected to see an increase in
+number of patients due to our increasing population. Looking into this
+occurrence we may have found a reason according to an article by “The
+Guardian” there was a reduction of NHS mental health beds by 25% since
+2010 leading to lesser space to occupy patients. There also is a spike
+around the years 2019 which we assume may have been caused by the
+Covid-19 pandemic, which lead to declining mental health due to living
+conditions with the sickness and the lockdown.</p>
+<p>(Insert Graph)</p>
+<p>Referring to our next graph we see that the number of patients
+against the length of stay throughout the years have changed slightly
+where shorter stays are more frequent compared to longer stays in the
+recent years.(shorter stays &gt;=7 days, longer &gt;7days). We have
+selected the data from 1997/98 and 2021/22 to look at this change more
+closer and we can clearly see a change in frequency of the shorter stays
+and the longer stays. Why?</p>
+<p>(Insert Graph)</p>
+<p>The graph below shows the changes in number of diagnoses for each
+diagnosis between the year 1997 and 2022. We notice that there arent
+many substantial changes to the diagnoses except for mood(affective)
+disorders where there is a huge decrease in frequency from 1997/98 to
+2021/22. Why?</p>
+<p>(Insert Graph)</p>
+<ul>
+<li>Do we want to see if there is relation to readmissions with length
+of stay #There seems to be a correlation to readmissions to length of
+stay, there is a dip in number of readmissions during 2007-2012 due to
+change in protocol. Increase in number of readmissions right after as
+length of stay decreases.(as length of stay decreases a need to readmit
+has become more frequent to get more treatment)</li>
+<li>Average length of stay has decreased over the 23 year period which
+may correspond to better healthcare or a change in healthcare
+protocols.</li>
+</ul>
+<p>##Be more careful with wording do not imply but “assume” ##Link
+findings of trends to the next graph i.e reason we created the next
+graph ##Advantages and disadvantages and limitations of the graphs we
+made</p>
+<p>#Discussion/Conclusion -Answering research question -Mention bias:
+Variable/ Didnt mention big cities and just looked over whole of
+scotland -Limitation - What kind of improvements we could put into the
+graphs</p>
+<p>In conclusion…</p>
 </div>
 <div id="references" class="section level2">
 <h2>References</h2>
