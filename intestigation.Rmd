@@ -279,7 +279,7 @@ readmissions.single %>%
                    theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
                    labs(x = "Year", 
                         y = "Percent of Readmissions", 
-                        title = "Changes in Readmissions", 
+                        title = "Percentage of Readmissions Within 28 days", 
                         subtitle = "from 1997 to 2022",
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
                         )
@@ -290,7 +290,7 @@ readmissions.single %>%
                    theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
                    labs(x = "Year", 
                         y = "Percent of Readmissions", 
-                        title = "Changes in Readmissions", 
+                        title = "Percentage of Readmissions Within 133 days. ", 
                         subtitle = "from 1997 to 2022",
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
                         )

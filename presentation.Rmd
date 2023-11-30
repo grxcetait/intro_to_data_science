@@ -461,13 +461,6 @@ class: inverse, center, middle
 - **Respect the Computers:**We did not overtax the computer. 
 
 ---
-```{r include=FALSE}
-
-#Background image
-style_xaringan(
-  last_slide_background_image = "img/background.jpg"
-)
-```
 class: center, middle
 
 #Thank you!
