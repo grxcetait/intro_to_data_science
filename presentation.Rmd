@@ -63,7 +63,7 @@ style_xaringan(
 
 class: center, middle
 #Research question: 
-## How has the length of stay in hospitals in Scotland changed over the past 2 decades for people diagnosed with different mental health conditions?
+## To what extent has the length of stay in mental health hospitals in Scotland changed over the past 2 decades?
 
 ---
 
@@ -300,6 +300,25 @@ readmissions.single %>%
 ```
 
 ---
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+#bar chart for 1997/88 and 2021/22 based on diagnoses and amount of patients
+diagnosis %>% filter(HBT == "S92000003",
+                     FinancialYear == "1997/98" | 
+           FinancialYear == "2021/22") %>%
+              group_by(FinancialYear, DiagnosisName) %>%
+              summarise(amount = sum(PatientsCount),.groups="drop") %>%
+              ggplot(aes(x = amount, y = DiagnosisName, fill = FinancialYear)) +
+              theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+              geom_bar(position = "dodge", stat = "identity") +
+              labs(y = "Diagnoses in Patients", 
+                        x = "Amount of Patients", 
+                        title = "Changes in Diagnoses", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022",
+                        legend = "Financial Year"
+                        )+theme_minimal()
+```
+---
 
 ```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
 length.of.stay.single <- length.of.stay %>% 
@@ -364,25 +383,6 @@ ggplot(model1_aug, mapping = aes(x = .fitted, y = .resid)) +
 
 ---
 
-```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
-#bar chart for 1997/88 and 2021/22 based on diagnoses and amount of patients
-diagnosis %>% filter(HBT == "S92000003",
-                     FinancialYear == "1997/98" | 
-           FinancialYear == "2021/22") %>%
-              group_by(FinancialYear, DiagnosisName) %>%
-              summarise(amount = sum(PatientsCount),.groups="drop") %>%
-              ggplot(aes(x = amount, y = DiagnosisName, fill = FinancialYear)) +
-              theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
-              geom_bar(position = "dodge", stat = "identity") +
-              labs(y = "Diagnoses in Patients", 
-                        x = "Amount of Patients", 
-                        title = "Changes in Diagnoses", 
-                        subtitle = "from 1997 to 2022",
-                        caption = "From 76290 patients in 1997 to 61030 patients in 2022",
-                        legend = "Financial Year"
-                        )+theme_minimal()
-```
----
 class: inverse, center, middle
 
 #Back to our question
