@@ -199,37 +199,39 @@ age.sex %>%
 - This is a graph showing the total number of patients in each year from our dataset. The proportion of male to females roughly remains the same throughout the years. 
 ]
 
+
 ---
 
-class: center, middle
-.pull-left[
-```{r warning=FALSE, out.height="70%",echo=FALSE,fig.align = 'center'}
-mental_health_inpatient_activity_age_sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
-y97_98<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="1997/98")
-y21_22<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="2021/22")
-plot1<-ggplot(y97_98,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+ labs(title = "Patient distribution by sex in 1997/98 in different age groups",
-       x = "Age Groups", 
-       y = "Number of Patients")+theme_minimal()+ylim(0,6000)
-
-plot1
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+age.sex %>% filter(HBR == "S92000003",
+                       FinancialYear == "1997/98" | 
+                       FinancialYear == "2021/22") %>%
+                   group_by(FinancialYear, AgeGroup) %>%
+                   summarise(Amount = sum(PatientsCount),.groups="drop") %>%
+                   mutate(
+                     Order = case_when(
+                       AgeGroup == "0-17 years" ~ 1,
+                       AgeGroup == "18-24 years" ~ 2,
+                       AgeGroup == "25-39 years" ~ 3,
+                       AgeGroup == "40-64 years" ~ 4,
+                       AgeGroup == "65plus years" ~ 5
+                     )
+                   ) %>%
+                   ggplot(aes(x = reorder(AgeGroup, +Order), y = Amount)) +
+                   facet_wrap(vars(FinancialYear)) +
+                   geom_bar(position = "dodge", stat = "identity",fill="forestgreen") +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Age of Patients", 
+                        y = "Amount of Patients", 
+                        title = "Changes in Age of Patients", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )+theme_minimal()
 ```
+
+.footnotes[
+- A significant drop can be seen in the number of patients aged 25-39 years in the year 2021/22 as compared to 1997/98. The number of patients aged 0-17 years and 18-24 years old have also dropped.
 ]
-.pull-right[
-```{r warning=FALSE, out.height="70%",echo=FALSE,fig.align = 'center'}
-mental_health_inpatient_activity_age_sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
-y97_98<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="1997/98")
-y21_22<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="2021/22")
-
-plot2<-ggplot(y21_22,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+labs(title = "Patient distribution by sex in 2021/22 in different age groups",
-       x = "Age Groups", 
-       y = "Number of Patients")+theme_minimal()+ylim(0,6000)
-plot2
-```
-]
-.footnote[
-These are bar charts comparing the patient distribution by sex in 2 financial years, 1997/98 and 2021/22. The trend of the graphs remains similar, although the total number of patients in each age group has mostly decreased.]
-
-
 ---
 
 ```{r warning=FALSE, out.width="100%", fig.width=12,out.height="90%", echo=FALSE}
@@ -262,59 +264,39 @@ length.of.stay %>% filter(HBT == "S92000003",
 .footnotes[
 - The number of patients who stayed in the hospital for 8-28 days and 29 days- 6 months decreased a lot in 2021/22 as compared to 1997/98. 
 ]
----
 
+---
 ```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
-age.sex %>% filter(HBR == "S92000003",
-                       FinancialYear == "1997/98" | 
-                       FinancialYear == "2021/22") %>%
-                   group_by(FinancialYear, AgeGroup) %>%
-                   summarise(Amount = sum(PatientsCount),.groups="drop") %>%
-                   mutate(
-                     Order = case_when(
-                       AgeGroup == "0-17 years" ~ 1,
-                       AgeGroup == "18-24 years" ~ 2,
-                       AgeGroup == "25-39 years" ~ 3,
-                       AgeGroup == "40-64 years" ~ 4,
-                       AgeGroup == "65plus years" ~ 5
-                     )
-                   ) %>%
-                   ggplot(aes(x = reorder(AgeGroup, +Order), y = Amount)) +
-                   facet_wrap(vars(FinancialYear)) +
-                   geom_bar(position = "dodge", stat = "identity",fill="forestgreen") +
+readmissions.single <- readmissions %>%
+  filter(HBT == "S92000003") %>%
+  mutate(
+  FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
+  )
+
+readmissions.single %>%                   
+                   ggplot(aes(y = PercentageOfReadmissionsWithin28Days, x = FinancialYear)) +
+                   geom_path() +
                    theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
-                   labs(x = "Age of Patients", 
-                        y = "Amount of Patients", 
-                        title = "Changes in Age of Patients", 
+                   labs(x = "Year", 
+                        y = "Percent of Readmissions", 
+                        title = "Percentage of Readmissions Within 28 days", 
                         subtitle = "from 1997 to 2022",
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
                         )+theme_minimal()
 ```
-.footnotes[
-- A significant drop can be seen in the number of patients aged 25-39 years in the year 2021/22 as compared to 1997/98. The number of patients aged 0-17 years and 18-24 years old have also dropped.
-]
 ---
 
 ```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
-length.of.stay %>%
-  filter(HBT == "S92000003",
-         FinancialYear == "1997/98" | 
-           FinancialYear == "2021/22") %>%
-  group_by(FinancialYear, LengthOfStay) %>%
-  summarise(amount = sum(NumberOfStays),.groups = "drop") %>%
-  ggplot(aes(y = FinancialYear,
-             x = amount, 
-             fill = LengthOfStay)) +
-  geom_col(position = "fill") +
-  labs(x = "Number of Patients",
-       y = "Financial Year",
-       title = "Number of Patients vs Length of Stay",
-       subtitle = "Comparing 1997/98 and 2021/22") +
-  scale_fill_discrete(breaks = c('< 1 day', 
-                                 '1 - 7 days',
-                                 '8 - 28 days',
-                                 '29 days - 6 months',
-                                 '> 6 months'))+theme_minimal()
+readmissions.single %>%                   
+                   ggplot(aes(y = PercentageOfReadmissionsWithin133Days, x = FinancialYear)) +
+                   geom_path() +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Year", 
+                        y = "Percent of Readmissions", 
+                        title = "Percentage of Readmissions Within 133 days. ", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )+theme_minimal()
 ```
 
 ---
@@ -355,12 +337,21 @@ length.of.stay.single %>%
                         subtitle = "from 1997 to 2022",
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
                         )+theme_minimal()
+```
+---
+
+class: center, middle
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=TRUE}
 model1 <- linear_reg() %>%
           set_engine("lm") %>%
           fit(AverageStay ~ FinancialYear, data = length.of.stay.single)
 
 tidy(model1)
 ```
+
+.footnotes[
+
+]
 
 ---
 ```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
@@ -392,39 +383,6 @@ diagnosis %>% filter(HBT == "S92000003",
                         )+theme_minimal()
 ```
 ---
-```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
-readmissions.single <- readmissions %>%
-  filter(HBT == "S92000003") %>%
-  mutate(
-  FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
-  )
-
-readmissions.single %>%                   
-                   ggplot(aes(y = PercentageOfReadmissionsWithin28Days, x = FinancialYear)) +
-                   geom_path() +
-                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
-                   labs(x = "Year", 
-                        y = "Percent of Readmissions", 
-                        title = "Percentage of Readmissions Within 28 days", 
-                        subtitle = "from 1997 to 2022",
-                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
-                        )+theme_minimal()
-```
----
-
-```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
-readmissions.single %>%                   
-                   ggplot(aes(y = PercentageOfReadmissionsWithin133Days, x = FinancialYear)) +
-                   geom_path() +
-                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
-                   labs(x = "Year", 
-                        y = "Percent of Readmissions", 
-                        title = "Percentage of Readmissions Within 133 days. ", 
-                        subtitle = "from 1997 to 2022",
-                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
-                        )+theme_minimal()
-```
----
 class: inverse, center, middle
 
 #Back to our question
@@ -433,65 +391,55 @@ class: inverse, center, middle
 
 #Our findings
 
-- The average length of stay has decreased over the past 2 decades
+- The average length of stay has decreased by 9 days over the past 2 decades, which is a decrease of approximately 0.4 days each year.
 
-- The total number of patients with stays between 8-25 has decreased significantly whereas the number of stays between 29 days - 6 months and more than 6 months have also shown a decrease. 
+- The number of patients with long stays (8-28 days, 29 days - 6 months, 6+ months) has significantly decreased
  
 - Most patients in the year 2021/22 stayed in the hospitals for only up to week, whereas the most common length of stay in 1997/98 was 8 - 28 days. 
- 
+
 - Number of stays which were less than one day have also increased significantly in 2021/22
-
- - This may indicate that treatments may have gotten better and therefore quicker
-
-- The percentage of readmissions within 28 days has shown a gradual increase since 2010 however the percentage of re-admissions within 133 days has shown a significant overall decrease since 2000. 
-
-
-
-- Sex of the patient does not contribute to length of stay
-
- - The ratio between male and female over the past two decades has not significantly changed
  
-- Patient distribution has skewed more towards the 40-64 age range rather than 65+ years 
-
+- The percentage of readmissions within 28 days has shown a gradual increase since 2010 however the percentage of re-admissions within 133 days has shown a significant overall decrease since 2000.
+ 
+- This may indicate that treatments may have gotten better and therefore quicker
+ 
 ---
 
-#What are the advantages/limitations of the investigation we have performed
+#What are the advantages of the investigation we have performed
 
-- The decrease in the lengths of stay over the 2 years implies that the mental health care system has gotten better and the treatments are now quicker than they were 2 decades ago. The percentage of re-admissions within 133 days has decreased which implies that the healthcare has gotten better, resulting in fewer relapses after treatments. 
+- The decrease in the lengths of stay over the 2 years suggests that the mental health care system has gotten better and the treatments are now quicker than they were 2 decades ago. The percentage of re-admissions within 133 days has decreased which implies that the healthcare has gotten better, resulting in fewer relapses after treatments. 
 
 - To get a general idea of trend, we chose to use data from all the hospitals in Scotland. This acted as an advantage because it provided a more comprehensive and representative picture of the entire population. This was important to draw conclusions and get a more comprehensive assessment of trends over time, enabling us to identify patterns.
 
-- Reliability and validity of our data: The dataset we used for out analysis was from the official government website. This means that the data was not systematically skewed or influenced by external factors, increasing validity. 
+- Reliability and validity of our data: The dataset we used for out analysis was from the official government website. This means that the data was not systematically skewed or influenced by external factors, increasing validity.
+
+---
+#What are the limitations/issues of the investigation we have performed?
 
 - As we went on with the research, we kept making new graphs to further answer our questions and analyse the trends. This also means that some of the initial graphs we made may not have a direct correlation with the final answer. 
 
----
-# Issues we faced and suggestions to improve our analysis
+- Since we used data from all the hospitals in Scotland, we had a lot of data to work with.
 
-- Since we used data from all the hospitals in Scotland, we had a lot of data to work with. This meant that a lot of effort was required in data cleaning, processing, and analysis. 
+- While using data from all hospitals in Scotland increased generalisability, it may have over-generalised the findings.
 
-- While using data from all hospitals in Scotland increased generalisability, it may have over-generalised the findings. This means that the findings from the analysis may not apply to every single hospital individually, especially if there are significant differneces in healthcare practices or patient populations. 
+- Financial year was the only common variable between all of the datasets.
+ 
+- Length of stay was non-continuous data which made it different to calculate summary statistics and plot graphs of it. 
 
 ---
 
 #How we respected the four respects
 
-- **Respect the People:**As this data included some medical codes for the different diagnosis, we thought it was a good idea to write out what each of the codes stood for instead, to make the data understandable by everyone. 
+- **Respect the People:** As this data included some medical codes for the different diagnosis, we thought it was a good idea to write out what each of the codes stood for instead, to make the data understandable by everyone. 
 
-- **Respect the Data:**We used appropriate visualisation styles for the data types and made sure every graph was titled, labelled, colored and very easy to interpret.  
+- **Respect the Data:** We used appropriate visualisation styles for the data types and made sure every graph was titled, labelled, colored and very easy to interpret.  
 
-- **Respect the Mathematics:**The scale and range of the axes in all the graphs was apt for the data being plotted 
+- **Respect the Mathematics:** The scale and range of the axes in all the graphs was apt for the data being plotted 
 
-- **Respect the Computers:**We did not overtax the computer. 
+- **Respect the Computers:** We did not overtax the computer. 
 
 ---
-```{r include=FALSE}
 
-#Background image
-style_xaringan(
-  title_slide_background_image = "img/background.jpg"
-)
-```
 class: center, middle
 
 #Thank you!

@@ -164,38 +164,41 @@ class: inverse, center, middle
 - This is a graph showing the total number of patients in each year from our dataset. The proportion of male to females roughly remains the same throughout the years. 
 ]
 
----
-
-class: center, middle
-.pull-left[
-&lt;img src="presentation_files/figure-html/unnamed-chunk-4-1.png" width="100%" height="70%" style="display: block; margin: auto;" /&gt;
-]
-.pull-right[
-&lt;img src="presentation_files/figure-html/unnamed-chunk-5-1.png" width="100%" height="70%" style="display: block; margin: auto;" /&gt;
-]
-.footnote[
-These are bar charts comparing the patient distribution by sex in 2 financial years, 1997/98 and 2021/22. The trend of the graphs remains similar, although the total number of patients in each age group has mostly decreased.]
-
 
 ---
 
-&lt;img src="presentation_files/figure-html/unnamed-chunk-6-1.png" width="100%" height="90%" /&gt;
-.footnotes[
-- The number of patients who stayed in the hospital for 8-28 days and 29 days- 6 months decreased a lot in 2021/22 as compared to 1997/98. 
-]
----
+&lt;img src="presentation_files/figure-html/unnamed-chunk-4-1.png" width="100%" /&gt;
 
-&lt;img src="presentation_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
 .footnotes[
 - A significant drop can be seen in the number of patients aged 25-39 years in the year 2021/22 as compared to 1997/98. The number of patients aged 0-17 years and 18-24 years old have also dropped.
 ]
 ---
 
-&lt;img src="presentation_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
+&lt;img src="presentation_files/figure-html/unnamed-chunk-5-1.png" width="100%" height="90%" /&gt;
+.footnotes[
+- The number of patients who stayed in the hospital for 8-28 days and 29 days- 6 months decreased a lot in 2021/22 as compared to 1997/98. 
+]
+
+---
+&lt;img src="presentation_files/figure-html/unnamed-chunk-6-1.png" width="100%" /&gt;
+---
+
+&lt;img src="presentation_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
 
 ---
 
-&lt;img src="presentation_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
+&lt;img src="presentation_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
+---
+
+class: center, middle
+
+```r
+model1 &lt;- linear_reg() %&gt;%
+          set_engine("lm") %&gt;%
+          fit(AverageStay ~ FinancialYear, data = length.of.stay.single)
+
+tidy(model1)
+```
 
 ```
 ## # A tibble: 2 × 5
@@ -205,17 +208,16 @@ These are bar charts comparing the patient distribution by sex in 2 financial ye
 ## 2 FinancialYear   -0.436    0.0284     -15.3 1.41e-13
 ```
 
+.footnotes[
+
+]
+
 ---
 &lt;img src="presentation_files/figure-html/unnamed-chunk-10-1.png" width="100%" /&gt;
 
 ---
 
 &lt;img src="presentation_files/figure-html/unnamed-chunk-11-1.png" width="100%" /&gt;
----
-&lt;img src="presentation_files/figure-html/unnamed-chunk-12-1.png" width="100%" /&gt;
----
-
-&lt;img src="presentation_files/figure-html/unnamed-chunk-13-1.png" width="100%" /&gt;
 ---
 class: inverse, center, middle
 
@@ -225,56 +227,52 @@ class: inverse, center, middle
 
 #Our findings
 
-- The average length of stay has decreased over the past 2 decades
+- The average length of stay has decreased by 9 days over the past 2 decades, which is a decrease of approximately 0.4 days each year.
 
-- The total number of patients with stays between 8-25 has decreased significantly whereas the number of stays between 29 days - 6 months and more than 6 months have also shown a decrease. 
+- The number of patients with long stays (8-28 days, 29 days - 6 months, 6+ months) has significantly decreased
  
 - Most patients in the year 2021/22 stayed in the hospitals for only up to week, whereas the most common length of stay in 1997/98 was 8 - 28 days. 
- 
+
 - Number of stays which were less than one day have also increased significantly in 2021/22
-
- - This may indicate that treatments may have gotten better and therefore quicker
-
-- The percentage of readmissions within 28 days has shown a gradual increase since 2010 however the percentage of re-admissions within 133 days has shown a significant overall decrease since 2000. 
-
-
-
-- Sex of the patient does not contribute to length of stay
-
- - The ratio between male and female over the past two decades has not significantly changed
  
-- Patient distribution has skewed more towards the 40-64 age range rather than 65+ years 
-
+- The percentage of readmissions within 28 days has shown a gradual increase since 2010 however the percentage of re-admissions within 133 days has shown a significant overall decrease since 2000.
+ 
+- This may indicate that treatments may have gotten better and therefore quicker
+ 
 ---
 
-#What are the advantages/limitations of the investigation we have performed
+#What are the advantages of the investigation we have performed
 
-- The decrease in the lengths of stay over the 2 years implies that the mental health care system has gotten better and the treatments are now quicker than they were 2 decades ago. The percentage of re-admissions within 133 days has decreased which implies that the healthcare has gotten better, resulting in fewer relapses after treatments. 
+- The decrease in the lengths of stay over the 2 years suggests that the mental health care system has gotten better and the treatments are now quicker than they were 2 decades ago. The percentage of re-admissions within 133 days has decreased which implies that the healthcare has gotten better, resulting in fewer relapses after treatments. 
 
 - To get a general idea of trend, we chose to use data from all the hospitals in Scotland. This acted as an advantage because it provided a more comprehensive and representative picture of the entire population. This was important to draw conclusions and get a more comprehensive assessment of trends over time, enabling us to identify patterns.
 
-- Reliability and validity of our data: The dataset we used for out analysis was from the official government website. This means that the data was not systematically skewed or influenced by external factors, increasing validity. 
+- Reliability and validity of our data: The dataset we used for out analysis was from the official government website. This means that the data was not systematically skewed or influenced by external factors, increasing validity.
+
+---
+#What are the limitations/issues of the investigation we have performed?
 
 - As we went on with the research, we kept making new graphs to further answer our questions and analyse the trends. This also means that some of the initial graphs we made may not have a direct correlation with the final answer. 
 
----
-# Issues we faced and suggestions to improve our analysis
+- Since we used data from all the hospitals in Scotland, we had a lot of data to work with.
 
-- Since we used data from all the hospitals in Scotland, we had a lot of data to work with. This meant that a lot of effort was required in data cleaning, processing, and analysis. 
+- While using data from all hospitals in Scotland increased generalisability, it may have over-generalised the findings.
 
-- While using data from all hospitals in Scotland increased generalisability, it may have over-generalised the findings. This means that the findings from the analysis may not apply to every single hospital individually, especially if there are significant differneces in healthcare practices or patient populations. 
+- Financial year was the only common variable between all of the datasets.
+ 
+- Length of stay was non-continuous data which made it different to calculate summary statistics and plot graphs of it. 
 
 ---
 
 #How we respected the four respects
 
-- **Respect the People:**As this data included some medical codes for the different diagnosis, we thought it was a good idea to write out what each of the codes stood for instead, to make the data understandable by everyone. 
+- **Respect the People:** As this data included some medical codes for the different diagnosis, we thought it was a good idea to write out what each of the codes stood for instead, to make the data understandable by everyone. 
 
-- **Respect the Data:**We used appropriate visualisation styles for the data types and made sure every graph was titled, labelled, colored and very easy to interpret.  
+- **Respect the Data:** We used appropriate visualisation styles for the data types and made sure every graph was titled, labelled, colored and very easy to interpret.  
 
-- **Respect the Mathematics:**The scale and range of the axes in all the graphs was apt for the data being plotted 
+- **Respect the Mathematics:** The scale and range of the axes in all the graphs was apt for the data being plotted 
 
-- **Respect the Computers:**We did not overtax the computer. 
+- **Respect the Computers:** We did not overtax the computer. 
 
 ---
 
