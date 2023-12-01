@@ -38,10 +38,6 @@ options(readr.show_col_types = FALSE)
 
 To what extent has the length of stay of mental health inpatients in Scotland changed over the years 1997 to 2022? This particular question was preferred due to its narrower scope, allowing us to investigate and comment on trends regarding variables such as age, sex, and diagnoses. Further, and more importantly, the investigation of this question may provide additional insight into how the quality of mental health treatments changed.
 
-
-
-
-
 ## Data
 
 Our Data is from the "Public Health Scotland". It contains 14 files with information on patients with mental health problems and their institute by region spanning over the financial years 1997/98 - 2021/22. The key variables we decided to investigate was the length of stay, readmissions, number of patients, ages and sex. These variables were to chosen to see if there are changes in the length of stay and if it had any affect on other variables or if the variables affected the length of stay.
@@ -254,17 +250,7 @@ ggplot(model1_aug, mapping = aes(x = .fitted, y = .resid)) +
   labs(x = "Predicted Average Stay", y = "Residuals", title = "Graph of the Residuals from the Linear Model of Length of Stay")+theme_minimal()
 ```
 
-#*How our research question would be relevant to solve issues*
-#*What kind of improvement we can make for our investigation*
-
-
-#Be more careful with wording do not imply but "assume"
-#Link findings of trends to the next graph i.e reason we created the next graph 
-#Advantages and disadvantages and limitations of the graphs we made
-
 ## References
-
-List any references here. You should, at a minimum, list your data source.
 
 {1}Public Health Scotland, "Mental Health Inpatient Activity," 23 November 2021. [Online]. Available: 
 https://www.opendata.nhs.scot/dataset/mental-health-inpatient-activity. [Accessed 20th October 2023]
