@@ -45,6 +45,10 @@ Our Data is from the "Public Health Scotland". It contains 14 files with informa
 Public Health Scotland, "Mental Health Inpatient Activity," 23 November 2021. [Online]. Available: 
 https://www.opendata.nhs.scot/dataset/mental-health-inpatient-activity. [Accessed 20th October 2023]
 
+## Link to the Github Repository
+
+https://github.com/KLewis144/IDS_Project
+
 # Findings
 Although mental health has been a topic of great interest amongst researchers since the start of the 20th century, its importance and impact on people's well-being has only recently started to be taken into account. People, hospitals, businesses, and governments have become more aware of people's mental health, and so it is interesting to see how this has evolved over the past decades and how patients have been responding to this. NHS Scotland made available a dataset with information about mental health inpatients in hospitals in Scotland, dating back to 1997, which set the basis of this investigation. We decided to use variables such as age, sex and diagnosis to attempt to explain changes in the length of stay, as the latter may be the one impacted most by the advances of mental health awareness. This leads us to a guiding research question to be answered by this investigation: 'to what extent has the length of stay of mental health inpatients in Scotland changed over the years 1997 to 2022?'
 
