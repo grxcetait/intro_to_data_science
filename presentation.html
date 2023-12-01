@@ -4,7 +4,7 @@
     <title>IDS Project</title>
     <meta charset="utf-8" />
     <meta name="author" content="The Git Gods   Grace Tait, Khushi Wadhwa, Kieran Lewis, Caio Celano, &amp; Nor Danish Raziq" />
-    <meta name="date" content="2023-11-29" />
+    <meta name="date" content="2023-11-30" />
     <script src="libs/header-attrs-2.25/header-attrs.js"></script>
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
@@ -22,7 +22,7 @@ class: center, middle, inverse, title-slide
 ### University of Edinburgh
 ]
 .date[
-### 2023-11-29
+### 2023-11-30
 ]
 
 ---
@@ -40,7 +40,7 @@ class: center, middle, inverse, title-slide
 
 class: center, middle
 #Research question: 
-## How has the length of stay in hospitals in Scotland changed over the past 2 decades for people diagnosed with different mental health conditions?
+## To what extent has the length of stay in mental health hospitals in Scotland changed over the past 2 decades?
 
 ---
 
@@ -67,7 +67,7 @@ class: inverse, center, middle
 
 - Form possible relationships between different variables and brainstorm research questions that we could explore further
 
-- Create data visualisations from our initial ideas to see if there are any trends or if it would be worth investigating further
+- Create summary statistics and data visualisations from our initial ideas to see if there are any trends or if it would be worth investigating further
 
 - Look for ways to link the datasets to obtain our chosen variables
 
@@ -89,24 +89,27 @@ class: inverse, center, middle
   
   - How has the length of stay changed?
   
-  - Could compare factors between different financial years or regions
+- Could compare factors between different financial years or regions
   
 ---
 
 #Biases and how we avoided them
 
-- Initial biases we confronted was we assumed there would be relationships between specific variables and predicted trends
+- Initial biases we confronted was we assumed there would be relationships between specific variables and we predicted trends for these relationships
 
-- Assumed number of patients would increase in hospitals due to increasing population
+ - Assumed number of patients would increase in hospitals due to increasing population
  
-- Assumed length of stay would decrease due to improved treatment methods
-
-- We decided to use data from every hospital in Scotlandas this helped reduce selection bias and also to accurately represent the diversity of cases and treatment approaches across the entire healthcare system.
+  - Ended up being incorrect after calculating summary statistics
+ 
+ - Assumed length of stay would decrease due to "improved treatment methods" that arises from experience and more research over the years
 
 - How we proceeded our investigation
 
+ - We decided to use data from every hospital in Scotland instead of specific regions
+ 
+  - Helped reduce selection bias and accurately represent the diversity of cases and treatment approaches across the entire healthcare system
 
-- Plotted graphs to visualise relationships between variables then exploring any trends the graphs showed instead of our predicted trends
+ - Made sure to only explore trends we found from summary statistics or data visualisations instead of our own assumptions to ensure our answer is not influenced by bias
 
 ---
 
@@ -116,6 +119,8 @@ class: inverse, center, middle
 
 - Filtered each dataset to contain the area code for Scotland 
 
+ - Found an area code that consisted of all the hospitals in Scotland instead of individual regions
+
 - Filtered each dataset to group different variables together
 
  - Eg. financial year, age, length of stay
@@ -123,69 +128,12 @@ class: inverse, center, middle
 - Renamed diagnosis variables from codes to the diagnosis names
 
  - Made it more clear when plotting graphs
-
----
-
-class: inverse, center, middle
-
-# Our data visualisations
-
----
-&lt;img src="presentation_files/figure-html/unnamed-chunk-2-1.png" width="100%" /&gt;
-.footnotes[
-- This is a graph showing the total number of patients in each year from our dataset. The proportion of male to females roughly remains the same throughout the years. 
-]
-
----
-.pull-left[
-&lt;img src="presentation_files/figure-html/unnamed-chunk-3-1.png" width="100%" height="70%" style="display: block; margin: auto;" /&gt;&lt;img src="presentation_files/figure-html/unnamed-chunk-3-2.png" width="100%" height="70%" style="display: block; margin: auto;" /&gt;
-]
-.pull-right[
-- These are bar charts comparing the patient distribution by sex in 2 financial years, 1997/98 and 2021/22. The trend of the graphs remains similar, although the total number of patients in each age group has mostly decreased.]
-
-
----
-
-&lt;img src="presentation_files/figure-html/unnamed-chunk-4-1.png" width="100%" height="90%" /&gt;
-.footnotes[
-- The number of patients who stayed in the hospital for 8-28 days and 29 days- 6 months decreased a lot in 2021/22 as compared to 1997/98. 
-]
----
-
-&lt;img src="presentation_files/figure-html/unnamed-chunk-5-1.png" width="100%" /&gt;
-.footnotes[
-- A significant drop can be seen in the number of patients aged 25-39 years in the year 2021/22 as compared to 1997/98. The number of patients aged 0-17 years and 18-24 years old have also dropped.
-]
----
-
-&lt;img src="presentation_files/figure-html/unnamed-chunk-6-1.png" width="100%" /&gt;
-
----
-
-
-```
-## `geom_smooth()` using formula = 'y ~ x'
-```
-
-&lt;img src="presentation_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
-
-```
-## # A tibble: 2 × 5
-##   term          estimate std.error statistic  p.value
-##   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1 (Intercept)    909.      57.1         15.9 6.46e-14
-## 2 FinancialYear   -0.436    0.0284     -15.3 1.41e-13
-```
-
----
-&lt;img src="presentation_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
+ 
 ---
 #Processing diagnosis data
 
-.pull-left[
 
 ```r
-#mutating diagnosis to contain a column with the types of diagnosis based on the code
 diagnosis &lt;- diagnosis %&gt;% mutate(
               DiagnosisName = case_when(
                 ICD10Codes == "F00 - F09 or Chapter G and second position F00" ~ "Organic, including symptomatic, mental disorders",
@@ -198,22 +146,79 @@ diagnosis &lt;- diagnosis %&gt;% mutate(
                )
               )
 ```
-]
-.pull-right[
-- To respect the data and the people, we added a column to the dataset with the diagnosis name that was relating to each of the diagnosis codes. This makes it easier to understand what the graph is showing, without having to memorise what each of the codes stand for. 
-]
+
+
 .footnotes[
-- Data wrangling as we added a new variable to the data. 
+To respect the data and the people, we added a column to the dataset with the diagnosis name that was relating to each of the diagnosis codes. This makes it easier to understand what the graph is showing, without having to memorise what each of the codes stand for. 
+]
+
+---
+
+class: inverse, center, middle
+
+# Our data visualisations
+
+---
+&lt;img src="presentation_files/figure-html/unnamed-chunk-3-1.png" width="100%" /&gt;
+.footnotes[
+- This is a graph showing the total number of patients in each year from our dataset. The proportion of male to females roughly remains the same throughout the years. 
+]
+
+
+---
+
+&lt;img src="presentation_files/figure-html/unnamed-chunk-4-1.png" width="100%" /&gt;
+
+.footnotes[
+- A significant drop can be seen in the number of patients aged 25-39 years in the year 2021/22 as compared to 1997/98. The number of patients aged 0-17 years and 18-24 years old have also dropped.
 ]
 ---
 
-&lt;img src="presentation_files/figure-html/unnamed-chunk-10-1.png" width="100%" /&gt;
+&lt;img src="presentation_files/figure-html/unnamed-chunk-5-1.png" width="100%" height="90%" /&gt;
+.footnotes[
+- The number of patients who stayed in the hospital for 8-28 days and 29 days- 6 months decreased a lot in 2021/22 as compared to 1997/98. 
+]
+
+---
+&lt;img src="presentation_files/figure-html/unnamed-chunk-6-1.png" width="100%" /&gt;
+---
+
+&lt;img src="presentation_files/figure-html/unnamed-chunk-7-1.png" width="100%" /&gt;
+
+---
+&lt;img src="presentation_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
+---
+
+&lt;img src="presentation_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
+---
+
+class: center, middle
+
+```r
+model1 &lt;- linear_reg() %&gt;%
+          set_engine("lm") %&gt;%
+          fit(AverageStay ~ FinancialYear, data = length.of.stay.single)
+
+tidy(model1)
+```
+
+```
+## # A tibble: 2 × 5
+##   term          estimate std.error statistic  p.value
+##   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    909.      57.1         15.9 6.46e-14
+## 2 FinancialYear   -0.436    0.0284     -15.3 1.41e-13
+```
+
+.footnotes[
+
+]
+
 ---
 &lt;img src="presentation_files/figure-html/unnamed-chunk-11-1.png" width="100%" /&gt;
+
 ---
 
-&lt;img src="presentation_files/figure-html/unnamed-chunk-12-1.png" width="100%" /&gt;
----
 class: inverse, center, middle
 
 #Back to our question
@@ -222,46 +227,52 @@ class: inverse, center, middle
 
 #Our findings
 
-- The average length of stay has decreased over the past 2 decades
+- The average length of stay has decreased by 9 days over the past 2 decades, which is a decrease of approximately 0.4 days each year.
 
-- The total number of patients with stays between 8-25 has decreased significantly whereas the number of stays between 29 days - 6 months and more than 6 months have also shown a decrease. 
+- The number of patients with long stays (8-28 days, 29 days - 6 months, 6+ months) has significantly decreased
  
 - Most patients in the year 2021/22 stayed in the hospitals for only up to week, whereas the most common length of stay in 1997/98 was 8 - 28 days. 
+
+- Number of stays which were less than one day have also increased significantly in 2021/22
  
-- Number of stays which were less than one day have also increased significantly in 2021/22, indicating that treatments may have gotten better and therefore quicker. 
-
-- The percentage of readmissions within 28 days has shown a gradual increase since 2010 however the percentage of re-admissions within 133 days has shown a significant overall decrease since 2000. 
-
+- The percentage of readmissions within 28 days has shown a gradual increase since 2010 however the percentage of re-admissions within 133 days has shown a significant overall decrease since 2000.
+ 
+- This may indicate that treatments may have gotten better and therefore quicker
+ 
 ---
 
-#What are the advantages/limitations of the investigation we have performed
+#What are the advantages of the investigation we have performed
 
-- The decrease in the lengths of stay over the 2 years implies that the mental health care system has gotten better and the treatments are now quicker than they were 2 decades ago. The percentage of re-admissions within 133 days has decreased which implies that the healthcare has gotten better, resulting in fewer relapses after treatments. 
+- The decrease in the lengths of stay over the 2 years suggests that the mental health care system has gotten better and the treatments are now quicker than they were 2 decades ago. The percentage of re-admissions within 133 days has decreased which implies that the healthcare has gotten better, resulting in fewer relapses after treatments. 
 
 - To get a general idea of trend, we chose to use data from all the hospitals in Scotland. This acted as an advantage because it provided a more comprehensive and representative picture of the entire population. This was important to draw conclusions and get a more comprehensive assessment of trends over time, enabling us to identify patterns.
 
-- Reliability and validity of our data: The dataset we used for out analysis was from the official government website. This means that the data was not systematically skewed or influenced by external factors, increasing validity. 
+- Reliability and validity of our data: The dataset we used for out analysis was from the official government website. This means that the data was not systematically skewed or influenced by external factors, increasing validity.
+
+---
+#What are the limitations/issues of the investigation we have performed?
 
 - As we went on with the research, we kept making new graphs to further answer our questions and analyse the trends. This also means that some of the initial graphs we made may not have a direct correlation with the final answer. 
 
----
-# Issues we faced and suggestions to improve our analysis
+- Since we used data from all the hospitals in Scotland, we had a lot of data to work with.
 
-- Since we used data from all the hospitals in Scotland, we had a lot of data to work with. This meant that a lot of effort was required in data cleaning, processing, and analysis. 
+- While using data from all hospitals in Scotland increased generalisability, it may have over-generalised the findings.
 
-- While using data from all hospitals in Scotland increased generalisability, it may have over-generalised the findings. This means that the findings from the analysis may not apply to every single hospital individually, especially if there are significant differneces in healthcare practices or patient populations. 
+- Financial year was the only common variable between all of the datasets.
+ 
+- Length of stay was non-continuous data which made it different to calculate summary statistics and plot graphs of it. 
 
 ---
 
 #How we respected the four respects
 
-- **Respect the People:**As this data included some medical codes for the different diagnosis, we thought it was a good idea to write out what each of the codes stood for instead, to make the data understandable by everyone. 
+- **Respect the People:** As this data included some medical codes for the different diagnosis, we thought it was a good idea to write out what each of the codes stood for instead, to make the data understandable by everyone. 
 
-- **Respect the Data:**We used appropriate visualisation styles for the data types and made sure every graph was titled, labelled, colored and very easy to interpret.  
+- **Respect the Data:** We used appropriate visualisation styles for the data types and made sure every graph was titled, labelled, colored and very easy to interpret.  
 
-- **Respect the Mathematics:**The scale and range of the axes in all the graphs was apt for the data being plotted 
+- **Respect the Mathematics:** The scale and range of the axes in all the graphs was apt for the data being plotted 
 
-- **Respect the Computers:**We did not overtax the computer. 
+- **Respect the Computers:** We did not overtax the computer. 
 
 ---
 

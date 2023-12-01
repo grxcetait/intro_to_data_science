@@ -226,7 +226,7 @@ length.of.stay.single <- length.of.stay %>%
                          LengthOfStay == "1 - 7 days" ~ 4,
                          LengthOfStay == "8 - 28 days" ~ 18,
                          LengthOfStay == "29 days - 6 months" ~ 98.5,
-                         LengthOfStay == "> 6 months" ~ 100 
+                         LengthOfStay == "> 6 months" ~ 168 
                       ),
                      TotalStays = Midpoint * Amount
                    ) %>%
@@ -240,11 +240,9 @@ length.of.stay.single <- length.of.stay %>%
 #calculating average length of stay for each year (decreasing trend)
 length.of.stay.single %>%                   
                    ggplot(aes(y = AverageStay, x = FinancialYear, color = "color")) +
-                   geom_point() +
-                   geom_smooth(method = "lm", se = FALSE) +
+                   geom_point(show.legend = FALSE) +
+                   geom_smooth(method = "lm", se = FALSE, show.legend = FALSE) +
                    theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
-                   ylim(20,40) +
-                   coord_fixed(ratio = 0.6) +
                    labs(x = "Year", 
                         y = "Average Stay", 
                         title = "Changes in Average Stay", 

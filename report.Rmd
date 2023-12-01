@@ -121,6 +121,42 @@ To explore this research question, our method was heavily reliant on data tidyin
 
 We opted to create several plots, visualisations and models as we wanted to see trends within categorical variables of length of stay, such as age, gender and diagnosis. Originally, we were meant to join the datasets of these different variables in order to investigate how they affect length of stay. However, we found out that there were no common rows between the datasets, meaning we could not join. Since we still wanted to explore these other variables, instead we chose to visualise age, sex and gender as sub-categories to see trends within these groups. 
 
+#Analysis Of The Data
+After all the data wrangling and visualisation we started analysing the data to notice any trends or patterns in it. From our first graph below, we refer to the number of patients from each age group and sex in 1997/97 and we were able to see that as the age increases, there tends to be an increasing number of patients and we continue to see this trend for other years. We looked into this occurence to see if there was any inherent reason for this. From an article published by WHO "World Health Organisation" older ages are more susceptible to mental health problems due to having more experiences which could have some accumulation of adversities leading to built up psychological distresses{1}. The treatment of many older adults such as dire living conditions etc. would also cause mental illnesses such as depression and anxiety which we could see is quite common in our data(seen in the next graphs). This may have contributed to the trend that we saw.
+
+(Insert Graph)
+
+A trend we did not expect to see, where the number of patients in a hospital has a subtle decreasing trend as seen from our graph of "Number of Patients Versus Financial Year". We expected to see an increase in number of patients due to our increasing population. Looking into this occurrence we may have found a reason according to an article by "The Guardian" there was a reduction of NHS mental health beds by 25% since 2010 leading to lesser space to occupy patients. There also is a spike around the years 2019 which we  assume may have been caused by the Covid-19 pandemic, which lead to declining mental health due to living conditions with the sickness and the lockdown.
+
+(Insert Graph)
+
+Referring to our next graph we see that the number of patients against the length of stay throughout the years have changed slightly where shorter stays are more frequent compared to longer stays in the recent years.(shorter stays >=7 days, longer >7days). We have selected the data from 1997/98 and 2021/22 to look at this change more closer and we can clearly see a change in frequency of the shorter stays and the longer stays. Why?
+
+(Insert Graph)
+
+The graph below shows the changes in number of diagnoses for each diagnosis between the year 1997 and 2022. We notice that there arent many substantial changes to the diagnoses except for mood(affective) disorders where there is a huge decrease in frequency from 1997/98 to 2021/22. Why?
+
+(Insert Graph)
+
+- Do we want to see if there is relation to readmissions with length of stay
+  #There seems to be a correlation to readmissions to length of stay, there is a dip in number of readmissions during 2007-2012 due to change in protocol. Increase in number of readmissions right after as length of stay decreases.(as length of stay decreases a need to readmit has become more frequent to get more treatment)
+- Average length of stay has decreased over the 23 year period which may correspond to better healthcare or a change in healthcare protocols.
+
+
+##Be more careful with wording do not imply but "assume"
+##Link findings of trends to the next graph i.e reason we created the next graph 
+##Advantages and disadvantages and limitations of the graphs we made
+
+
+#Discussion/Conclusion
+-Answering research question
+-Mention bias: Variable/ Didnt mention big cities and just looked over whole of scotland
+-Limitation
+- What kind of improvements we could put into the graphs
+
+In conclusion...
+
+
 
 
 ## References
