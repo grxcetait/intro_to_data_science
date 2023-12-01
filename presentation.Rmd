@@ -86,16 +86,6 @@ class: inverse, center, middle
 
 ---
 
-#Initial steps
-
-- Form possible relationships between different variables and brainstorm research questions that we could explore further
-
-- Create summary statistics and data visualisations from our initial ideas to see if there are any trends or if it would be worth investigating further
-
-- Look for ways to link the datasets to obtain our chosen variables
-
----
-
 #Brainstorming ideas
 
 - Factors we could look at:
@@ -401,12 +391,12 @@ class: inverse, center, middle
 - The percentage of readmissions within 28 days has shown a gradual increase since 2010 however the percentage of re-admissions within 133 days has shown a significant overall decrease since 2000.
  
 - This may indicate that treatments may have gotten better and therefore quicker
- 
+
+- The percentage of re-admissions within 133 days has decreased which implies that the healthcare has gotten better, resulting in fewer relapses after treatments. 
+
 ---
 
 #What are the advantages of the investigation we have performed
-
-- The decrease in the lengths of stay over the 2 years suggests that the mental health care system has gotten better and the treatments are now quicker than they were 2 decades ago. The percentage of re-admissions within 133 days has decreased which implies that the healthcare has gotten better, resulting in fewer relapses after treatments. 
 
 - To get a general idea of trend, we chose to use data from all the hospitals in Scotland. This acted as an advantage because it provided a more comprehensive and representative picture of the entire population. This was important to draw conclusions and get a more comprehensive assessment of trends over time, enabling us to identify patterns.
 
