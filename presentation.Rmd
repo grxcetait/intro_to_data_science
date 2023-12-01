@@ -191,8 +191,8 @@ age.sex %>%
              x = amount, 
              fill = Sex)) +
   geom_col() +
-  labs(x = "Financial Year",
-       y = "Number of Patients",
+  labs(x = "Number of Patients",
+       y = "Financial Year",
        title = "Number of Patients vs Financial Year")+theme_minimal()
 ```
 .footnotes[
