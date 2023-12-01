@@ -44,23 +44,21 @@ To what extent has the length of stay of mental health inpatients in Scotland ch
 
 ## Data
 
-Briefly describe your dataset here - include a description of the key variables you will be investigating. 
-Include a citation for your data. 
-See http://libraryguides.vu.edu.au/c.php?g=386501&p=4347840 for guidance on proper citation for datasets. 
-If you got your data off the web, make sure to state the retrieval date.
+Our Data is from the "Public Health Scotland". It contains 14 files with information on patients with mental health problems and their institute by region spanning over the financial years 1997/98 - 2021/22. The key variables we decided to investigate was the length of stay, readmissions, number of patients, ages and sex. These variables were to chosen to see if there are changes in the length of stay and if it had any affect on other variables or if the variables affected the length of stay.
 
-
+Public Health Scotland, "Mental Health Inpatient Activity," 23 November 2021. [Online]. Available: 
+https://www.opendata.nhs.scot/dataset/mental-health-inpatient-activity. [Accessed 20th October 2023]
 
 # Findings
 Although mental health has been a topic of great interest amongst researchers since the start of the 20th century, its importance and impact on people's well-being has only recently started to be taken into account. People, hospitals, businesses, and governments have become more aware of people's mental health, and so it is interesting to see how this has evolved over the past decades and how patients have been responding to this. NHS Scotland made available a dataset with information about mental health inpatients in hospitals in Scotland, dating back to 1997, which set the basis of this investigation. We decided to use variables such as age, sex and diagnosis to attempt to explain changes in the length of stay, as the latter may be the one impacted most by the advances of mental health awareness. This leads us to a guiding research question to be answered by this investigation: 'to what extent has the length of stay of mental health inpatients in Scotland changed over the years 1997 to 2022?'
 
-To explore this research question, our method was heavily reliant on data tidying and processing, since the data provided was quite messy. The main advantage with doing this is that we were able to make the application of data science much more straightforward and less convoluted. It would also allow us to more easily find correlations between length of stay and other useful variables, which may help answer the research question. Firstly, we had to load the data for 1997 and 2022, the more relevant years for our research, into separate objects using filter. Since the data was within the same dataset, this would make it much easier to work with and create useful results. Further, we had to translate the ICD10 codes for diagnoses into the common names and categories of the mental illnesses, since most would not know what each code stands for. A particular feature of this dataset is the number of continuous variables present, especially length of stay. Thus, we mutated each period of time into the midpoint value, e.g. 1-7 days was mutated to 4 days. This was done especially in order to allow us to find a linear model for the change in length of stay over time.
+To explore this research question, our method was heavily reliant on data tidying and processing, since the data provided was quite messy. The main advantage with doing this is that we were able to make the application of data science much more straightforward and less convoluted. It would also allow us to more easily find correlations between length of stay and other useful variables, which may help answer the research question. Firstly, we had to load the data for 1997 and 2022, the more relevant years for our research, into separate objects using filter. Since the data was within the same dataset, this would make it much easier to work with and create useful results. Further, we had to translate the ICD10 codes for diagnoses into the common names and categories of the mental illnesses, since most would not know what each code stands for. A particular feature of this dataset is the number of discrete variables present, especially length of stay. Thus, we mutated each period of time into the midpoint value, e.g. 1-7 days was mutated to 4 days. This was done especially in order to allow us to find a linear model for the change in length of stay over time.
 
 We opted to create several plots, visualisations and models as we wanted to see trends within categorical variables of length of stay, such as age, gender and diagnosis. Originally, we were meant to join the datasets of these different variables in order to investigate how they affect length of stay. However, we found out that there were no common rows between the datasets, meaning we could not join. Since we still wanted to explore these other variables, instead we chose to visualise age, sex and gender as sub-categories to see trends within these groups. The presentation shows eight visualisations, with most of them being bar plots, histograms or variations of that. We found these bar plots particularly useful for the variable we were investigating. Since we are trying to show the changes in a quantifiable variable, length of stay of inpatients in Scottish hospitals, magnitudes were put into proportion by the bars allowing for easier visualisation that respects the people. Moreover, histograms helped us bring all years together without using separate graphs, making things tidier and less convoluted. On the readmissions graphs, we felt those were necessary to complement the changes in lengths of stay time periods. A smooth line graph was perfect for that, showing a change in a value over time.
 
 Overall, our method consisted in organising the data into the relevant years, which allowed us to mutate information into tidier and more understandable variable names. With that, we used bar plots and histograms to show categorical values and their values at different years, namely length of stay. Our usage of smooth line graphs was more limited to continuous variables such as the percentage of readmissions.
 
-After all the data wrangling and visualisation we started analysing the data to notice any trends or patterns in it. From our first graph below, we refer to the number of patients from each age group and sex in 1997/98 and we were able to see that as the age increases, there tends to be an increasing number of patients and we continue to see this trend for other years. We looked into this occurrence to see if there was any inherent reason for this. From an article published by WHO "World Health Organisation" older ages are more susceptible to mental health problems due to having more experiences which could have some accumulation of adversities leading to built up psychological distresses{1}. The treatment of many older adults such as dire living conditions etc. would also cause mental illnesses such as depression and anxiety which we could see is quite common in our data(seen in the next graphs). This may have contributed to the trend that we saw. While going through this graph and comparing to the other years we noticed there was a change in the number of total patients. So we decided to continue by plotting the total number of patients throughout the 23 year period.(Continued in next paragraph)
+After all the data wrangling and visualisation we started analysing the data to notice any trends or patterns in it. From our first graph below, we refer to the number of patients from each age group and sex in 1997/98 and we were able to see that as the age increases, there tends to be an increasing number of patients and we continue to see this trend for other years. We looked into this occurrence to see if there was any inherent reason for this. From an article published by WHO "World Health Organisation" older ages are more susceptible to mental health problems due to having more experiences which could have some accumulation of adversities leading to built up psychological distresses{2}. The treatment of many older adults such as dire living conditions etc. would also cause mental illnesses such as depression and anxiety which we could see is quite common in our data(seen in the next graphs). This may have contributed to the trend that we saw. While going through this graph and comparing to the other years we noticed there was a change in the number of total patients. So we decided to continue by plotting the total number of patients throughout the 23 year period.(Continued in next paragraph)
 
 
 ```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
@@ -90,7 +88,7 @@ age.sex %>% filter(HBR == "S92000003",
                         )+theme_minimal()
 ```
 
-A trend we did not expect to see, where the number of patients in a hospital has a subtle decreasing trend as seen from our graph of "Number of Patients Versus Financial Year". We expected to see an increase in number of patients due to our increasing population. Looking into this occurrence we may have found a reason for this. According to an article by "The Guardian" there was a reduction of NHS mental health beds by 25% since 2010 leading to lesser space to occupy patients {2}. There also is a spike around the year 2019 which we assume may have been caused by the Covid-19 pandemic, which lead to declining mental health due to living conditions with the sickness and the lockdown.
+A trend we did not expect to see, where the number of patients in a hospital has a subtle decreasing trend as seen from our graph of "Number of Patients Versus Financial Year". We expected to see an increase in number of patients due to our increasing population. Looking into this occurrence we may have found a reason for this. According to an article by "The Guardian" there was a reduction of NHS mental health beds by 25% since 2010 leading to lesser space to occupy patients {3}. There also is a spike around the year 2019 which we assume may have been caused by the Covid-19 pandemic, which lead to declining mental health due to living conditions with the sickness and the lockdown.
 
 ```{r warning=FALSE, fig.height=6, fit.width=12, echo=FALSE}
 #Bar chart for number of patients vs. financial year
@@ -102,8 +100,8 @@ age.sex %>%
              x = amount, 
              fill = Sex)) +
   geom_col() +
-  labs(x = "Financial Year",
-       y = "Number of Patients",
+  labs(x = "Number of Patients",
+       y = "Financial Year",
        title = "Number of Patients vs Financial Year")+theme_minimal()
 ```
 
@@ -172,7 +170,7 @@ diagnosis %>% filter(HBT == "S92000003",
                         )+theme_minimal()
 ```
 
-After noticing the trend in length of stay we wanted to see if it would affect the number of readmissions. So according to the first graph below, we see the number of readmissions after 28 days of stay decreases first then increases with a few negligible spikes but one spike to take note of is during 2020. In the second graph we see the number of readmissions after 133 days has a decreasing trend with a peak during 2020 just as the graph before. We looked into this trend and found that there were acts "" which may explain the dip around 2010 and the increase after. the peaks from both graphs in 2020 may have been due to the Covid-19 pandemic which cause many to readmit themselves due to the circumstances. This would also correlate with our trend in length of stay. As the shorter length of stay increases and vice versa, there would be more readmissions to gain more treatment and the decrease for readmissions after 133 days could have been due to better healthcare.
+After noticing the trend in length of stay we wanted to see if it would affect the number of readmissions. So according to the first graph below, we see the number of readmissions after 28 days of stay decreases first then increases with a few negligible spikes but one spike to take note of is during 2020. In the second graph we see the number of readmissions after 133 days has a decreasing trend with a peak during 2020 just as the graph before. We looked into this trend and found that there was an act called the "Mental Health (Scotland) Act 2015" which allows service users with mental disorders to receive effective treatment quickly {4} and may explain the increase around 2015 and onwards. The peaks from both graphs in 2020 may have been due to the Covid-19 pandemic which cause many to readmit themselves due to the circumstances. This would also correlate with our trend in length of stay. As the shorter length of stay increases and vice versa, there would be more readmissions to gain more treatment and the decrease for readmissions after 133 days could have been due to better healthcare.
 
 ```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
 readmissions.single <- readmissions %>%
@@ -267,10 +265,14 @@ ggplot(model1_aug, mapping = aes(x = .fitted, y = .resid)) +
 ## References
 
 List any references here. You should, at a minimum, list your data source.
-{1}Who, "World Health Organisation", https://www.who.int/news-room/fact-sheets/detail/mental-health-of-older-adults#:~:text=Risk%20factors,-At%20older%20ages&text=Exposure%20to%20adversity%2C%20significant%20loss,sense%20of%20purpose%20with%20retirement.
 
-{2}Denis Campbell, The Guardian, https://www.theguardian.com/society/2021/jul/05/number-of-nhs-mental-health-beds-down-by-25-since-2010-analysis-shows [Accessed on 5th July 2021]
+{1}Public Health Scotland, "Mental Health Inpatient Activity," 23 November 2021. [Online]. Available: 
+https://www.opendata.nhs.scot/dataset/mental-health-inpatient-activity. [Accessed 20th October 2023]
 
-{3}
+{2}Who, "World Health Organisation", https://www.who.int/news-room/fact-sheets/detail/mental-health-of-older-adults#:~:text=Risk%20factors,-At%20older%20ages&text=Exposure%20to%20adversity%2C%20significant%20loss,sense%20of%20purpose%20with%20retirement. [Accessed 28th November 2023]
+
+{3}Denis Campbell, The Guardian, https://www.theguardian.com/society/2021/jul/05/number-of-nhs-mental-health-beds-down-by-25-since-2010-analysis-shows [Accessed 28th November 2023]
+
+{4}Director-General Health and Social Care, Scottish Goverment. Available: https://www.gov.scot/policies/mental-health/ [Accessed 29th November 2023]
 
 
