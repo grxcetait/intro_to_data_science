@@ -12,6 +12,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r load-lib, include = FALSE}
 library(tidyverse)
+library(tidymodels)
+library(ggplot2)
 # Add any other libraries here
 
 
@@ -22,7 +24,11 @@ library(tidyverse)
 ```{r load-data, include=FALSE}
 # load your data here and any pre-processing/cleaning 
 #  that you need for your report.
-
+age.sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
+length.of.stay <- read_csv("data/mental-health-inpatient-activity-length-of-stay.csv")
+diagnosis <- read_csv("data/mental-health-inpatient-activity-diagnosis-trend.csv")
+readmissions <- read_csv("data/mental-health-inpatient-activity-readmissions.csv")
+options(readr.show_col_types = FALSE)
 
 
 
@@ -122,46 +128,217 @@ We opted to create several plots, visualisations and models as we wanted to see 
 
 Overall, our method consisted in organising the data into the relevant years, which allowed us to mutate information into tidier and more understandable variable names. With that, we used bar plots and histograms to show categorical values and their values at different years, namely length of stay. Our usage of smooth line graphs was more limited to continuous variables such as the percentage of readmissions.
 
-#Analysis Of The Data
-After all the data wrangling and visualisation we started analysing the data to notice any trends or patterns in it. From our first graph below, we refer to the number of patients from each age group and sex in 1997/97 and we were able to see that as the age increases, there tends to be an increasing number of patients and we continue to see this trend for other years. We looked into this occurence to see if there was any inherent reason for this. From an article published by WHO "World Health Organisation" older ages are more susceptible to mental health problems due to having more experiences which could have some accumulation of adversities leading to built up psychological distresses{1}. The treatment of many older adults such as dire living conditions etc. would also cause mental illnesses such as depression and anxiety which we could see is quite common in our data(seen in the next graphs). This may have contributed to the trend that we saw.
-
-(Insert Graph)
-
-A trend we did not expect to see, where the number of patients in a hospital has a subtle decreasing trend as seen from our graph of "Number of Patients Versus Financial Year". We expected to see an increase in number of patients due to our increasing population. Looking into this occurrence we may have found a reason according to an article by "The Guardian" there was a reduction of NHS mental health beds by 25% since 2010 leading to lesser space to occupy patients. There also is a spike around the years 2019 which we  assume may have been caused by the Covid-19 pandemic, which lead to declining mental health due to living conditions with the sickness and the lockdown.
-
-(Insert Graph)
-
-Referring to our next graph we see that the number of patients against the length of stay throughout the years have changed slightly where shorter stays are more frequent compared to longer stays in the recent years.(shorter stays >=7 days, longer >7days). We have selected the data from 1997/98 and 2021/22 to look at this change more closer and we can clearly see a change in frequency of the shorter stays and the longer stays. Why?
-
-(Insert Graph)
-
-The graph below shows the changes in number of diagnoses for each diagnosis between the year 1997 and 2022. We notice that there arent many substantial changes to the diagnoses except for mood(affective) disorders where there is a huge decrease in frequency from 1997/98 to 2021/22. Why?
-
-(Insert Graph)
-
-- Do we want to see if there is relation to readmissions with length of stay
-  #There seems to be a correlation to readmissions to length of stay, there is a dip in number of readmissions during 2007-2012 due to change in protocol. Increase in number of readmissions right after as length of stay decreases.(as length of stay decreases a need to readmit has become more frequent to get more treatment)
-- Average length of stay has decreased over the 23 year period which may correspond to better healthcare or a change in healthcare protocols.
+After all the data wrangling and visualisation we started analysing the data to notice any trends or patterns in it. From our first graph below, we refer to the number of patients from each age group and sex in 1997/98 and we were able to see that as the age increases, there tends to be an increasing number of patients and we continue to see this trend for other years. We looked into this occurrence to see if there was any inherent reason for this. From an article published by WHO "World Health Organisation" older ages are more susceptible to mental health problems due to having more experiences which could have some accumulation of adversities leading to built up psychological distresses{1}. The treatment of many older adults such as dire living conditions etc. would also cause mental illnesses such as depression and anxiety which we could see is quite common in our data(seen in the next graphs). This may have contributed to the trend that we saw. While going through this graph and comparing to the other years we noticed there was a change in the number of total patients. So we decided to continue by plotting the total number of patients throughout the 23 year period.(Continued in next paragraph)
 
 
-##Be more careful with wording do not imply but "assume"
-##Link findings of trends to the next graph i.e reason we created the next graph 
-##Advantages and disadvantages and limitations of the graphs we made
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+age.sex %>% filter(HBR == "S92000003",
+                       FinancialYear == "1997/98" | 
+                       FinancialYear == "2021/22") %>%
+                   group_by(FinancialYear, AgeGroup) %>%
+                   summarise(Amount = sum(PatientsCount),.groups="drop") %>%
+                   mutate(
+                     Order = case_when(
+                       AgeGroup == "0-17 years" ~ 1,
+                       AgeGroup == "18-24 years" ~ 2,
+                       AgeGroup == "25-39 years" ~ 3,
+                       AgeGroup == "40-64 years" ~ 4,
+                       AgeGroup == "65plus years" ~ 5
+                     )
+                   ) %>%
+                   ggplot(aes(x = reorder(AgeGroup, +Order), y = Amount)) +
+                   facet_wrap(vars(FinancialYear)) +
+                   geom_bar(position = "dodge", stat = "identity",fill="forestgreen") +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Age of Patients", 
+                        y = "Amount of Patients", 
+                        title = "Changes in Age of Patients", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )+theme_minimal()
+```
+
+A trend we did not expect to see, where the number of patients in a hospital has a subtle decreasing trend as seen from our graph of "Number of Patients Versus Financial Year". We expected to see an increase in number of patients due to our increasing population. Looking into this occurrence we may have found a reason for this. According to an article by "The Guardian" there was a reduction of NHS mental health beds by 25% since 2010 leading to lesser space to occupy patients {2}. There also is a spike around the year 2019 which we assume may have been caused by the Covid-19 pandemic, which lead to declining mental health due to living conditions with the sickness and the lockdown.
+
+```{r warning=FALSE, fig.height=6, fit.width=12, echo=FALSE}
+#Bar chart for number of patients vs. financial year
+age.sex %>% 
+  filter(HBR == "S92000003") %>%
+  group_by(FinancialYear, Sex) %>%
+  summarise(amount = sum(PatientsCount),.groups="drop") %>%
+  ggplot(aes(y = FinancialYear, 
+             x = amount, 
+             fill = Sex)) +
+  geom_col() +
+  labs(x = "Financial Year",
+       y = "Number of Patients",
+       title = "Number of Patients vs Financial Year")+theme_minimal()
+```
+
+Next, getting closer to our research question we refer to our next graph where we see that the number of patients against the length of stay throughout the years have changed slightly where shorter stays are more frequent compared to longer stays in the recent years.(shorter stays >=7 days, longer >7days). We have selected the data from 1997/98 and 2021/22 to look at this change more closer and we can clearly see a change in frequency of the shorter stays and the longer stays.
+
+```{r warning=FALSE, out.width="100%", fig.width=12,out.height="90%", echo=FALSE}
+length.of.stay %>% filter(HBT == "S92000003",
+                       FinancialYear == "1997/98" | 
+                       FinancialYear == "2021/22") %>%
+                   group_by(FinancialYear, LengthOfStay) %>%
+                   summarise(Amount = sum(NumberOfStays),.groups = "drop") %>%
+                   mutate(
+                     Order = case_when(
+                       LengthOfStay == "< 1 day" ~ 1,
+                       LengthOfStay == "1 - 7 days" ~ 2,
+                       LengthOfStay == "8 - 28 days" ~ 3,
+                       LengthOfStay == "29 days - 6 months" ~ 4,
+                       LengthOfStay == "> 6 months" ~ 5
+                     )
+                   ) %>%
+                   ggplot(aes(x = reorder(LengthOfStay, +Order), y = Amount)) +
+                   facet_wrap(vars(FinancialYear)) +
+                   geom_bar(position = "dodge", stat = "identity",fill="forestgreen") +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Length of Patients Stay", 
+                        y = "Amount of Patients", 
+                        title = "Changes in Lengths of Stay", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )+theme_minimal()
+
+```
+
+The graph below shows the changes in number of diagnoses for each diagnosis between the year 1997 and 2022. We notice that there aren't many substantial changes to the diagnoses except for mood affective disorders where there is a huge decrease in frequency from 1997/98 to 2021/22. However this does not seem to aid us in our research question, this will be discussed further in the conclusion further down.
+
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+#bar chart for 1997/88 and 2021/22 based on diagnoses and amount of patients
+
+#mutating diagnosis to contain a column with the types of diagnosis based on the code
+diagnosis <- diagnosis %>% mutate(
+              DiagnosisName = case_when(
+                ICD10Codes == "F00 - F09 or Chapter G and second position F00" ~ "Organic, including symptomatic, mental disorders",
+                ICD10Codes == "F10 - F19" ~ "Mental & behavioural disorders due to psychoactive substance use",
+                ICD10Codes == "F20 - F29" ~ "Schizophrenia, schizotypal, & delusional disorders",
+                ICD10Codes == "F30 - F39" ~ "Mood (affective) disorders",
+                ICD10Codes == "F40 - F49" ~ "Neurotic, stress-related, & somatoform disorders",
+                ICD10Codes == "F60 - F69" ~ "Disorders of adult personality & behaviour",
+                ICD10Codes == "F50 - F59, F70 - F99" ~ "Other selected diagnoses principally affecting children & young people"
+               )
+              )
+
+diagnosis %>% filter(HBT == "S92000003",
+                     FinancialYear == "1997/98" | 
+           FinancialYear == "2021/22") %>%
+              group_by(FinancialYear, DiagnosisName) %>%
+              summarise(amount = sum(PatientsCount),.groups="drop") %>%
+              ggplot(aes(x = amount, y = DiagnosisName, fill = FinancialYear)) +
+              theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+              geom_bar(position = "dodge", stat = "identity") +
+              labs(y = "Diagnoses in Patients", 
+                        x = "Amount of Patients", 
+                        title = "Changes in Diagnoses", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022",
+                        legend = "Financial Year"
+                        )+theme_minimal()
+```
+
+After noticing the trend in length of stay we wanted to see if it would affect the number of readmissions. So according to the first graph below, we see the number of readmissions after 28 days of stay decreases first then increases with a few negligible spikes but one spike to take note of is during 2020. In the second graph we see the number of readmissions after 133 days has a decreasing trend with a peak during 2020 just as the graph before. We looked into this trend and found that there were acts "" which may explain the dip around 2010 and the increase after. the peaks from both graphs in 2020 may have been due to the Covid-19 pandemic which cause many to readmit themselves due to the circumstances. This would also correlate with our trend in length of stay. As the shorter length of stay increases and vice versa, there would be more readmissions to gain more treatment and the decrease for readmissions after 133 days could have been due to better healthcare.
+
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+readmissions.single <- readmissions %>%
+  filter(HBT == "S92000003") %>%
+  mutate(
+  FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
+  )
+
+readmissions.single %>%                   
+                   ggplot(aes(y = PercentageOfReadmissionsWithin28Days, x = FinancialYear)) +
+                   geom_path() +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Year", 
+                        y = "Percent of Readmissions", 
+                        title = "Percentage of Readmissions Within 28 days", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )+theme_minimal()
+```
+
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+readmissions.single %>%                   
+                   ggplot(aes(y = PercentageOfReadmissionsWithin133Days, x = FinancialYear)) +
+                   geom_path() +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Year", 
+                        y = "Percent of Readmissions", 
+                        title = "Percentage of Readmissions Within 133 days. ", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )+theme_minimal()
+```
+
+In conclusion, we have found five distinct findings. Firstly, as our age increases we may be more prone to mental health issues which we assume is the reason for the increasing number of patients as age increases for each year. Secondly, the average number of patients in a mental hospital all around Scotland has decreased over the 23 year period despite our increasing population (..maybe can elaborate more?..). Thirdly, the length of stay of patients over the years have changed as in shorter stays have been more frequent and longer stays have been less frequent from 1997 to 2022. Fourthly, after comparing the number of diagnoses in 1997 and 2022, we found there were no significant changes aside from a drastic decrease in mood affective disorders. However this finding was proven not to be useful in answering our research question as there were no common variables in the data to relate to the length of stay. Finally, the number of readmissions after 28 days across the years had a decrease from 1997 to 2007 and was a bit stagnant up till 2012 and had an increase onwards and as for readmissions after 133 days, it had a decreasing trend. Both results share a peak in 2020. The results for readmissions correlate with our length of stay across the years as length of stay is shorter we assume there would be more readmission for more treatment and for the decrease in length of stays, it may be caused by better healthcare in the recent years. However whilst doing our investigation we came across a few limitations such as having no common variables between diagnoses with age group, length of stay or readmission which didn't allow us to see any trends and relation between them. If we were able to relate this variables we would've been able to see the effects of each diagnoses which would help us in answering our research question more accurately. One thing to note was also how the length of stay weren't in exact numbers but instead put into groups of time periods which didn't allow us to see a fully accurate trend. Through our investigation we managed to answer our research question by figuring out how the lengths of stay have changed in the past 2 decades where on average the length of stay have decreased by 9 days or 0.4 days per year and the frequency of shorter stays have increased and longer stays decreased. 
+
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+length.of.stay.single <- length.of.stay %>% 
+                   filter(HBT == "S92000003",) %>%
+                   group_by(FinancialYear, LengthOfStay) %>%
+                   summarise(Amount = sum(NumberOfStays),.groups = "drop") %>%
+                   mutate(
+                     Midpoint = case_when(
+                         LengthOfStay == "< 1 day" ~ 0.5,
+                         LengthOfStay == "1 - 7 days" ~ 4,
+                         LengthOfStay == "8 - 28 days" ~ 18,
+                         LengthOfStay == "29 days - 6 months" ~ 98.5,
+                         LengthOfStay == "> 6 months" ~ 168 
+                      ),
+                     TotalStays = Midpoint * Amount
+                   ) %>%
+                   group_by(FinancialYear) %>%
+                   summarise(TotalStaysYearly = sum(TotalStays), TotalAmount = sum(Amount)) %>%
+                   mutate(
+                     AverageStay = TotalStaysYearly / TotalAmount,
+                     FinancialYear = as.numeric(substr(FinancialYear, 1, 4))
+                   )
+
+length.of.stay.single %>%                   
+                   ggplot(aes(y = AverageStay, x = FinancialYear)) +
+                   geom_point(color="red") +
+                   geom_smooth(method = "lm", se = FALSE,color="black",
+                               formula = y ~ x) +
+                   theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
+                   labs(x = "Year", 
+                        y = "Average Stay", 
+                        title = "Changes in Average Stay", 
+                        subtitle = "from 1997 to 2022",
+                        caption = "From 76290 patients in 1997 to 61030 patients in 2022"
+                        )+theme_minimal()
+```
+
+```{r warning=FALSE, out.width="100%", fig.width=12, echo=FALSE}
+model1 <- linear_reg() %>%
+          set_engine("lm") %>%
+          fit(AverageStay ~ FinancialYear, data = length.of.stay.single)
+
+model1_aug <- augment(model1$fit)
+ggplot(model1_aug, mapping = aes(x = .fitted, y = .resid)) +
+  geom_point(color="red") +
+  geom_hline(yintercept = 0, color = "gray", lty = "dashed") +
+  labs(x = "Predicted Average Stay", y = "Residuals", title = "Graph of the Residuals from the Linear Model of Length of Stay")+theme_minimal()
+```
+
+#*How our research question would be relevant to solve issues*
+#*What kind of improvement we can make for our investigation*
 
 
-#Discussion/Conclusion
--Answering research question
--Mention bias: Variable/ Didnt mention big cities and just looked over whole of scotland
--Limitation
-- What kind of improvements we could put into the graphs
-
-In conclusion...
-
-
-
+#Be more careful with wording do not imply but "assume"
+#Link findings of trends to the next graph i.e reason we created the next graph 
+#Advantages and disadvantages and limitations of the graphs we made
 
 ## References
 
 List any references here. You should, at a minimum, list your data source.
+{1}Who, "World Health Organisation", https://www.who.int/news-room/fact-sheets/detail/mental-health-of-older-adults#:~:text=Risk%20factors,-At%20older%20ages&text=Exposure%20to%20adversity%2C%20significant%20loss,sense%20of%20purpose%20with%20retirement.
+
+{2}Denis Campbell, The Guardian, https://www.theguardian.com/society/2021/jul/05/number-of-nhs-mental-health-beds-down-by-25-since-2010-analysis-shows [Accessed on 5th July 2021]
+
+{3}
 
 
