@@ -34,53 +34,6 @@ options(readr.show_col_types = FALSE)
 
 ```
 
-
-## Critera 
-
-Topics looking for:
-- loading , processing and cleaning of data
-- Effective summarisation of the data in both numerical and visual forms
-- Appropriate management of various variable types, specifically numerical and categorical variables
-- Evidence of effective communication, whether in numerical output and in data visualisations
-- Highlighting any ethical considerations as part of your data science investigation
-- Construction of an appropriate model, either a linear or logistic model
-- Valid assessment/interpretation of model output
-
-- What choices we made, why, what we found from each decision
-- Critique own methods
-- Provide suggestions for improving our analysis
-- Talk about issues relating to the reliability and validity of our data
-- Talk about the appropriateness of the statistical analysis
-
-Report writing
-- Introduction
- - What is your data? 
-  - Our data informs about inpatients with mental health problems who were admitted to Scottish hospitals for the day or for a prolonged period of time during between the years 1997-2022.
- - What research questions are you investigating?
- - Is there any relevant background information/literature that can help give context to your data/questions?
-  - It is important to note that awareness of mental health has grown significantly over the past decades. This may have had effects on the evolution of treatments for mental health problems.
-- Methods
- - Summarise what cleaning/preprocessing you have done to your data
-  - Load years 1997/98 and 2021/22 and attribute to separate objects using filter. Original file names are long so it makes it easier to find and differentiate relevant data.
-  - Decode the ICD10 diagnosis codes to the common disease names.
-  - Find midpoints of continuous variables such as length of stay.
- - Brief description of data science techniques you have used in your investigation
-  - Data tyding: attributed names to objects, made use of certain variables by mutating them
-  - Plotting: using a plethora of plot types (bar, scatter, histogram), labelling
-  - Building models: 
-- Results
- - Tables, figures and summary values from your exploratory investigation
- - Ensure they are well labelled, neat and directly relevant to the test
- - Avoid cluttering with unnecessary data
- - Summary of a fitted statistical model, such as estimates, plots and git statistic
- - A brief explanation of what the results mean in the given context of your data
-- Discussion
- - Answer your research question
- - What are the advantages/limitations of the investigation you have performed?
- - Discuss their implications, how they address your research question, and any limitations
- - If applicable, are there any ethical considerations in relation to your investigation/findings?
-
-
 ## Research Question
 
 To what extent has the length of stay of mental health inpatients in Scotland changed over the years 1997 to 2022? This particular question was preferred due to its narrower scope, allowing us to investigate and comment on trends regarding variables such as age, sex, and diagnoses. Further, and more importantly, the investigation of this question may provide additional insight into how the quality of mental health treatments changed.
@@ -98,28 +51,7 @@ If you got your data off the web, make sure to state the retrieval date.
 
 
 
-
-
-
-## Findings
-
-The write-up of your project and findings go here. 
-
-Think of this as the text of your presentation with some extra detail to cover what there was not time to discuss in the presentation. This might include any assumptions you made when doing your analysis, any limitations of the work you have done or any ideas you have for future work. Feel free to split this section into subsections to make it easier to read. 
-
-The length should be roughly 1,500 words. 
-If you want to use a word count addin, you can install this by copying and pasting the following into RStudio:
-
-`devtools::install_github("benmarwick/wordcountaddin", type = "source", dependencies = TRUE)`
-
-You will then need to restart RStudio. Once you have done that, select the text you want to count the words of, go to Addins, and select the `Word count` addin.
-This addin counts words using two different algorithms, but the results should be similar and as long as you're in the ballpark of 1,500 words, you're good! 
-The addin will ignore code chunks and only count the words in prose. If you don't want to use the addin you can always copy and paste the text into Microsoft Word to do a Word Count!
-
-You can also load your data here and present any analysis results / plots.
-Make sure to hide your code with  `echo = FALSE` unless the point you are trying to make is about the code itself, in which case you should show your code.
-
-#Report
+# Findings
 Although mental health has been a topic of great interest amongst researchers since the start of the 20th century, its importance and impact on people's well-being has only recently started to be taken into account. People, hospitals, businesses, and governments have become more aware of people's mental health, and so it is interesting to see how this has evolved over the past decades and how patients have been responding to this. NHS Scotland made available a dataset with information about mental health inpatients in hospitals in Scotland, dating back to 1997, which set the basis of this investigation. We decided to use variables such as age, sex and diagnosis to attempt to explain changes in the length of stay, as the latter may be the one impacted most by the advances of mental health awareness. This leads us to a guiding research question to be answered by this investigation: 'to what extent has the length of stay of mental health inpatients in Scotland changed over the years 1997 to 2022?'
 
 To explore this research question, our method was heavily reliant on data tidying and processing, since the data provided was quite messy. The main advantage with doing this is that we were able to make the application of data science much more straightforward and less convoluted. It would also allow us to more easily find correlations between length of stay and other useful variables, which may help answer the research question. Firstly, we had to load the data for 1997 and 2022, the more relevant years for our research, into separate objects using filter. Since the data was within the same dataset, this would make it much easier to work with and create useful results. Further, we had to translate the ICD10 codes for diagnoses into the common names and categories of the mental illnesses, since most would not know what each code stands for. A particular feature of this dataset is the number of continuous variables present, especially length of stay. Thus, we mutated each period of time into the midpoint value, e.g. 1-7 days was mutated to 4 days. This was done especially in order to allow us to find a linear model for the change in length of stay over time.

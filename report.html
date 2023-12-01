@@ -358,53 +358,6 @@ Celano, Grace Tait &amp; Nor Danish Raziq</h4>
 </div>
 
 
-<div id="critera" class="section level2">
-<h2>Critera</h2>
-<p>Topics looking for: - loading , processing and cleaning of data -
-Effective summarisation of the data in both numerical and visual forms -
-Appropriate management of various variable types, specifically numerical
-and categorical variables - Evidence of effective communication, whether
-in numerical output and in data visualisations - Highlighting any
-ethical considerations as part of your data science investigation -
-Construction of an appropriate model, either a linear or logistic model
-- Valid assessment/interpretation of model output</p>
-<ul>
-<li>What choices we made, why, what we found from each decision</li>
-<li>Critique own methods</li>
-<li>Provide suggestions for improving our analysis</li>
-<li>Talk about issues relating to the reliability and validity of our
-data</li>
-<li>Talk about the appropriateness of the statistical analysis</li>
-</ul>
-<p>Report writing - Introduction - What is your data? - Our data informs
-about inpatients with mental health problems who were admitted to
-Scottish hospitals for the day or for a prolonged period of time during
-between the years 1997-2022. - What research questions are you
-investigating? - Is there any relevant background information/literature
-that can help give context to your data/questions? - It is important to
-note that awareness of mental health has grown significantly over the
-past decades. This may have had effects on the evolution of treatments
-for mental health problems. - Methods - Summarise what
-cleaning/preprocessing you have done to your data - Load years 1997/98
-and 2021/22 and attribute to separate objects using filter. Original
-file names are long so it makes it easier to find and differentiate
-relevant data. - Decode the ICD10 diagnosis codes to the common disease
-names. - Find midpoints of continuous variables such as length of stay.
-- Brief description of data science techniques you have used in your
-investigation - Data tyding: attributed names to objects, made use of
-certain variables by mutating them - Plotting: using a plethora of plot
-types (bar, scatter, histogram), labelling - Building models: - Results
-- Tables, figures and summary values from your exploratory investigation
-- Ensure they are well labelled, neat and directly relevant to the test
-- Avoid cluttering with unnecessary data - Summary of a fitted
-statistical model, such as estimates, plots and git statistic - A brief
-explanation of what the results mean in the given context of your data -
-Discussion - Answer your research question - What are the
-advantages/limitations of the investigation you have performed? -
-Discuss their implications, how they address your research question, and
-any limitations - If applicable, are there any ethical considerations in
-relation to your investigation/findings?</p>
-</div>
 <div id="research-question" class="section level2">
 <h2>Research Question</h2>
 <p>To what extent has the length of stay of mental health inpatients in
@@ -423,37 +376,14 @@ See <a href="http://libraryguides.vu.edu.au/c.php?g=386501&amp;p=4347840" class=
 for guidance on proper citation for datasets. If you got your data off
 the web, make sure to state the retrieval date.</p>
 </div>
-<div id="findings" class="section level2">
-<h2>Findings</h2>
-<p>The write-up of your project and findings go here.</p>
-<p>Think of this as the text of your presentation with some extra detail
-to cover what there was not time to discuss in the presentation. This
-might include any assumptions you made when doing your analysis, any
-limitations of the work you have done or any ideas you have for future
-work. Feel free to split this section into subsections to make it easier
-to read.</p>
-<p>The length should be roughly 1,500 words. If you want to use a word
-count addin, you can install this by copying and pasting the following
-into RStudio:</p>
-<p><code>devtools::install_github(&quot;benmarwick/wordcountaddin&quot;, type = &quot;source&quot;, dependencies = TRUE)</code></p>
-<p>You will then need to restart RStudio. Once you have done that,
-select the text you want to count the words of, go to Addins, and select
-the <code>Word count</code> addin. This addin counts words using two
-different algorithms, but the results should be similar and as long as
-you’re in the ballpark of 1,500 words, you’re good! The addin will
-ignore code chunks and only count the words in prose. If you don’t want
-to use the addin you can always copy and paste the text into Microsoft
-Word to do a Word Count!</p>
-<p>You can also load your data here and present any analysis results /
-plots. Make sure to hide your code with <code>echo = FALSE</code> unless
-the point you are trying to make is about the code itself, in which case
-you should show your code.</p>
-<p>#Report Although mental health has been a topic of great interest
-amongst researchers since the start of the 20th century, its importance
-and impact on people’s well-being has only recently started to be taken
-into account. People, hospitals, businesses, and governments have become
-more aware of people’s mental health, and so it is interesting to see
-how this has evolved over the past decades and how patients have been
+<div id="findings" class="section level1">
+<h1>Findings</h1>
+<p>Although mental health has been a topic of great interest amongst
+researchers since the start of the 20th century, its importance and
+impact on people’s well-being has only recently started to be taken into
+account. People, hospitals, businesses, and governments have become more
+aware of people’s mental health, and so it is interesting to see how
+this has evolved over the past decades and how patients have been
 responding to this. NHS Scotland made available a dataset with
 information about mental health inpatients in hospitals in Scotland,
 dating back to 1997, which set the basis of this investigation. We
@@ -511,7 +441,7 @@ the data to notice any trends or patterns in it. From our first graph
 below, we refer to the number of patients from each age group and sex in
 1997/98 and we were able to see that as the age increases, there tends
 to be an increasing number of patients and we continue to see this trend
-for other years. We looked into this occurence to see if there was any
+for other years. We looked into this occurrence to see if there was any
 inherent reason for this. From an article published by WHO “World Health
 Organisation” older ages are more susceptible to mental health problems
 due to having more experiences which could have some accumulation of
@@ -592,14 +522,14 @@ there would be more readmission for more treatment and for the decrease
 in length of stays, it may be caused by better healthcare in the recent
 years. However whilst doing our investigation we came across a few
 limitations such as having no common variables between diagnoses with
-age group, length of stay or readmission which didnt allow us to see any
-trends and relation between them. If we were able to relate this
+age group, length of stay or readmission which didn’t allow us to see
+any trends and relation between them. If we were able to relate this
 variables we would’ve been able to see the effects of each diagnoses
 which would help us in answering our research question more accurately.
 One thing to note was also how the length of stay weren’t in exact
-numbers but instead put into groups of time periods which didnt allow us
-to see a fully accurate trend. Through our investigation we managed to
-answer our research question by figuring out how the lengths of stay
+numbers but instead put into groups of time periods which didn’t allow
+us to see a fully accurate trend. Through our investigation we managed
+to answer our research question by figuring out how the lengths of stay
 have changed in the past 2 decades where on average the length of stay
 have decreased by 9 days or 0.4 days per year and the frequency of
 shorter stays have increased and longer stays decreased.</p>
@@ -611,7 +541,6 @@ shorter stays have increased and longer stays decreased.</p>
 findings of trends to the next graph i.e reason we created the next
 graph #Advantages and disadvantages and limitations of the graphs we
 made</p>
-</div>
 <div id="references" class="section level2">
 <h2>References</h2>
 <p>List any references here. You should, at a minimum, list your data
@@ -619,6 +548,7 @@ source. {1}Who, “World Health Organisation”, <a href="https://www.who.int/ne
 <p>{2}Denis Campbell, The Guardian, <a href="https://www.theguardian.com/society/2021/jul/05/number-of-nhs-mental-health-beds-down-by-25-since-2010-analysis-shows" class="uri">https://www.theguardian.com/society/2021/jul/05/number-of-nhs-mental-health-beds-down-by-25-since-2010-analysis-shows</a>
 [Accessed on 5th July 2021]</p>
 <p>{3}</p>
+</div>
 </div>
 
 
