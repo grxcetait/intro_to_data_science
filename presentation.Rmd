@@ -349,7 +349,7 @@ length.of.stay.single %>%
                                formula = y ~ x) +
                    theme(axis.text.x=element_text(angle=45, hjust=0.9)) +
                    labs(x = "Year", 
-                        y = "Average Stay", 
+                        y = "Average Stay (in days)", 
                         title = "Changes in Average Stay", 
                         subtitle = "from 1997 to 2022",
                         caption = "From 76290 patients in 1997 to 61030 patients in 2022"
@@ -438,10 +438,6 @@ class: inverse, center, middle
 - **Respect the Computers:** We did not overtax the computer. 
 
 ---
-<<<<<<< HEAD
-=======
-
->>>>>>> 9242ba395f50e357227646395e39ac50f7c2da31
 class: center, middle
 
 #Thank you!
