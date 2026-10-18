@@ -61,7 +61,7 @@ Initial ideas:
 
 ```{r load-data}
 # Load your data
-mental_health_inpatient_activity_age_sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
+mental_health_inpatient_activity_age_sex <- read_csv("../data/mental-health-inpatient-activity-age-sex.csv")
 y97_98<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="1997/98")
 y21_22<-filter(mental_health_inpatient_activity_age_sex,FinancialYear=="2021/22")
 plot1<-ggplot(y97_98,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")+ labs(title = "Patient distribution by sex in 1997/98 in different age groups",
@@ -75,10 +75,10 @@ plot2
 
 #ggplot(new_df1,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")
 
-age.sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
-length.of.stay <- read_csv("data/mental-health-inpatient-activity-length-of-stay.csv")
-diagnosis <- read_csv("data/mental-health-inpatient-activity-diagnosis-trend.csv")
-readmissions <- read_csv("data/mental-health-inpatient-activity-readmissions.csv")
+age.sex <- read_csv("../data/mental-health-inpatient-activity-age-sex.csv")
+length.of.stay <- read_csv("../data/mental-health-inpatient-activity-length-of-stay.csv")
+diagnosis <- read_csv("../data/mental-health-inpatient-activity-diagnosis-trend.csv")
+readmissions <- read_csv("../data/mental-health-inpatient-activity-readmissions.csv")
 
 #Bar chart for number of patients vs. financial year
 age.sex %>% 

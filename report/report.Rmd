@@ -24,10 +24,10 @@ library(ggplot2)
 ```{r load-data, include=FALSE}
 # load your data here and any pre-processing/cleaning 
 #  that you need for your report.
-age.sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
-length.of.stay <- read_csv("data/mental-health-inpatient-activity-length-of-stay.csv")
-diagnosis <- read_csv("data/mental-health-inpatient-activity-diagnosis-trend.csv")
-readmissions <- read_csv("data/mental-health-inpatient-activity-readmissions.csv")
+age.sex <- read_csv("../data/mental-health-inpatient-activity-age-sex.csv")
+length.of.stay <- read_csv("../data/mental-health-inpatient-activity-length-of-stay.csv")
+diagnosis <- read_csv("../data/mental-health-inpatient-activity-diagnosis-trend.csv")
+readmissions <- read_csv("../data/mental-health-inpatient-activity-readmissions.csv")
 options(readr.show_col_types = FALSE)
 
 

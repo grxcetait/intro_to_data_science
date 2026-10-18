@@ -6,6 +6,8 @@ Group project for *Introduction to Data Science* (University of Edinburgh, 2023)
 
 ## Key findings
 
+![Average length of stay by financial year, with linear fit](figures/average-stay.png)
+
 - **Average length of stay fell from about 40 days to about 31 days**, a decline of roughly half a day per year (linear model fitted to annual averages).
 - **Short stays became more common and long stays less common** between 1997/98 and 2021/22.
 - **The number of inpatients fell over the period**, despite population growth, consistent with the reported reduction in NHS mental health beds since 2010.
@@ -29,23 +31,23 @@ Group project for *Introduction to Data Science* (University of Edinburgh, 2023)
 ## Repository structure
 
 ```
-├── report.Rmd / report.html                 # Final written report
-├── presentation.Rmd / presentation.html     # Slides (xaringan)
-├── investigation.Rmd / investigation.html   # Exploratory analysis
-├── data/                                    # Raw Public Health Scotland CSVs (see data/README.md)
-├── img/                                     # Images used in the slides
-└── xaringan-themer.css                      # Slide theme
+├── analysis/          # Exploratory analysis (investigation.Rmd)
+├── report/            # Final written report (report.Rmd + rendered HTML)
+├── presentation/      # Slides (xaringan), with images and theme
+├── data/              # Raw Public Health Scotland CSVs (see data/README.md)
+├── figures/           # Key figures used in this README
+└── ids-project.Rproj  # RStudio project file
 ```
 
 ## Reproducing the analysis
 
-Requires R with `tidyverse`, `tidymodels` and `xaringan`:
+Requires R with `tidyverse`, `tidymodels`, `xaringan`, `xaringanthemer` and `palmerpenguins`:
 
 ```r
-install.packages(c("tidyverse", "tidymodels", "xaringan"))
+install.packages(c("tidyverse", "tidymodels", "xaringan", "xaringanthemer", "palmerpenguins"))
 ```
 
-Open `ids-project.Rproj` in RStudio and knit `report.Rmd` or `presentation.Rmd`.
+Open `ids-project.Rproj` in RStudio, then knit `report/report.Rmd` or `presentation/presentation.Rmd`.
 
 ## Data
 

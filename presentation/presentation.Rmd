@@ -46,10 +46,10 @@ knitr::opts_chunk$set(fig.retina = 3, dpi = 300, fig.width = 6, fig.height=4,fig
 # Load your data
 #ggplot(new_df1,aes(fill=Sex,y=PatientsCount,x=AgeGroup))+geom_bar(position="dodge",stat="identity")
 
-age.sex <- read_csv("data/mental-health-inpatient-activity-age-sex.csv")
-length.of.stay <- read_csv("data/mental-health-inpatient-activity-length-of-stay.csv")
-diagnosis <- read_csv("data/mental-health-inpatient-activity-diagnosis-trend.csv")
-readmissions <- read_csv("data/mental-health-inpatient-activity-readmissions.csv")
+age.sex <- read_csv("../data/mental-health-inpatient-activity-age-sex.csv")
+length.of.stay <- read_csv("../data/mental-health-inpatient-activity-length-of-stay.csv")
+diagnosis <- read_csv("../data/mental-health-inpatient-activity-diagnosis-trend.csv")
+readmissions <- read_csv("../data/mental-health-inpatient-activity-readmissions.csv")
 options(readr.show_col_types = FALSE)
 ```
 
