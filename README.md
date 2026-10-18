@@ -52,9 +52,3 @@ Open `ids-project.Rproj` in RStudio, then knit `report/report.Rmd` or `presentat
 ## Data
 
 Public Health Scotland, *Mental Health Inpatient Activity*, published on the [Scottish Health and Social Care Open Data platform](https://www.opendata.nhs.scot/dataset/mental-health-inpatient-activity) under the Open Government Licence.
-
-## Team and contributions
-
-Team "The Git Gods": Kieran Lewis, Khushi Wadhwa, Caio Celano, Grace Tait and Nor Danish Raziq. Original repository: [KLewis144/IDS_Project](https://github.com/KLewis144/IDS_Project).
-
-**My contributions (Grace Tait):** [FILL IN, e.g. "Built and edited the final presentation, including its visualisations; contributed exploratory analysis and sections of the report."]
